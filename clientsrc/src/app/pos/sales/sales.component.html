@@ -1,0 +1,54 @@
+<div class="sales">
+    <div class="sales-wrapper">
+        <div class="data-search">
+            <app-sales-data-search></app-sales-data-search>
+        </div>
+
+        <div class="customer-detail">
+            <app-sales-customer-detail></app-sales-customer-detail>
+        </div>
+
+        <div class="product-list">
+            <app-inline-edit-list-view 
+                isSaleSource="true"
+                showPlusMinusButton="true"
+                [dataSource]='dataSource'
+                [columns]='productViewColumns' 
+                (changeQuantity)="changeProductQuantity($event)"
+                (deleteItem)="onDeleteSaleItem($event)">
+            </app-inline-edit-list-view>
+        </div>
+        
+        <div class="summary container">
+            <div class="row total">
+                <div class='col-6 title'>
+                    <span>TOTAL</span>
+                </div>
+                <div class='col-6 value'>
+                    <span class="amount">{{totalPriceDecimal}}</span>
+                    <span class="unit">$</span>
+                </div>
+            </div>
+            <div class="row tax">
+                <div class='col-6 title'>
+                    <span>GST {{GSTInclusiveMessage}}</span>
+                </div>
+                <div class='col-6 value'>
+                    <span class="amount">{{GSTDecimal}}</span>
+                    <span class="unit">%</span>
+                </div>
+            </div>
+            <div class="row net">
+                <div class='col-6 title'>
+                    <span>NET</span>
+                </div>
+                <div class='col-6 value'>
+                    <span class="amount">{{NETDecimal}}</span>
+                    <span class="unit">$</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" [ngStyle]="{'display': pageActive ? 'none': 'block'}"></div>
+</div>

@@ -1,0 +1,65 @@
+<div class="modal-header">
+    <h5 class="modal-title">Update Field</h5>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="updateValueForm">
+      <fieldset>
+        <div class="form-group">
+          <div class="add-control">
+            <label class="lable-control">Name</label>
+            <input class="form-control" formControlName="name" placeholder="Name" [ngClass]="{'is-invalid': (updateValueForm.get('name')?.dirty) &&
+                                                        !updateValueForm.get('name')?.valid}">
+            <span class="error invalid-feedback" *ngIf="updateValueForm.get('name')?.dirty&&
+            updateValueForm.get('name')?.errors">
+              <span *ngIf="updateValueForm.get('name')?.errors?.required || updateValueForm.get('name')?.errors?.nospace">
+                Name is required!
+              </span>
+            </span>
+  
+          </div>
+  
+          <div class="add-control">
+            <label class="lable-control">Description</label>
+            <div class="columns-dropdown">
+              <input class="form-control" formControlName="description">
+            </div>
+          </div>
+
+          <div class="add-control">
+            <label class="lable-control">IdentifiedId</label>
+            <input class="form-control" formControlName="identifiedId" placeholder="IdentifiedId" />
+            <span class="error invalid-feedback" *ngIf="
+            updateValueForm.get('identifiedId')?.dirty &&
+            updateValueForm.get('identifiedId')?.errors
+              ">
+              <span *ngIf="
+              updateValueForm.get('identifiedId')?.errors?.required ||
+              updateValueForm.get('identifiedId')?.errors?.nospace
+                ">
+                IdentifiedId is required!
+              </span>
+            </span>
+          </div>
+
+          <div class="add-control">
+              <label class="lable-control">Type</label>
+              <input class="form-control" formControlName="type" placeholder="Type" readonly>
+            </div>
+  
+          <div class="add-control" [hidden]="!isShowEntityRefList && !isShowPredefinedList">
+            <label class="lable-control">DefaultValue</label>
+            <ng-select [hidden]="!isShowEntityRefList" class="form-control" formControlName="entityList" #selection
+              [(ngModel)]="selectedEntityRef" [items]="entityRefList" bindValue="id" bindLabel="name" placeholder="Select Type" class="custom"
+              [clearable]=false>
+            </ng-select>
+            <tag-input [hidden]="!isShowPredefinedList" [(ngModel)]="predefinedList" formControlName="predefinedList"></tag-input>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+    <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+  </div>
+  <div class="modal-footer">
+    <button [disabled]="!updateValueForm.valid || isDeactive" class="btn btn-secondary" type="button" (click)="onSave()">Save</button>
+    <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">Cancel</button>
+  </div>

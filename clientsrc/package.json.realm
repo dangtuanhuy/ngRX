@@ -1,0 +1,16 @@
+{
+  "name": "pos",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "dependencies": {
+    "realm": "2.21.1"
+  },
+  "devDependencies": {
+    "electron": "3.0.12",
+    "electron-packager": "13.0.1",
+    "electron-builder": "20.38.3"
+  }
+}

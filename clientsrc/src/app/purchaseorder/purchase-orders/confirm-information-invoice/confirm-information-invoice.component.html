@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h5 class="modal-title">Invoice Informations</h5>
+  </div>
+  <div class="modal-body">
+    SoNo/DoNo: 
+    <input type="text" placeholder="Input SoNo/DoNo" [(ngModel)]="soDo" class="form-control" required>
+    <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+  </div>
+  <div class="modal-footer">
+    <button [disabled]="soDo == ''" class="btn btn-secondary" type="button" (click)="onPrint()">Print</button>
+    <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">Close</button>
+  </div>

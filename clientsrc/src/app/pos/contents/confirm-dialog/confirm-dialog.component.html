@@ -1,0 +1,13 @@
+<div class="pos-confirm-dialog">
+  <div class="modal-header">
+    <h5 class="modal-title">{{title}}</h5>
+  </div>
+  <div class="modal-body">
+    <p>{{message}}</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" type="button" (click)="onYes()" *ngIf="dialogType === 1">Yes</button>
+    <button class="btn btn-secondary" type="button" (click)="onNo()" *ngIf="dialogType === 1">No</button>
+    <button class="btn btn-secondary" type="button" (click)="onOk()" *ngIf="dialogType === 2">Ok</button>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+@import '@swimlane/ngx-datatable/release/index.css';
+@import '@swimlane/ngx-datatable/release/themes/material.css';
+@import '@swimlane/ngx-datatable/release/assets/icons.css';
+
+.pickup-orders-detail {
+    &__content {
+        width: 100%;
+        height: calc(100vh - 105px);
+        margin-left: 10px;
+
+        .ngx-datatable {
+            max-height: calc(100vh - 225px);
+            overflow-y: visible;
+        }
+
+        .customer-info {
+            margin-bottom: 10px;
+
+            span {
+                font-weight: 600;
+            }
+        }
+
+        .total-price {
+            margin-bottom: 10px;
+            
+            span {
+                font-weight: 600;
+            }
+        }
+
+        .product {
+            width: 95%;
+        }
+    }
+}

@@ -1,0 +1,52 @@
+<div class="row">
+  <p class="col-sm-6 list-view-title h4">
+    {{title}}
+  </p>
+
+  <div class="col-sm-6 search" [hidden]="isHiddenSearchBox">
+    <form class="form-inline my-2 my-lg-0 ">
+      <input class="form-control" [(ngModel)]="searchText" #searchInput name="searchText" type="search" placeholder="Search"
+        aria-label="Search">
+    </form>
+  </div>
+</div>
+
+<div class="columns-dropdown">  
+  <ng-select #selection [items]="items" bindLabel="label" bindValue="value" placeholder="Select columns to show" [(ngModel)]="selectedColumns" class="custom"
+    [clearable]=false [multiple]=true (ngModelChange)="onChange()" (remove)="onRemove($event)">
+  </ng-select>
+</div>
+
+<div class="group-button on-top">
+  <div class="btn-item" *ngFor="let item of listButton">
+    <button [disabled]="item.disable" type="button" class="btn btn-outline-secondary reset" (click)="onClickBtn(item)">{{item.title}}</button>
+  </div>
+</div>
+
+<div class="datatable">
+
+  <ngx-datatable  #myTable *ngIf="isMultiSelect" class='material' [rows]='format(datasource)' [columnMode]="'force'" [headerHeight]="50"
+    [footerHeight]="50" [rowHeight]="'auto'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+    [externalPaging]="true" [count]="totalItems" [offset]="pageNumber" [limit]="pageSize" (page)='setPage($event)'
+    [selected]="selected"
+    (select)='onSelect($event)' [selectionType]="'multiClick'">
+
+    <ngx-datatable-column *ngFor="let col of selectedColumns" [name]="formatHeader(col)">
+    </ngx-datatable-column>
+  </ngx-datatable>
+
+  <ngx-datatable  #myTable *ngIf="!isMultiSelect" class='material' [rows]='format(datasource)' [columnMode]="'force'" [headerHeight]="50"
+    [footerHeight]="50" [rowHeight]="'auto'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+    [externalPaging]="true" [count]="totalItems" [offset]="pageNumber" [limit]="pageSize" (page)='setPage($event)'
+    (select)='onSelect($event)' [selectionType]="'single'">
+
+    <ngx-datatable-column *ngFor="let col of selectedColumns" [name]="formatHeader(col)">
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>
+
+<div class="group-button">
+  <div class="btn-item" *ngFor="let item of listButton">
+    <button [disabled]="item.disable" type="button" class="btn btn-outline-secondary reset" (click)="onClickBtn(item)">{{item.title}}</button>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+@import '@swimlane/ngx-datatable/release/index.css';
+@import '@swimlane/ngx-datatable/release/themes/material.css';
+@import '@swimlane/ngx-datatable/release/assets/icons.css';
+
+.pending-sales {
+    &__content {
+        width: 95%;
+        height: calc(100vh - 105px);
+        margin-left: 10px;
+
+        .ngx-datatable {
+            max-height: calc(100vh - 155px);
+            overflow-y: visible;
+
+            .datatable-header {
+                .datatable-header-inner {
+                    .datatable-header-cell {
+
+                    }
+                }
+            }
+            
+            .datatable-body-cell {
+                &.column-action-release {
+                    display: flex;
+                    padding-top: 0 !important;
+                    padding-bottom: 0 !important;
+                    width: 300px !important;
+                }
+
+                .column-action-release {
+                    &-button {
+                        margin-right: 8px;
+                        color: #000;
+                        font-weight: 500;
+                        border: 1.4px #000 solid;
+
+                        &.release {
+                            color: #fff;
+                            background-color: #218838;
+                            border-color: #1e7e34;
+                        }
+
+                        &.detail {
+                            color: #fff;
+                            background-color: #17a2b8;
+                            border-color: #17a2b8;
+                        }
+
+                        &.delete {
+                            color: #f5eeee;
+                            background: #ff0000;
+                            border: none;
+                        }
+                    }
+                }
+
+                &-label {
+                    margin-top: auto;
+                    margin-bottom: auto;
+                }
+            }
+        }
+    }
+
+    &-search {
+        text-align: right;
+        margin-bottom: 10px;
+
+        .app-input {
+            width: 250px;
+            margin-left: auto;
+        }
+    }
+}

@@ -1,0 +1,388 @@
+.receipt {
+    &__content {
+        width: 95%;
+        height: calc(100vh - 105px);
+        margin-left: 10px;
+        display: flex;
+
+        .receipt__information {
+            width: 420px;
+            font-size: 0.8rem;
+
+            &_wrapper {
+                padding: 10px;
+                border: 1px solid;
+
+                .header {
+                    width: 100%;
+                    display: flex;
+    
+                    &__logo {
+                        width: 100px;
+    
+                        img {
+                            width: 100%;
+                        }
+                    }
+    
+                    &__infor {
+                        padding-left: 5px;
+                        padding-right: 5px;
+    
+                        .title {
+                            margin-bottom: 0;
+                            padding-bottom: 0px;
+                            font-size: 1.2rem;
+                        }
+    
+                        .store-name {
+                            margin-bottom: 0;
+                        }
+    
+                        .store-address {
+                            margin-bottom: 0;
+                        }
+    
+                        .customer-name {
+                            margin-bottom: 0;
+                        }
+
+                        .phone {
+                            margin-bottom: 0;
+                        }
+    
+                        .email {
+                            margin-bottom: 0;
+                        }
+    
+                        .gst-reg-no {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+    
+                .bill_info {
+                    .item {
+                        position: relative;
+                        display: flex;
+    
+                        .title {
+                            left: 0;
+                        }
+    
+                        .value {
+                            right: 0;
+                            position: absolute;
+    
+                            &.billno {
+                                font-weight: 800;
+                                position: relative;
+                                margin-left: 5px;
+                            }
+                        }
+                    }
+    
+                    &--row {
+                        width: 50%;
+                        padding: 0 5px;
+
+                        &.bill-no {
+                            width: 100%;
+                        }
+
+                        &.cashier-counter {
+                            display: flex;
+                            position: relative;
+                            width: 100%;
+
+                            .cashier {
+                                display: flex;
+                                width: 50%;
+                            }
+
+                            .counter {
+                                width: 50%;
+                            }
+                        }
+                    }
+                }
+    
+                .bill__content {
+                    .header {
+                        span {
+                            font-weight: 800;
+                            padding-left: 3px;
+                            padding-right: 3px;
+                        }
+                    }
+    
+                    .body {
+                        width: 100%;
+    
+                        .body-row {
+                            width: 100%;
+
+                            &-info {
+                                display: flex;
+
+                                .no {
+
+                                }
+
+                                .item {
+                                    width: 100%;
+                                }
+                            }
+
+                            &-skucode {
+                                .item {
+                                    width: 100%;
+                                    margin-left: 36px;
+                                }
+                            }
+
+                            &-info-detail {
+                                position: relative;
+                                text-align: right;
+                                
+                                .quantity {
+                                    position: absolute;
+                                    right: 180px;
+                                }
+
+                                .price {
+                                    position: absolute;
+                                    right: 99px;
+                                }
+
+                                .amount {
+                                    
+                                }
+
+                                &-order-promotion {
+                                    position: relative;
+                                    text-align: right;
+
+                                    .item-discount-description {
+                                        position: absolute;
+                                        right: 170px;
+                                    }
+
+                                    .item-discount-money-value {
+                                        margin-left: 130px;
+                                    }
+
+                                    .item-discount-percent-value {
+                                        position: absolute;
+                                        right: 97px;
+                                    }
+
+                                    .item-discount-percent-amount {
+                                        
+                                    }
+                                }
+                            }
+        
+                            span {
+                                word-wrap: break-word;
+                                padding-left: 3px;
+                                padding-right: 3px;
+                            }
+                        }
+    
+                        .body-summary {
+                            width: 100%;
+                            left: 0;
+                            padding: 0 15px;
+    
+                            .total {
+                                position: relative;
+                                display: flex;
+                                font-size: 1rem;
+    
+                                .title {
+                                    left: 0;
+                                }
+    
+                                .value {
+                                    right: 0;
+                                    position: absolute;
+                                    font-weight: 800;
+                                }
+                            }
+    
+                            .gst-number {
+                                .gst-amount {
+                                    position: relative;
+                                    display: flex;
+                                    font-size: 1rem;
+        
+                                    .title {
+                                        left: 0;
+                                    }
+        
+                                    .value {
+                                        right: 0;
+                                        position: absolute;
+                                        font-weight: 800;
+                                    }
+                                }
+                            }
+                        }
+
+                        .body-manual-promotion {
+                            width: 100%;
+                            left: 0;
+                            padding: 0 15px;
+                            
+                            &-title {
+                                left: 0;
+                                font-size: 1rem;
+                            }
+
+                            &-items {
+                                .body-manual-promotion-item {
+                                    display: flex;
+                                    position: relative;
+                                    
+                                    &-title {
+                                        margin-left: 10px;
+                                    }
+    
+                                    &-value {
+                                        right: 0;
+                                        position: absolute;
+
+                                        &.percent {
+                                            padding-left: 25px;
+
+                                            .amount-value {
+                                                padding-left: 25px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+    
+                    .bill--summary {
+                        font-weight: 800;
+                        display: flex;
+    
+                        .net-quantity {
+                            width: 50%;
+                            display: flex;
+                            position: relative;
+    
+                            .title {
+                                padding: 0 5px;
+                            }
+    
+                            .value {
+                                padding: 0 5px;
+                            }
+                        }
+    
+                        .net-total {
+                            width: 50%;
+                            display: flex;
+                            position: relative;
+    
+                            .title {
+                                padding: 0 5px;
+                            }
+    
+                            .value {
+                                position: absolute;
+                                right: 0;
+                                padding: 0 5px;
+                            }
+                        }
+                    }
+    
+                    .no {
+                        width: 40px;
+                    }
+    
+                    .item {
+                        width: 150px;
+                    }
+    
+                    .quantity {
+                        width: 50px;
+                    }
+    
+                    .price {
+                        width: 80px;
+                    }
+    
+                    .amount {
+                        width: 80px;
+                    }
+                }
+    
+                .receipt_payment-modes {
+                    .payment-mode {
+                        display: flex;
+                        position: relative;
+                        padding: 0 15px;
+
+                        .title {
+                            font-weight: 800;
+                        }
+
+                        .value {
+                            position: absolute;
+                            right: 0;
+                            margin-right: 15px;
+                            font-weight: 700;
+                        }
+                    }
+                }
+
+                .receipt_change {
+                    display: flex;
+                    position: relative;
+
+                    .change-title {
+                        margin-left: 5px;
+                        font-size: 15px;
+                    }
+
+                    .change-value {
+                        font-size: 15px;
+                        position: absolute;
+                        right: 20px;
+                    }
+                }
+
+                .receipt__retail {
+                    text-align: center;
+                }
+            }
+        }
+    }
+
+    &__actions {
+        margin-left: 10px;
+
+        .print {
+            margin-top: 10px;
+            background-color: #28A745;
+            border-color: #ffffff;
+            width: 200px;
+            height: 40px;
+
+            &:hover {
+                background-color: #28A745;
+                border-color: #ffffff;
+            }
+        }
+    }
+
+    .hr {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}

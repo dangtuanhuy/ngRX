@@ -1,0 +1,20 @@
+.pos-promotion {
+    &__content {
+        width: 95%;
+        height: calc(100vh - 105px);
+        margin-left: 10px;
+
+        .actions {
+            margin-top: 10px;
+            margin-left: 30px;
+        
+            .button-esc {
+                width: 120px;
+                height: 80px;
+                background-color: #d81d1d;
+                border-color: #ffffff;
+                color: #fff;
+            }
+        }
+    }
+}

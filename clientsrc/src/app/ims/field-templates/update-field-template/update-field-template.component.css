@@ -1,0 +1,51 @@
+.type {
+    float: left;
+    margin-top: 16px;
+    margin-right: 10px;
+}
+
+.text-checkbox {
+    margin-top: 10px;
+    display: block;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+table.fixed { table-layout:fixed; }
+
+.delete-icon {
+    cursor: pointer;
+    color: red;
+    float: right;
+}
+
+.modal-body{
+    overflow: auto;
+    max-height: 80vh;
+}
+
+.select-field {
+    margin-left: 10px;
+    width: 200px;
+}
+
+.add-section-btn {
+    float: right;
+}
+
+.group-add-field {
+    display: flex;
+    margin-top: 20px;
+}
+
+.delete-cell {
+    width: 50px;
+}

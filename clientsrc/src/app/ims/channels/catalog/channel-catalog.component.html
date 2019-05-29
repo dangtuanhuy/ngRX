@@ -1,0 +1,78 @@
+<div class="modal-header">
+    <h5 class="modal-title">Catalog</h5>
+    <div class="col-sm-6 search">
+        <form class="form-inline my-2 my-lg-0 ">
+          <input class="form-control" [(ngModel)]="searchText" #searchInput name="searchText" type="search" placeholder="Search"
+            aria-label="Search">
+        </form>
+      </div>
+    <button type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="onDismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+    <ngx-datatable  #catalogTable 
+                    class='material'
+                    [rows]='datasource'
+                    [columnMode]="'force'"
+                    [headerHeight]="50"
+                    [footerHeight]="50"
+                    [selectionType]="'single'"
+                    [externalPaging]="true"
+                    [count]="totalItemProduct"
+                    [offset]="pageNumberProduct"
+                    [limit]="pageSizeProduct"
+                    (page)='changeSelectedPage($event)'
+                    [rowHeight]="'auto'">
+
+        <ngx-datatable-row-detail class="variant-detail" [rowHeight]="'auto'" (toggle)="onDetailToggle($event)">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                <div class="table-detail">
+                    <table class="fixed">
+                        <tr class="header">
+                            <th class="variant-id text-center">#</th>
+                            <th *ngFor="let item of getFieldValue(row.variants)" class="header column-name text-center">{{item.name}}</th>
+                        </tr>
+                        <ng-container *ngFor="let variant of row.variants; let i=index">
+                            <tr>
+                                <td class="text-center" rowspan="2">{{i+1}}</td>
+                                <td *ngFor="let field of variant.fields; let j = index">
+                                    {{field.value}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td [attr.colspan]="getColumnCount(variant.fields)">
+                                    <div class="price-content">
+                                        <div class="price-item col-md-4">List Price: {{variant && variant.price ? variant.price.listPrice : 0}} </div>                                   
+                                        <div class="price-item col-md-4">Staff Price: {{variant && variant.price ? variant.price.staffPrice : 0}} </div>
+                                        <div class="price-item col-md-4">Member Price: {{variant && variant.price ? variant.price.memberPrice : 0}} </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </table>
+                </div>
+            </ng-template>
+        </ngx-datatable-row-detail>
+
+        <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <a [hidden]="row.variants && row.variants.length == 0" href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
+                    title="Expand/Collapse Row" (click)="toggleExpandRow(row)">
+                </a>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [name]="'name'">
+        </ngx-datatable-column>
+        <ngx-datatable-column [name]="'description'">
+        </ngx-datatable-column>
+    </ngx-datatable>
+    <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">Close</button>
+</div>

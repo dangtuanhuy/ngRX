@@ -1,0 +1,86 @@
+<div class="close-day" [ngStyle]="{'width': pageWidth}">
+    <div class="close-day--call-back">
+      <app-page-callback
+        [title]='title'
+        [defaultPage]='defaultPage'>
+      </app-page-callback>
+    </div>
+  
+    <div class="close-day__content">
+      <div class="denominations">
+        <app-denominations-table
+          [denominations]='denominations'
+          (change)="onChangeDenomination($event)">
+        </app-denominations-table>
+      </div>
+      
+      <div class="close-day__summary">
+        <div class="information">
+          <div class="item">
+            <div class="title">
+              <span>Counted</span>
+            </div>
+  
+            <div class="total">
+              <span>{{decimalCounted}}</span>
+            </div>
+            
+            <div class="denomination-icon">
+              <i class="fas fa-dollar-sign"></i>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="title register">
+              <span>Register</span>
+            </div>
+  
+            <div class="total">
+              <span>{{decimalRegister}}</span>
+            </div>
+            
+            <div class="denomination-icon">
+              <i class="fas fa-dollar-sign"></i>
+            </div>
+          </div>
+
+          <div class="item">
+              <div class="title deposit">
+                  <span>Deposit</span>
+                </div>
+      
+                <div class="total">
+                  <span>{{decimalDeposit}}</span>
+                </div>
+                
+                <div class="denomination-icon">
+                  <i class="fas fa-dollar-sign"></i>
+                </div>
+          </div>
+        </div>
+    
+        <div class="handle">
+          <div class="note row">
+            <div class="col-7">Cash expected</div>
+            <div class="col-1"></div>
+            <div class="col-3">{{decimalCashExpected}}</div>
+            <div class="col-1">
+              <button class="btn btn-success cash-expect-detail" (click)="onClickCashExpectedDetail()">Detail</button>
+            </div>
+          </div>
+
+          <div class="note row">
+            <div class="col-7">Cash difference</div>
+            <div class="col-1"></div>
+            <div class="col-3">{{decimalCashDifference}}</div>
+            <div class="col-1"></div>
+          </div>
+
+          <div class="function">
+              <button class="btn btn-success tender" (click)="onClickTender()" *ngIf="currentTenderIn">Tender</button>
+              <button class="btn btn-success save" (click)="onClickEndTheDay()" *ngIf="currentOpendayCashingUp">End the day</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

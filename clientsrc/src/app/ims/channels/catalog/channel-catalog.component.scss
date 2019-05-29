@@ -1,0 +1,44 @@
+.modal-body {
+    margin: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    border-spacing: 0;
+    background: #fff;
+}
+
+table,
+th,
+td {
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    padding: 5px 5px;
+}
+
+table.fixed {
+    table-layout: fixed;
+}
+
+.table-detail {
+    margin: 10px;
+}
+
+.ngx-datatable .datatable-body .datatable-scroll {
+    display: inline-block;
+    width: 100% !important;
+}
+
+.price-content {
+    display: flex;
+    .price-item {
+        padding: 0;
+    }
+}
+
+.variant-id {
+    width: 50px;
+}

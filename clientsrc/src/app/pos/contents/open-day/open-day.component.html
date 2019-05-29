@@ -1,0 +1,38 @@
+<div class="open-day" [ngStyle]="{'width': pageWidth}">
+  <div class="open-day--call-back">
+    <app-page-callback
+      [title]='title'
+      [defaultPage]='defaultPage'>
+    </app-page-callback>
+  </div>
+  
+  <div class="open-day__content">
+    <div class="denominations">
+      <app-denominations-table
+        [denominations]='denominations'
+        (change)="onChangeDenomination($event)">
+      </app-denominations-table>
+    </div>
+    
+    <div class="open-day__summary">
+      <div class="information">
+          <div class="register">
+            <span>Register</span>
+          </div>
+
+          <div class="total">
+              <span>{{decimalTotal}}</span>
+          </div>
+          
+          <div class="denomination-icon">
+              <i class="fas fa-dollar-sign"></i>
+          </div>
+      </div>
+
+      <div class="function">
+          <button class="btn btn-success tender" (click)="onClickTender()" *ngIf="currentOpendayCashingUp && !currentTenderIn">Tender</button>
+          <button class="btn btn-success" (click)="onOpenDay()" *ngIf="!currentOpendayCashingUp">Open day</button>
+      </div>
+    </div>
+  </div>
+</div>

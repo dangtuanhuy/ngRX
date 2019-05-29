@@ -1,0 +1,44 @@
+.loading-page {
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.detail-loading {
+    display: flex;
+    justify-content: center;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+}
+
+.icon-loading {
+    font-size:48px;
+    color:#6c757d;
+}
+
+.hidden {
+    display: none;
+} 
+
+.show {
+    display: flex;
+    position: absolute;
+}
+
+.button {
+    width: 30%;
+    height: 50%;
+}
+
+.spinner-disable {
+    position: fixed; 
+    height: 100%; 
+    width: 100%; 
+    top: 0; 
+    left: 0; 
+    z-index: 9999; 
+}
+

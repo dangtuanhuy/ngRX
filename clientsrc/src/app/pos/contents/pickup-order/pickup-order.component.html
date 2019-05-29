@@ -1,0 +1,49 @@
+<div class="pickup-orders" [ngStyle]="{'width': pageWidth}">
+  <div class="pickup-orders--call-back">
+    <app-page-callback [title]='title'>
+    </app-page-callback>
+  </div>
+
+  <div class="pickup-orders__content">
+    <div class="pickup-orders-search">
+      <app-input-with-keyboard
+        id="{{searchOrderId}}"
+        placeholder="Pickup Order"
+        className="form-control app-input"
+        [value]="orderSearch"
+        (valueChange)="onSearchOrder($event)">
+      </app-input-with-keyboard>
+    </div>
+
+    <div class="pickup-orders">
+      <ngx-datatable
+        #myTable
+        class="material striped list-product expandable"
+        [rows]="pickupOrders"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="50"
+        [selectionType]="'single'" 
+        (select)="onSelectOrder($event)">
+        <ngx-datatable-column name="customerName" [sortable]="false" [draggable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            Customer Name
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{value}}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+  
+        <ngx-datatable-column name="deposit" [sortable]="false" [draggable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            Deposit ($)
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{formatNumberDecimal(value)}}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>

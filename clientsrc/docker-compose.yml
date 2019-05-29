@@ -1,0 +1,28 @@
+version: '3.5'
+services:
+  harvey-ims-web:
+   image: ${DOCKER_REGISTRY}harveyimsweb
+   build:
+     context: .
+     dockerfile: Dockerfile-ims
+
+  harvey-purchase-order-web:
+   image: ${DOCKER_REGISTRY}harveypurchaseorderweb
+   build:
+     context: .
+     dockerfile: Dockerfile-purchase-order
+  
+  harvey-retail-web:
+   image: ${DOCKER_REGISTRY}harveyretailweb
+   build:
+     context: .
+     dockerfile: Dockerfile-retail
+
+  harvey-promotion-web:
+   image: ${DOCKER_REGISTRY}harveypromotionweb
+   build:
+     context: .
+     dockerfile: Dockerfile-promotion
+     
+
+

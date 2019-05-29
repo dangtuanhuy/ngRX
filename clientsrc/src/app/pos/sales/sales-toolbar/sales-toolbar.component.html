@@ -1,0 +1,16 @@
+<div class="sales-toolbar">
+    <div [hidden]="!isSync" class="lds-dual-ring"></div>
+    <i [hidden]="isSync" class="fas fa-sync"></i>
+    <i class="fas fa-signal" [ngClass]="isOnline ? 'online-mode' : 'offline-mode'"></i>
+
+    <ng-container *ngIf="saleTarget && salesAchieved">
+        <p title="{{periodTimeOfTarget}}" class="target">Target: {{target}} ($)</p>
+        <p class="achievied-target">Achieved: {{achieved}} ($)</p>
+        <p class="remaining-target">Remaining: {{remainingTarget}} ($)</p>
+    </ng-container>
+    
+    <div class="sales-toolbar-information">
+        <p class="outlet-name">{{storeName}}</p>
+        <a class="logout-button" (click)="onClickLogout($event)">Logout</a>
+    </div>
+</div>

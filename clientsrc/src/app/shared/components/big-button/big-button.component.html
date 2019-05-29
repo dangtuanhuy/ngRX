@@ -1,0 +1,13 @@
+<div id="big-button" class="{{id}}" [ngStyle]="{'width': width, 'height': 'height'}" (click)="onClickButton()">
+    <div class="btn div-button"
+        [ngStyle]="{'background-color': backgroundColor, 'color': textColor}">
+        <div class="titles flex-container space-between">
+            <div class="title flex-item" [ngStyle]="{'font-size': fontSize, 'height': titleHeight, 'display': caption ? '': 'flex'}">
+                <span [innerHTML]="title" [ngStyle]="{'margin': caption ? '': 'auto'}"></span>
+            </div>
+            <div class="title caption flex-item" [innerHTML]="caption" [ngStyle]="{'font-size': fontSize}" *ngIf="caption">
+            </div>
+        </div>
+        <p *ngIf="shortKey" class="short-key">{{shortKey}}</p>
+    </div>
+</div>

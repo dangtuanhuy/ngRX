@@ -1,0 +1,14 @@
+<input 
+  id="{{id}}"
+  type="{{type}}"
+  class="{{className}}"
+  [ngStyle]="style"
+  [isNumpad]="isNumpad"
+  placeholder="{{placeholder}}"
+  [(ngModel)]="value"
+  (ngModelChange)="onModelChange()"
+  [inputSelectText]="inputSelectText"
+  [putItemLeft]="putItemLeft"
+  [putItemRight]="putItemRight"
+  appKeyboard
+/>

@@ -1,0 +1,18 @@
+#sales-data-search {
+    display: flex;
+    background-color: #eee;
+    border-radius: 3px;
+    padding: 10px;
+    height: 60px;
+
+    .data-search {
+        display: inherit;
+        margin: auto;
+        width: 100%;
+
+        div {
+            margin-left: 5px;
+            width: 50%
+        }
+    }
+}

@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h5 class="modal-title">{{title}}</h5>
+</div>
+<div class="modal-body">
+    <div class="add-control">
+        <label class="lable-control">User Manager</label>
+        <ng-select #selection [items]="usersManager"
+            bindValue="id" bindLabel="fullName" placeholder="Select User Manager" class="custom select-field" (change)="onSelectedUser($event)"
+            [clearable]=false>
+        </ng-select>
+    </div>
+</div>
+<div class="modal-footer">
+    <button [disabled]="!managerId" class="btn btn-secondary" type="button" (click)="onSave()">Submit</button>
+    <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">No</button>
+</div>

@@ -1,0 +1,17 @@
+<div class="denominations-table flex-container space-between">
+  <div class="denomination-item flex-item" *ngFor="let denomination of denominations">
+    <div class="title">
+      {{denomination.name}}
+    </div>
+    <div class="value">
+      <app-input-with-keyboard
+        id="denominationIdPrefix-{{denomination.id}}"
+        type="number" 
+        placeholder="0"
+        isNumpad="true"
+        [value]="denomination.quantity"
+        (valueChange)="valueChange(denomination.id, $event)">
+      </app-input-with-keyboard>
+    </div>
+  </div>
+</div>

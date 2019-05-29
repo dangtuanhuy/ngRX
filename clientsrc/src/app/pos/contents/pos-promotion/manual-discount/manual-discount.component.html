@@ -1,0 +1,38 @@
+<div class="manual-discount">
+  <div class="title">
+    Manual discount:
+  </div>
+  
+  <div class="contents">
+    <div class="select-reason">
+      <ng-select #selection [(ngModel)]="selectedDiscountReasonType"
+        [items]="discountReasonTypes" 
+        bindValue="id" bindLabel="value" 
+        placeholder="Select Reason" class="custom select-field"
+        [clearable]=false>
+      </ng-select>
+    </div>
+
+    <div class="select-promotion">
+      <ng-select #selection 
+        [(ngModel)]="selectedManualDiscountType" 
+        (ngModelChange)="onChangeManualDiscountType($event)"
+        [items]="manualDiscountTypes" 
+        bindValue="id" bindLabel="value" 
+        placeholder="Select Promotion" class="custom select-field"
+        [clearable]=false>
+      </ng-select>
+    </div>
+  
+    <div class="value">
+      <app-input-with-keyboard id="{{manualDiscountValueId}}" type="number" inputSelectText="true" isNumpad="true"
+        [value]="manualDiscountValue" (valueChange)="onChangeManualDiscountValue($event)">
+      </app-input-with-keyboard>
+      {{manualDiscountUnit}}
+    </div>
+
+    <div class="action">
+      <button class="btn btn-success" (click)="onAddManualDiscount($event)">Add</button>
+    </div>
+  </div>
+</div>

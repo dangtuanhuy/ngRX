@@ -1,0 +1,27 @@
+.field-input{
+    border: 1px #695656 solid;
+    margin: 10px 5px;
+    padding: 10px;
+    border-style: dashed;
+}
+
+.fields-selection {
+    margin: 20px 0;
+}
+
+.information-content {
+    padding: 20px 10px;
+}
+
+.variants-content {
+    @extend .information-content;
+}
+
+.barcodes-content {
+    @extend .information-content;
+}
+
+.modal-body{
+    max-height: 80vh;
+    overflow: auto;
+}

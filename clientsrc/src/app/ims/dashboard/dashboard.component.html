@@ -1,0 +1,111 @@
+<div class="dashboard-page">
+  <p class="col-sm-6 list-view-title h4">
+    Dashboard
+  </p>
+
+  <div class="columns-dropdown">
+    <div class="dropdown">
+      <label class="dropdown-title">Location:</label>
+      <ng-select class="custom"
+                 [items]="locations"
+                 bindLabel="name"
+                 placeholder="Select location"
+                 [loading]="isLocationsLoading"
+                 [(ngModel)]="selectedLocation"
+                 (ngModelChange)="onSelectedLocationChange($event)"
+                 [clearable]=false>
+      </ng-select>
+      <input class="form-control ml-2"
+             [(ngModel)]="searchText"
+             #searchInput
+             name="searchText"
+             type="search"
+             placeholder="Search"
+             aria-label="Search">
+    </div>
+    <div class="button-group">
+      <button type="button"
+              class="btn btn-outline-secondary mr-2"
+              (click)="expandAllStocksRows()">Expand All</button>
+      <button type="button"
+              class="btn btn-outline-secondary"
+              (click)="collapseAllStocksRows()">Collapse All</button>
+    </div>
+  </div>
+
+  <div class="datatable">
+    <ngx-datatable #stocksTable
+                   class='material'
+                   [loadingIndicator]="isLoadingInventoryStock"
+                   [rows]='stocksDashboard.items'
+                   [columnMode]="'force'"
+                   [headerHeight]="50"
+                   [footerHeight]="50"
+                   [rowHeight]="'auto'"
+                   [externalPaging]="true"
+                   [count]="stocksDashboard.items.length"
+                   [offset]="pageNumber"
+                   [limit]="stocksDashboard.items.length"
+                   (page)='setPage($event)'>
+
+      <ngx-datatable-row-detail>
+        <ng-template let-row="row"
+                     let-expanded="expanded"
+                     ngx-datatable-row-detail-template>
+          <table class="fixed">
+            <tr class="header">
+              <th *ngFor="let field of getFieldName(row)"
+                  class="header column-name text-center">{{field.name}}</th>
+              <th class="header column-name text-center">SKU Code</th>
+              <th class="header column-name text-center"
+                  *ngIf="isShowLocationName">Location</th>
+              <th class="header column-name text-center">Balance</th>
+            </tr>
+            <tr *ngFor="let item of row.items">
+              <td *ngFor="let field of item.fields">
+                {{field.value}}
+              </td>
+              <td>
+                {{item.skuCode}}
+              </td>
+              <td *ngIf="isShowLocationName">
+                {{item.locationName}}
+              </td>
+              <td>
+                {{item.balance}}
+              </td>
+            </tr>
+          </table>
+        </ng-template>
+      </ngx-datatable-row-detail>
+
+      <ngx-datatable-column [width]="50"
+                            [resizeable]="false"
+                            [sortable]="false"
+                            [draggable]="false"
+                            [canAutoResize]="false">
+        <ng-template let-row="row"
+                     let-expanded="expanded"
+                     ngx-datatable-cell-template>
+          <a [class.datatable-icon-right]="!expanded"
+             [class.datatable-icon-down]="expanded"
+             title="Expand/Collapse Row"
+             class="arrow-detail"
+             (click)="toggleExpandStocksRow(row)">
+          </a>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Product Name">
+        <ng-template let-column="column"
+                     ngx-datatable-header-template>
+          Product Name
+        </ng-template>
+        <ng-template let-row="row"
+                     ngx-datatable-cell-template>
+          {{row.productName}}
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

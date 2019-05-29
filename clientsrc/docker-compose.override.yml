@@ -1,0 +1,19 @@
+version: '3.5'
+
+services:
+  harvey-ims-web:
+    ports:
+      - "4100:80"
+  
+  harvey-purchase-order-web:
+    ports:
+      - "4200:80"
+  
+  harvey-retail-web:
+    ports:
+      - "4400:80"
+  
+  harvey-promotion-web:
+    ports:
+      - "4300:80" 
+      

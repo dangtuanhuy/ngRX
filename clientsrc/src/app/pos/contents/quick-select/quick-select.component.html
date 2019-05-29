@@ -1,0 +1,61 @@
+<div id="quick-select">
+  <div class="contents">
+    <div class="categories grid-with-arrow-1">
+      <app-buttons-grid
+        rowNumber='1'
+        colNumber='7'
+        [showArrow]='true'
+        buttonColor='#499bc0'
+        [buttons]='categoriesBigButtons'
+        (clickItem)='onClickCategory($event)'
+        (clickPrevious)='onClickCategoryPrevious()'
+        (clickNext)='onClickCategoryNext()'>
+      </app-buttons-grid>
+    </div>
+
+    <div class="products grid-with-arrow-2">
+      <app-buttons-grid
+        rowNumber='2'
+        colNumber='7'
+        [showArrow]='true'
+        buttonColor='#b7e2f3'
+        [buttons]='productsBigButtons'
+        (clickItem)='onClickProduct($event)'
+        (clickPrevious)='onClickProductPrevious()'
+        (clickNext)='onClickProductNext()'>
+      </app-buttons-grid>
+    </div>
+
+    <div class="features grid-without-arrow-2">
+      <app-buttons-grid
+        rowNumber='2'
+        colNumber='9'
+        buttonColor='#499bc0'
+        [buttons]='featuresBigButtons'
+        (clickItem)='onClickFeature($event)'>
+      </app-buttons-grid>
+    </div>
+
+    <div class="keys grid-without-arrow-2">
+      <app-buttons-grid
+        rowNumber='2'
+        colNumber='9'
+        buttonColor='#b7e2f3'
+        [buttons]='shortKeysBigButtons'
+        (clickItem)='onClickShortKey($event)'>
+      </app-buttons-grid>
+    </div>
+
+    <div class="functions grid">
+      <app-buttons-grid
+        rowNumber='1'
+        colNumber='4'
+        [buttonFullHeight]='true'
+        [buttons]='functionsBigButtons'
+        (clickItem)='onClickFunction($event)'>
+      </app-buttons-grid>
+    </div>
+  </div>
+
+  <div class="overlay" [ngStyle]="{'display': pageActive ? 'none': 'block'}"></div>
+</div>

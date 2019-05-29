@@ -1,0 +1,198 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">{{title}}</h5>
+    </div>
+    <div class="modal-body purchase-order">
+        <form [formGroup]="addValueForm">
+            <fieldset>
+                <div class="form-group">
+                    <div class="add-control">
+                        <label>Name</label>
+                        <input class="form-control"
+                               formControlName="name"
+                               placeholder="Name">
+                    </div>
+                    <div class="add-control">
+                        <label>Description</label>
+                        <input class="form-control"
+                               formControlName="description"
+                               placeholder="Description">
+                    </div>
+                    <div class="add-control">
+                        <label class="lable-control">Vendor</label>
+                        <ng-select #selection
+                                   formControlName="vendor"
+                                   [items]="vendors"
+                                   bindValue="id"
+                                   bindLabel="name"
+                                   placeholder="Select Vendor"
+                                   class="custom select-field"
+                                   (change)="onSelectedVendorChange($event)"
+                                   [clearable]=false>
+                        </ng-select>
+                    </div>
+                    <label>Date</label>
+                    <div class="input-group">
+                        <input class="form-control"
+                               placeholder="yyyy-mm-dd"
+                               name="d1"
+                               formControlName="date"
+                               ngbDatepicker
+                               #d1="ngbDatepicker">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar"
+                                    (click)="d1.toggle()"
+                                    type="button">
+                                <i class="fas fa-calendar-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <div class="datatable">
+            <div class="row">
+                <div class="col-md-2">
+                    <button class="btn btn-secondary"
+                            type="button"
+                            (click)="onClickAddButton()">Add</button>
+                </div>
+                <div class="col-md-10 currency-option">
+                    <ng-select class="custom-currency"
+                               [items]="stockTypes"
+                               bindLabel="name"
+                               bindValue="id"
+                               placeholder="Select stocktype"
+                               (change)="onStockTypeChange($event)"
+                               [clearable]=false
+                               title="name">
+                    </ng-select>
+                    <ng-select class="custom-currency"
+                               [items]="currencies"
+                               bindLabel="name"
+                               bindValue="id"
+                               [(ngModel)]="currencySelected"
+                               placeholder="Select currency"
+                               (change)="onOptionSelected($event)"
+                               [clearable]=false
+                               title="name">
+                    </ng-select>
+                </div>
+
+            </div>
+
+            <div class="content">
+                <table class="fixed">
+                    <tr class="header">
+                        <th class="header column-name text-center">Products</th>
+                        <th class="header column-name text-center">Variants</th>
+                        <th class="header column-name text-center">Stock types</th>
+                        <th class="header column-name text-center">Quantity</th>
+                        <th class="header column-name text-center">Cost Value</th>
+                        <th class="header column-name text-center">Action</th>
+                    </tr>
+                    <tr *ngFor="let item of purchaseOrderItemViewModel; let i = index" [ngClass]="item.isDuplicate ? 'duplicate' : ''">
+                        <th class="header column-name text-center">
+                            <div class="cell">
+                                <ng-select class="custom"
+                                           [items]="products"
+                                           bindLabel="name"
+                                           bindValue="id"
+                                           placeholder="Search product"
+                                           [(ngModel)]="item.productId"
+                                           (change)="onSelectedProductChange(i)"
+                                           (search)="searchText.next($event)"
+                                           [clearable]=false>
+                                </ng-select>
+                            </div>
+                        </th>
+                        <th class="header column-name text-center">
+                            <div class="cell">
+                                    <div class="text-box"
+                                    (click)="openVariantModal(i, item)">
+                                   <div class="text-box__empty"
+                                        *ngIf="!item.variant">
+                                       <span>select variant</span>
+                                   </div>
+                                   <div class="text-box__input"
+                                        *ngIf="item.variant">
+                                       <div *ngFor="let field of item.variant.fieldValues"
+                                            class="field__tag">
+                                           <div class="field__tag-title">{{field.name}}: <span class="font-weight-normal"
+                                                     *ngFor="let value of field.value; let i = index">
+                                                   <span *ngIf="i == 0">{{value}}</span><span *ngIf="i > 0">,
+                                                       {{value}}</span></span>
+                                           </div>
+   
+                                           <div class="field__tag-tooltip-wrapper open">
+                                               <div class="field__tag-tooltip">{{field.name}}: <span
+                                                         class="font-weight-normal"
+                                                         *ngFor="let value of field.value; let i = index">
+                                                       <span *ngIf="i == 0">{{value}}</span><span *ngIf="i > 0">,
+                                                           {{value}}</span></span></div>
+                                           </div>
+                                       </div>
+                                   </div>
+   
+                               </div>
+                            </div>
+                        </th>
+                        <th class="header column-name text-center">
+                            <div class="cell">
+                                <ng-select class="custom"
+                                           [items]="stockTypes"
+                                           bindLabel="name"
+                                           bindValue="id"
+                                           placeholder="Select stock type"
+                                           [(ngModel)]="item.stockTypeId"
+                                           [clearable]=false
+                                           (change)="onSelectedStockTypeChange(i)">
+                                </ng-select>
+                            </div>
+
+                        </th>
+                        <th class="header column-name text-center">
+                            <div class="cell">
+                                <input class="number-updown"
+                                       type="number"
+                                       name="input"
+                                       (change)="onQuantityChange(i)"
+                                       [(ngModel)]="item.quantity"
+                                       oninput="validity.valid||(value='');"
+                                       min="0">
+                            </div>
+                        </th>
+                        <th class="header column-name text-center">
+                            <div class="cell">
+                                <input class="number-updown"
+                                       type="number"
+                                       name="input"
+                                       (change)="onCostChange(i)"
+                                       [(ngModel)]="item.costValue"
+                                       [(ngModel)]="item.costValue"
+                                       oninput="validity.valid||(value='');"
+                                       step="0.01"
+                                       min="0">
+                            </div>
+                        </th>
+                        <th class="header column-name text-center">
+                            <div class="cell">
+                                <i class="fas fa-trash-alt fa-lg icon"
+                                   (click)="deletePurchaseOrderItem(i)"></i>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button [disabled]="addValueForm.invalid"
+                class="btn btn-secondary"
+                type="button"
+                (click)="onSave()">Save</button>
+        <button class="btn btn-secondary"
+                type="button"
+                (click)="onDismiss('Cross click')">Cancel</button>
+    </div>
+</div>

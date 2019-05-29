@@ -1,0 +1,95 @@
+.add-transfer-in {
+    button:disabled {
+        cursor: not-allowed;
+    }
+
+    .columns-dropdown {
+        display: flex;
+        padding: 20px 20px 10px 0;
+        justify-content: flex-start;
+
+        .dropdown {
+            display: flex;
+            align-items: center;
+            &-title {
+                margin: 0px 20px;
+            }
+        }
+    }
+
+    .group-button {
+        display: flex;
+        justify-content: flex-end;
+        .back-btn {
+            margin-right: 10px;
+        }
+    }
+
+    .datatable{
+        height: 100%;
+        padding: 10px 0px;
+
+        .content {
+            padding: 10px 0;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+            padding: 5px 5px;
+        }
+
+        
+        table.fixed {
+            table-layout: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            border-spacing: 0;
+
+            .header {
+                background-color: rgba(0, 0, 0, .03);
+            }
+
+            .cell {
+                display: flex;
+                justify-content: center;
+                .custom {
+                    width: 200px;
+
+                    .item-select {
+                        border-bottom: 1px solid #ccc;
+                    }
+                }
+
+                .ng-dropdown-panel {
+                    border: unset;
+                }
+
+                .ng-dropdown-panel-items.scroll-host{
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    width: fit-content;
+                    min-width: 200px;
+                }
+    
+                .number-updown {
+                    height: 36px;
+                    width: 100px;
+                    padding-left: 10px;
+                }
+            }
+
+            .icon {
+                cursor: pointer;
+            }
+
+        }
+    }
+}

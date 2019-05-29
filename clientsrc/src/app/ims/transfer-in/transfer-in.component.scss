@@ -1,0 +1,77 @@
+.transfer-in-page {
+    .filter-multi-select{
+        width: 100%;
+        padding-bottom: 30px;
+        &-field {
+            float: left;
+            padding-left: 4.5px;
+            &-view {
+                width: 370px;
+                display:inline-block;
+            }
+        }        
+    }
+    .group-button {
+        width: 80px;
+        float: right;
+        .btn-item {
+            float: right;
+        }
+        .transfer-in-button {
+            padding-top: 10px;
+            width: 110px;
+        }
+    }
+    .filter {
+        .location-filter-form {
+            float: left;
+        }
+        .date-filter-form {
+            float: left;
+        }
+        .btn-filter {
+            padding-top: 32px;
+        }
+    }
+    .transfer-in-datatable {
+        .ngx-datatable .datatable-body .datatable-scroll {
+            display: inline-block;
+            width: 100% !important;
+        }
+        .ngx-datatable.material .datatable-body .datatable-row-detail {
+            padding: 20px;
+            height: fit-content !important;
+        }
+    }
+    .filter-transfer-in-page {
+        .filter {
+            .location-filter-form {
+                float: left;
+            }
+            .date-filter-form {
+                float: left;
+            }
+            .btn-filter {
+                padding-top: 32px;
+            }
+        }
+        .filter-transfer-in-datatable {
+            padding-top: 50px;
+            .group-btn {
+                .btn-item {
+                    float: right;
+                    margin-right: 20px;
+                }
+            }
+            .ngx-datatable .datatable-body .datatable-scroll {
+                display: inline-block;
+                width: 100% !important;
+            }
+            .ngx-datatable.material .datatable-body .datatable-row-detail {
+                padding: 20px;
+                height: fit-content !important;
+            }
+        }
+    }
+    
+}

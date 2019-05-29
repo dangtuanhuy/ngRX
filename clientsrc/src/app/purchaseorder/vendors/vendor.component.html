@@ -1,0 +1,40 @@
+<div class="vendors-page">
+    <p class="list-view-title h4">
+        {{title}}
+    </p>
+    <div class="filter-multi-select col-12">
+            <div class="filter-multi-select-field col-3">
+                <div class="filter-multi-select-field-title">
+                    <p class="h6">Payment Term</p>
+                </div>
+                <app-filter-multi-select [dropdownList]="dropDownListPaymentTerm" [customPlaceholder]="paymentTermsPlaceholder" (dropDownListItem)='handleSelectedDropDownListPaymentTerms($event)' class="filter-multi-select-field-view"></app-filter-multi-select>
+            </div>
+            <div class="filter-multi-select-field col-3">
+                <div class="filter-multi-select-field-title">
+                    <p class="h6">Currency</p>     
+                </div>
+                <app-filter-multi-select [dropdownList]="dropDownListCurency" [customPlaceholder]="currenciesPlaceholder" (dropDownListItem)='handleSelectedDropDownListCurrencies($event)' class="filter-multi-select-field-view"></app-filter-multi-select>
+            </div>
+            <div class="filter-multi-select-field col-3">
+                <div class="filter-multi-select-field-title">
+                    <p class="h6">Tax Type</p>     
+                </div>
+                <app-filter-multi-select [dropdownList]="dropDownListTaxType" [customPlaceholder]="taxTypesPlaceholder" (dropDownListItem)='handleSelectedDropDownListTaxTypes($event)' class="filter-multi-select-field-view"></app-filter-multi-select>
+            </div>       
+    </div>
+    <div>
+        <app-list-view-management
+                [datasource]="datasource"
+                [pageSize]="pageSize"
+                [listButton]="listButton"
+                [actionType]="actionType"
+                [isHiddenSearchBox]="isHiddenSearchBox"
+                [addSuccessMessage]='addSuccessMessage'
+                [updateSuccessMessage]='updateSuccessMessage'
+                [deleteSuccessMessage]='deleteSuccessMessage'
+                (changeSelectedPage)="changeSelectedPage($event)"
+                (searchQuery)="handleSearchQuery($event)"
+                [userDefinedColumnSetting] = "userDefinedColumnSetting">
+        </app-list-view-management>
+    </div>    
+</div>

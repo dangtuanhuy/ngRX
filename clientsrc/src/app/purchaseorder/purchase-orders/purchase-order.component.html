@@ -1,0 +1,31 @@
+<div class="purchase-order-page">
+    <p class="list-view-title h4">
+        {{title}}
+    </p>
+    <div class="filter">
+        <div class="columns-dropdown">
+            <div class="dropdown">
+                <label class="dropdown-title">Status:</label>
+                <ng-select class="custom" [items]="status" placeholder="Select status" [(ngModel)]="selectedStatus"
+                    (change)="onChangeFilter()">
+                </ng-select>
+
+                <label class="dropdown-title">Stages:</label>
+                <ng-select class="custom" [items]="stages" placeholder="Select stages" [(ngModel)]="selectedStages"
+                    (change)="onChangeFilter()">
+                </ng-select>
+            </div>
+        </div>
+    </div>
+
+    <div class="datatable">
+        <div class="content">
+            <app-list-view-management [datasource]="datasource" [pageSize]="pageSize" [listButton]="listButton"
+                [actionType]="actionType" [isHiddenSearchBox]="isHiddenSearchBox" [addSuccessMessage]='addSuccessMessage'
+                [updateSuccessMessage]='updateSuccessMessage' [deleteSuccessMessage]='deleteSuccessMessage'
+                (changeSelectedPage)="changeSelectedPage($event)" (searchQuery)="eventSearchQuery($event)"
+                [userDefinedColumnSetting]="userDefinedColumnSetting">
+            </app-list-view-management>
+        </div>
+    </div>
+</div>

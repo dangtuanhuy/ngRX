@@ -1,0 +1,16 @@
+<div>
+    <ngx-datatable #myTable class='material' [rows]='dataSource' 
+    [columnMode]="'force'" [headerHeight]="50" 
+    [footerHeight]="50"
+    [selectionType]="'single'" [rowHeight]="'auto'" 
+    [limit]="pageSize" 
+    [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" 
+    (select)='onSelect($event)' >
+
+        <ngx-datatable-column [name]="'Value'">
+        </ngx-datatable-column>
+    </ngx-datatable>
+</div>
+<div class="footer">
+    <button class="field__btn-cancel" (click)="onDismiss()">Cancel <i class="fas fa-ban"></i></button>
+</div>

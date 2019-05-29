@@ -1,0 +1,75 @@
+<div class="recent-sales" [ngStyle]="{'width': pageWidth}">
+  <div class="recent-sales--call-back">
+    <app-page-callback
+      [title]='title'
+      [defaultPage]='defaultPage'>
+    </app-page-callback>
+  </div>
+
+  <div class="recent-sales__content">
+    <div class="recent-sales-search">
+      <app-input-with-keyboard
+        id="{{searchSaleId}}"
+        placeholder="Search..."
+        className="form-control app-input"
+        [value]="saleSearch"
+        (valueChange)="onSearch($event)">
+      </app-input-with-keyboard>
+    </div>
+
+    <div class="sales">
+      <ngx-datatable
+        #myTable
+        class="material striped list-product expandable"
+        [rows]="recentSales"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="50"
+        [externalPaging]="true"
+        [count]="totalItem"
+        [offset]="pageIndex"
+        [limit]="pageSize"
+        [selectionType]="'single'" 
+        (select)="onSelectSale($event)"
+        (page)='setPage($event)'>
+        
+        <ngx-datatable-column name="billNo" [sortable]="false" [draggable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            Bill no
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{value}}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="customerName" [sortable]="false" [draggable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            Customer Name
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{value}}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="amount" [sortable]="false" [draggable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            Net ($)
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{formatNumberDecimal(value)}}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="createdDate" [sortable]="false" [draggable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            Created Date
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{formarDate(value)}}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>

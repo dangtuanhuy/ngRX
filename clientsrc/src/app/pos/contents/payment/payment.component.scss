@@ -1,0 +1,129 @@
+.payment{
+    height: 100%;
+    padding: 5px;
+    
+    .payment-wrapper{
+        width: 100%;
+
+        .payment-mode{
+            float: left;
+            padding-top: 10px;
+            width: calc(100% - 260px);
+
+            .payment-data-search {
+                .data-search {
+                    width: 200px;
+                    margin-left: auto;
+                }
+            }
+
+            .payment-mode-list {
+                width: 100%;
+                margin-top: 10px;
+
+                .ngx-datatable {
+                    width: 100%;
+
+                    .datatable-header {
+                        .datatable-header-inner {
+                            width: 100% !important;
+                            
+                            .datatable-row-center {
+                                width: 100% !important;
+
+                                .datatable-header-cell {
+                                    &.icon, &.amount {
+                                        width: 100px !important;
+                                    }
+    
+                                    &.paymode {
+                                        width: calc(100% - 300px) !important;
+                                    }
+
+                                    &.action {
+                                        width: 100px !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    .datatable-body {
+                        width: 100%;
+                        max-height: calc(100vh - 300px);
+                        min-height: calc(100vh - 300px);
+
+                        .datatable-row-wrapper {
+                            .datatable-body-row {
+                                width: 100% !important;
+
+                                .datatable-row-center {
+                                    width: 100% !important;
+
+                                    .datatable-body-cell {
+                                        &.icon, &.amount {
+                                            width: 100px !important;
+                                        }
+        
+                                        &.paymode {
+                                            width: calc(100% - 300px) !important;
+                                        }
+
+                                        &.action {
+                                            width: 100px !important;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .payment-result{
+            float: right;
+            padding-top: 10px;
+            width: 260px;
+
+            .summary {
+                margin-top: 50px;
+
+                .price {
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+
+    &-action {
+        &--save-button {
+            margin-top: 10px;
+            background-color: #28A745;
+            border-color: #ffffff;
+
+            &:hover {
+                background-color: #28A745;
+                border-color: #ffffff;
+            }
+        }
+
+        &--cancel-button {
+            margin-top: 10px;
+            background-color: #d81d1d;
+            border-color: #ffffff;
+
+            &:hover {
+                background-color: #d81d1d;
+                border-color: #ffffff;
+            }
+        }
+
+        button {
+            width: 100%;
+            height: 50px;
+            font-size: 22px;
+            font-weight: 900;
+        }
+    }
+}

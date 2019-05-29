@@ -1,0 +1,218 @@
+<div class="receipt" [ngStyle]="{'width': pageWidth}">
+  <div class="receipt--call-back">
+    <app-page-callback [title]='title' [defaultPage]='defaultPage'>
+    </app-page-callback>
+  </div>
+
+  <div class="receipt__content">
+    <div class="receipt__information">
+      <div class="receipt__information_wrapper">
+        <div class="header">
+          <div class="header__logo">
+            <img src="assets/pos/images/pos-receipt-icon.png" alt="Receipt logo" class="logo" />
+          </div>
+
+          <ng-container *ngIf="saleReceipt">
+            <div class="header__infor">
+              <h4 class="title">TOG Connection Pte Ltd</h4>
+              <p class="store-name">{{saleReceipt.storeName}}</p>
+              <p class="store-address" *ngIf="saleReceipt.storeAddress">{{saleReceipt.storeAddress}}</p>
+              <p></p>
+              <p class="customer-name" *ngIf="saleReceipt.customerName">Name: {{saleReceipt.customerName}}</p>
+              <p class="phone" *ngIf="saleReceipt.customerPhoneNumber">Phone: {{saleReceipt.customerPhoneNumber}}</p>
+            </div>
+          </ng-container>
+        </div>
+
+        <hr class="hr">
+
+        <div class="bill_info">
+          <div class="bill_info--row bill-no">
+            <div class="item">
+              <div class="title">
+                Bill No:
+              </div>
+
+              <div class="value billno">
+                {{billno}}
+              </div>
+            </div>
+          </div>
+
+          <div class="bill_info--row">
+            <div class="item">
+              <div class="title">
+                Date:
+              </div>
+
+              <div class="value">
+                {{createdDate}}
+              </div>
+            </div>
+          </div>
+
+          <div class="bill_info--row cashier-counter">
+            <div class="cashier">
+              <div class="title">
+                Cashier:
+              </div>
+
+              <div class="value">
+                {{cashierName}}
+              </div>
+            </div>
+
+            <div class="counter">
+              <div class="title">
+                Counter: {{counter}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="hr">
+
+        <div class="bill__content">
+          <div class="header">
+            <span class="no">No.</span>
+            <span class="item">Item</span>
+            <span class="quantity">Qty</span>
+            <span class="price">Price($)</span>
+            <span class="amount">Amount($)</span>
+          </div>
+
+          <hr class="hr">
+          <div class="body">
+            <ng-container *ngIf="order">
+              <div class="body-row" *ngFor="let item of order.orderItems; let i = index">
+                <div class="body-row-info">
+                  <span class="no">{{i + 1}}</span>
+                  <span class="item">{{item.variant}}</span>
+                </div>
+                <div class="body-row-skucode">
+                  <span class="item">{{item.skuCode}}</span>
+                </div>
+                <div class="body-row-info-detail">
+                  <span class="quantity">{{item.quantity}}</span>
+                  <span class="price">{{formatNumberDecimal(item.price)}}</span>
+                  <span class="amount">{{formatNumberDecimal(item.price * item.quantity)}}</span>
+                </div>
+
+                <ng-container *ngIf="item.orderItemPromotions && item.orderItemPromotions.length > 0">
+                  <div class="body-row-info-detail-order-promotion" *ngFor="let itemPromotion of item.orderItemPromotions">
+                    <ng-container *ngIf="itemPromotion.discountType === discountType.Money">
+                      <span class="item-discount-description">Item Discount</span>
+                      <span class="item-discount-money-value">-{{formatNumberDecimal(itemPromotion.value)}}</span>
+                    </ng-container>
+
+                    <ng-container *ngIf="itemPromotion.discountType === discountType.Percent">
+                      <span class="item-discount-description">Item Discount</span>
+                      <span class="item-discount-percent-value">-{{formatNumberDecimal(itemPromotion.value)}}(%)</span>
+                      <span class="item-discount-percent-amount">-{{formatNumberDecimal(itemPromotion.value * item.price * item.quantity / 100)}}</span>
+                    </ng-container>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-container>
+
+            <div class="body-manual-promotion" *ngIf="order && order.orderPromotions.length > 0">
+              <div class="body-manual-promotion-title">
+                Discount
+              </div>
+
+              <div class="body-manual-promotion-items">
+                <div class="body-manual-promotion-item" *ngFor="let orderPromotion of order.orderPromotions">
+                  <div class="body-manual-promotion-item-title">
+                    {{orderPromotion.reason}}
+                  </div>
+  
+                  <div class="body-manual-promotion-item-value" *ngIf="orderPromotion.discountType === discountType.Money">
+                    -{{formatNumberDecimal(orderPromotion.value)}} ($)
+                  </div>
+
+                  <div class="body-manual-promotion-item-value percent" *ngIf="orderPromotion.discountType === discountType.Percent">
+                    <span class="value">-{{formatNumberDecimal(orderPromotion.value)}} (%)</span>
+                    <span class="amount-value">-{{formatNumberDecimal(orderPromotion.value * totalAmount / 100)}} ($)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="body-summary">
+              <div class="total">
+                <div class="title">
+                  Total Amount
+                </div>
+
+                <div class="value">
+                  {{formatNumberDecimal(totalAmount)}} ($)
+                </div>
+              </div>
+              <div class="gst-number">
+                <ng-container *ngIf="gstInclusive">
+                  (GST S$ {{gstInclusiveAmount}} Inclusive)
+                </ng-container>
+
+                <ng-container *ngIf="!gstInclusive">
+                  <div class="gst-amount">
+                    <div class="title">
+                      GST
+                    </div>
+
+                    <div class="value">
+                      {{gstAmount}} ($)
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <hr class="hr">
+          <div class="bill--summary">
+            <div class="net-quantity">
+              <span class="title">Net Qty: </span>
+              <span class="value">{{netQuantityTotal}}</span>
+            </div>
+            <div class="net-total">
+              <span class="title">Net Total: </span>
+              <span class="value">{{formatNumberDecimal(netTotal)}} ($)</span>
+            </div>
+          </div>
+        </div>
+
+        <ng-container *ngIf="saleReceipt">
+          <hr class="hr">
+          <div class="receipt_payment-modes">
+            <div class="payment-mode" *ngFor="let salePayment of saleReceipt.salePayments">
+              <div class="title">
+                {{salePayment.name}}
+              </div>
+
+              <div class="value">
+                {{salePayment.decimalAmount}}
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <hr class="hr">
+        <div class="receipt_change">
+          <div class="change-title"> Change </div>
+          <div class="change-value"> {{saleReceipt.change}} ($) </div>
+        </div>
+
+        <hr class="hr">
+        <div class="receipt__retail">
+          Retain Your Receipt for Exchange within {{exchangeDayAmount}} Days For Selected Items Only! Thanks! Please
+          Come again
+        </div>
+      </div>
+    </div>
+
+    <div class="receipt__actions">
+      <button class="btn btn-info print" (click)="onPrint()">Print</button>
+      <button class="btn btn-info print" (click)="onEsc()">Esc</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div *ngIf="!isInEditMode(); else editMode">
+    <span class="field__title">{{displayText}}</span>: <span class="field__tag">{{value}}</span>
+    <i class="far fa-edit field__icon-edit" (click)="edit()"></i>
+</div>
+
+<ng-template #editMode>
+    <!-- <input class="form-control" [(ngModel)]="bindingValue" type="checkbox" /> -->
+    <label class="container">
+        <input type="checkbox" checked="checked" [(ngModel)]="bindingValue">
+        <span class="checkmark"></span>
+    </label>
+    <br>
+    <button class="field__btn-save" (click)="save()">Save <i class="fas fa-save"></i></button>
+    <button class="field__btn-cancel" (click)="cancel()">Cancel <i class="fas fa-ban"></i></button>
+</ng-template>

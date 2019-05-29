@@ -1,0 +1,80 @@
+<div class="modal-header">
+  <h5 class="modal-title">Add Field Template</h5>
+</div>
+<div class="modal-body">
+  <form [formGroup]="addValueForm">
+    <fieldset>
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" formControlName="name" placeholder="Name" [ngClass]="{'is-invalid': (addValueForm.get('name')?.touched ||
+                                                  addValueForm.get('name')?.dirty) &&
+                                                  !addValueForm.get('name')?.valid}">
+        <span class="error invalid-feedback" *ngIf="addValueForm.get('name')?.dirty&&
+                                                    addValueForm.get('name')?.errors">
+            <span *ngIf="addValueForm.get('name')?.errors?.required">
+              Name is required!
+            </span>
+        </span>
+        <label>Description</label>
+        <input class="form-control" formControlName="description" placeholder="Description">
+        <label>IdentifiedId</label>
+        <input class="form-control" formControlName="identifiedId" placeholder="IdentifiedId" [ngClass]="{'is-invalid': (addValueForm.get('identifiedId')?.touched ||
+                                                  addValueForm.get('identifiedId')?.dirty) &&
+                                                  !addValueForm.get('identifiedId')?.valid}">
+        <span class="error invalid-feedback" *ngIf="addValueForm.get('identifiedId')?.dirty&&
+                                                    addValueForm.get('identifiedId')?.errors">
+            <span *ngIf="addValueForm.get('identifiedId')?.errors?.required">
+              IdentifiedId is required!
+            </span>
+        </span>
+        <input [hidden]="!supportWithVariant" class="type" formControlName="type" type="checkbox" (change)="onChangeType($event)">
+      </div>
+    </fieldset>
+    <div *ngFor="let item of section">
+      <div class="card">
+        <div class="card-header">
+          <input formControlName="sectionName" [hidden]="item.name == 'Variant'" placeholder="Name" value="{{item.name}}" (change)="onEditSectionName($event, item.orderSection)">
+          <label [hidden]="item.name != 'Variant'">{{item.name}}</label>
+          <button [hidden]="item.name == 'Variant'" type="button" class="close" aria-label="Close" (click)="onDeleteSection(item)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="card-body">
+          <table class="fixed">
+
+            <tr>
+              <th class="header column-name">name</th>
+              <th class="header column-type">type</th>
+              <th class="header">default value</th>
+            </tr>
+            <ng-container *ngFor="let field of item.fields">
+              <tr>
+                <td>{{field.field.name}}</td>
+                <td>{{getFieldType(field.field.type)}}</td>
+                <td>{{buildDefaultValue(field.field.defaultValue, field.field.type)}}</td>
+                <td class="delete-cell"><i class="fas fa-trash-alt delete-icon" (click)="onDeleteField(item, field.field)"></i></td>
+              </tr>
+            </ng-container>
+          </table>
+          <div class="group-add-field">
+            <button [disabled]="(item.orderSection != -1 && listField.length == 0) || (item.orderSection == -1 && predefinedList.length == 0)" 
+            type="button" class="btn btn-secondary add-field-btn" (click)="onClickAddField(item.orderSection)">Add
+              more fields...</button>
+            <ng-select formControlName="listField" [hidden]="isSelected || !selectedSection || selectedSection.orderSection != item.orderSection" #selection
+              [items]="getItems(item.orderSection)" bindValue="id" bindLabel="name" placeholder="Select Field" class="custom select-field"
+              [(ngModel)]="selectedField" [clearable]=false (change)="onSelectdField($event)">
+            </ng-select>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-secondary add-section-btn" (click)="onClickAddSection($event)">Add more
+      section...</button>
+  </form>
+  <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-secondary" [disabled]="addValueForm.invalid || !isVariantField || isDeactive" type="button" (click)="onSave()">Save</button>
+  <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">Cancel</button>
+</div>

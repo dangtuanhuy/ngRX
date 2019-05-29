@@ -1,0 +1,83 @@
+<div class="recent-sales-detail" [ngStyle]="{'width': pageWidth}">
+  <div class="recent-sales-detail--call-back">
+    <app-page-callback
+      [title]='title'
+      [defaultPage]='defaultPage'>
+    </app-page-callback>
+  </div>
+
+  <div class="recent-sales-detail__content">
+    <ng-container *ngIf="sale">
+      <div class="customer-info" >
+        Bill no: <span>{{sale.billNo}}</span>
+      </div>
+  
+      <div class="customer-info" *ngIf="sale">
+        Customer Name: <span>{{sale.customerName}}</span>
+      </div>
+  
+      <div class="total-price" *ngIf="sale">
+        Net: <span>{{formatNumberDecimal(sale.amount)}} $</span>
+      </div>
+  
+      <div class="total-price" *ngIf="sale">
+        <ng-container *ngIf="sale.gstInclusive">
+          GST: <span>{{formatNumberDecimal(sale.gst)}} % (Inclusive)</span>
+        </ng-container>
+  
+        <ng-container *ngIf="!sale.gstInclusive">
+          GST: <span>{{formatNumberDecimal(sale.gst)}} % </span>
+        </ng-container>
+      </div>
+  
+      <div class="customer-info" *ngIf="sale">
+        Created date: <span>{{formarDate(sale.createdDate)}}</span>
+      </div>
+  
+      <div class="product" *ngIf="sale">
+        <ngx-datatable
+          #myTable
+          class="material striped list-product expandable"
+          [rows]="dataSource"
+          [columnMode]="'force'"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [rowHeight]="50">
+          <ngx-datatable-column name="description" [sortable]="false" [draggable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template>
+              Description
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              <strong>{{value}}</strong>
+            </ng-template>
+          </ngx-datatable-column>
+  
+          <ngx-datatable-column name="quantity" [sortable]="false" [draggable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template>
+              Quantity
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              <strong>{{value}}</strong>
+            </ng-template>
+          </ngx-datatable-column>
+  
+          <ngx-datatable-column name="price" [sortable]="false" [draggable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template>
+              Price ($)
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              <strong>{{formatNumberDecimal(value)}}</strong>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+    </ng-container>
+    
+    <div class="actions">
+      <button class="btn btn-outline-secondary reset reprint"
+        (click)="onClickReprint()">
+        Reprint
+      </button>
+    </div>
+  </div>
+</div>

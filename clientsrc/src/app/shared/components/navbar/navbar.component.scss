@@ -1,0 +1,34 @@
+$topnav-background-color: #6c757d;
+.navbar {
+    box-shadow: 1px 1px 4px 1px #4c4c4c;
+    background: $topnav-background-color;
+    &-fixed-top {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+    }
+    .img-brand {
+        height: 55px;
+    }
+    .menu {
+        a.list-group-item {
+            cursor: pointer;
+            border: 0;
+            border-radius: 0;
+            color: rgba(255, 255, 255, 0.5);
+            background: $topnav-background-color;
+        }
+        a:hover {
+            color: #fff;
+            cursor: pointer;
+        }
+        a.active {
+            background: darken($topnav-background-color, 5%);
+            color: #fff;
+            border-radius: 5px;
+        }
+    }
+}
+

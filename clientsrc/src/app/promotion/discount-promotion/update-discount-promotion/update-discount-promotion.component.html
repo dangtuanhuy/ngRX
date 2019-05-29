@@ -1,0 +1,182 @@
+<div class="modal-header">
+  <h5 class="modal-title">Edit Promotion</h5>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="updateValueForm">
+    <fieldset>
+      <div class="form-group">
+        <div class="name">
+          <label class="lable-control">Name</label>
+          <input class="form-control" formControlName="name" placeholder="Name" [ngClass]="{
+                  'is-invalid':
+                  updateValueForm.get('name')?.dirty &&
+                    !updateValueForm.get('name')?.valid
+                }" />
+          <span class="error invalid-feedback" *ngIf="
+            updateValueForm.get('name')?.dirty &&
+            updateValueForm.get('name')?.errors
+                ">
+            <span *ngIf="
+              updateValueForm.get('name')?.errors?.required ||
+              updateValueForm.get('name')?.errors?.nospace
+                  ">
+              Name is required!
+            </span>
+          </span>
+        </div>
+
+        <div class="description">
+          <label class="lable-control">Description</label>
+          <input class="form-control" formControlName="description" placeholder="Description" />
+        </div>
+
+        <div class="promotion-type">
+          <label class="lable-control">Promotion Type</label>
+          <ng-select class="form-control" formControlName="promotionType" bindValue="id" bindLabel="typeName"
+            [items]="listPromotionTypes" placeholder="Promotion Type" [(ngModel)]="selectedPromotionType"
+            class="custom" [clearable]="false" [ngClass]="{
+                    'is-invalid':
+                    updateValueForm.get('promotionType')?.dirty &&
+                      !updateValueForm.get('promotionType')?.valid
+                  }">
+          </ng-select>
+        </div>
+
+        <div class="location">
+          <label class="lable-control">Location</label>
+          <div class="columns-dropdown">
+            <ng-select class="form-control" formControlName="location" bindValue="id" bindLabel="name"
+              [items]="listLocation" placeholder="Location" [(ngModel)]="selectedLocation" class="custom" [clearable]="false"
+              [multiple]=true>
+            </ng-select>
+          </div>
+        </div>
+
+        <div class="from-date">
+          <label class="lable-control">From Date</label>
+          <div class="input-group">
+            <input class="form-control" formControlName="fromDate" placeholder="yyyy-mm-dd" name="d1" [(ngModel)]="fromDate"
+              (ngModelChange)="onSelectedFromDateChange($event)" ngbDatepicker #d1="ngbDatepicker" [ngClass]="{'is-invalid': updateValueForm.get('fromDate')?.dirty && !updateValueForm.get('fromDate')?.valid}">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button">
+                <i class="fas fa-calendar-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="=to-date">
+          <label class="lable-control">To Date</label>
+          <div class="input-group">
+            <input class="form-control" formControlName="toDate" placeholder="yyyy-mm-dd" name="d2" [(ngModel)]="toDate"
+              (ngModelChange)="onSelectedToDateChange($event)" ngbDatepicker #d2="ngbDatepicker" [ngClass]="{'is-invalid': updateValueForm.get('toDate')?.dirty && !updateValueForm.get('toDate')?.valid}">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button">
+                <i class="fas fa-calendar-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div [hidden]="selectedPromotionType != promotionTypes.Discount" class="discount">
+          <label class="lable-control">Discount</label>
+          <div class="discount-content">
+            <div class="discount-type">
+              <ng-select class="form-control" formControlName="discountType" bindValue="id" bindLabel="typeName"
+                [items]="listDiscountTypes" placeholder="Select Type" [(ngModel)]="selectedDiscountType" class="custom"
+                [clearable]="false">
+              </ng-select>
+            </div>
+
+            <input [hidden]="selectedDiscountType == discountTypes.Percent" class="form-control" formControlName="discountValueAmount"
+              placeholder="Discount Value" type="number" oninput="validity.valid||(value='');" min="0" />
+            <input [hidden]="selectedDiscountType != discountTypes.Percent" class="form-control" formControlName="discountValuePercent"
+              placeholder="Discount Value" type="number" oninput="validity.valid||(value='');" min="0" max="100" />
+          </div>
+
+          <div>
+            <input class="lable-control" formControlName="promotionSelection" type="radio" value="code">
+            <span class="lable-control"> Use Coupon Codes</span>
+          </div>
+          <div>
+            <input class="lable-control" formControlName="promotionSelection" type="radio" value="condition">
+            <span class="lable-control"> Use Conditions</span>
+          </div>
+
+          <div [hidden]="updateValueForm.get('promotionSelection')?.value != promotionSelection.code" class="card">
+            <h5 class="card-header">Coupon Codes Detail</h5>
+            <div class="card-body">
+              <div class="coupon-codes">
+                <div [hidden]="!selectedPromotion?.promotionDetail?.isUseCouponCodes">
+                  <textarea readonly class="form-control coupon-codes" formControlName="couponCodes" [(ngModel)]="listCouponCodeDisplay"></textarea>
+                  <div>
+                    <input class="lable-control" formControlName="isAddNewCouponCodes" type="checkbox" [(ngModel)]="isAddNewCouponCodes">
+                    <span class="lable-control"> Add new coupon codes</span>
+                  </div>
+                </div>
+                <div class="coupon-codes" [hidden]="selectedPromotion?.promotionDetail?.isUseCouponCodes && !isAddNewCouponCodes">
+                  <label class="lable-control">Number of Codes</label>
+                  <input class="form-control" formControlName="numberOfCodes" [(ngModel)]="numberOfCodes" type="number"
+                    oninput="validity.valid||(value='');" min="0" />
+                  <label class="lable-control">Coupon Codes</label>
+                  <textarea readonly class="form-control coupon-codes" formControlName="updateCouponCodes" [(ngModel)]="listUpdateCouponCodeDisplay"></textarea>
+                  <button class="btn btn-secondary" type="button"
+                    (click)="generatePromotionCode($event)">Generate
+                    Codes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="conditions" [hidden]="updateValueForm.get('promotionSelection')?.value != promotionSelection.condition">
+            <div class="card">
+              <h5 class="card-header">Conditions Detail</h5>
+              <div class="card-body">
+                <div>
+                  <label>Condition</label>
+                  <ng-select class="form-control" formControlName="conditions" bindValue="id" bindLabel="typeName"
+                    [items]="listConditionTypes" placeholder="Please choose a condition to add" [(ngModel)]="selectedCondition"
+                    class="custom" [clearable]="false">
+                  </ng-select>
+                </div>
+                <div class="condition-detail">
+                  <div class="operator">
+                    <span>operator</span>
+                    <ng-select class="form-control" formControlName="operators" bindValue="id" bindLabel="typeName"
+                      [items]="listOperatorTypes" placeholder="Choose operator" [(ngModel)]="selectedOperator" class="custom"
+                      [clearable]="false">
+                    </ng-select>
+                  </div>
+                  <div class="value-of-condition">
+                    <span>value</span>
+                    <input class="form-control" formControlName="valueOfCondition" type="number" oninput="validity.valid||(value='');"
+                      min="0" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </fieldset>
+  </form>
+
+  <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+
+</div>
+
+<div class="modal-footer">
+  <button [disabled]="isDeactive || !(updateValueForm.valid
+                        || (selectedPromotionType == promotionTypes.DiscountManual
+                              && updateValueForm.get('name')?.dirty && !updateValueForm.get('name')?.valid
+                              && updateValueForm.get('location')?.dirty && !updateValueForm.get('location')?.valid))"
+    class="btn btn-secondary" type="button" (click)="onSave()">
+    Save
+  </button>
+  <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">
+    Cancel
+  </button>
+</div>

@@ -1,0 +1,161 @@
+<div *ngIf="!isMassAllocation"
+     class="add-goods-inward-page">
+  <p class="list-view-title h4">
+    Goods Inward Management
+  </p>
+  <div class="selected-location">
+    <div class="columns-dropdown">
+      <div class="dropdown">
+        <label class="dropdown-title">From:</label>
+        <ng-select class="custom"
+                   [items]="vendors"
+                   bindLabel="name"
+                   placeholder="Select vendor"
+                   [loading]="isVendorsLoading"
+                   (ngModelChange)="selectVendor($event)"
+                   [(ngModel)]="selectedVendor"
+                   [clearable]=false
+                   [disabled]="isAdd">
+        </ng-select>
+      </div>
+    </div>
+    <div class="columns-dropdown">
+      <div class="dropdown">
+        <label class="dropdown-title">To:</label>
+        <ng-select class="custom"
+                   [items]="warehouses"
+                   bindLabel="name"
+                   placeholder="Select warehouse"
+                   [loading]="isWarehousesLoading"
+                   [(ngModel)]="selectedWarehouse"
+                   [clearable]=false
+                   [disabled]="isAdd">
+        </ng-select>
+      </div>
+    </div>
+  </div>
+
+  <div class="datatable">
+    <div class="content">
+      <app-list-view-management [title]=""
+                                [datasource]="purchaseOrders"
+                                [pageSize]="purchaseOrders.length"
+                                [totalItems]="purchaseOrders.length"
+                                [listButton]="listButton"
+                                [actionType]="actionType"
+                                [isMultiSelect]="isMultiSelect"
+                                [isHiddenSearchBox]="isHiddenSearchBox"
+                                [userDefinedColumnSetting]="userDefinedColumnSetting"
+                                *ngIf="!isAdd">
+      </app-list-view-management>
+      <div *ngIf="isAdd">
+        <table class="fixed">
+          <tr class="header">
+            <th class="header column-name text-center">Purchase Orders</th>
+            <th class="header column-name text-center">Products</th>
+            <th class="header column-name text-center">Variants</th>
+            <th class="header column-name text-center">Stock types</th>
+            <th class="header column-name text-center">BarCode</th>
+            <th class="header column-name text-center">Quantity</th>
+          </tr>
+          <tr *ngFor="let item of purchaseOrdersSelected; let i = index"
+              class="w-100">
+            <td class="header column-name text-center">
+              <div class="cell">
+                <p>{{item.poName}}</p>
+              </div>
+            </td>
+            <td class="header column-name text-center">
+              <div class="cell">
+                <p class="text-truncate">{{item.productName}}</p>
+              </div>
+            </td>
+            <td class="header column-name text-center">
+              <div class="cell">
+                <p *ngFor="let field of item.variant.fieldValues"
+                   class="text-truncate">{{field.name}}: {{field.value}}</p>
+              </div>
+            </td>
+            <td class="header column-name text-center">
+              <div class="cell">
+                <p class="text-truncate">{{item.stockTypeName}}</p>
+              </div>
+            </td>
+            <td class="header column-name text-center">
+              <div class="cell">
+                <ng-select class="barcodes-input"
+                           [items]="item.barCodes"
+                           bindLabel="name"
+                           placeholder="Input barcode"
+                           [addTag]="true"
+                           [multiple]="true"
+                           [clearable]="false"
+                           (change)="onAddNewBarCodes()"
+                           [(ngModel)]="item.barCodes">
+                </ng-select>
+
+              </div>
+            </td>
+            <td class="header column-name text-center">
+              <div class="cell">
+                <input class="number-updown"
+                       type="number"
+                       name="input"
+                       [(ngModel)]="item.quantity"
+                       (change)="onCheckNumberQuantityChange(i)"
+                       min="0">
+              </div>
+            </td>
+          </tr>
+        </table>
+        <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+      </div>
+      <div class="group-button"
+           *ngIf="!isAdd">
+        <div class="btn-item giw-back-btn">
+          <button type="button"
+                  class="btn btn-outline-secondary reset"
+                  (click)="onClickBackToListingButton()">Back</button>
+        </div>
+        <div class="btn-item giw-next-btn">
+          <button type="button"
+                  [disabled]="(selectItems.length > 0 && selectedWarehouse)? false : true"
+                  class="btn btn-outline-secondary reset"
+                  (click)="onClickNext()">Next</button>
+        </div>
+      </div>
+      <div class="group-button add-giw-group-btn"
+           *ngIf="isAdd">
+        <div *ngIf="!allowShowMassAllocationBtn" class="btn-item giw-save-btn">
+          <button type="button"
+                class="btn btn-outline-secondary"
+                (click)="onClickSave()">Save</button>
+        </div>
+        <div *ngIf="allowShowMassAllocationBtn" class="btn-item giw-save-btn">
+          <button type="button"
+                  class="btn btn-outline-secondary"
+                  (click)="onClickSave()">Save & MassAllocation</button>
+        </div>
+        <div class="btn-item giw-generate-barcode-btn">
+          <button type="button"
+                  class="btn btn-outline-secondary mr-2"
+                  (click)="onClickGenerateBarCode()"
+                  [disabled]="isDisableGenerateBarCode">Generate BarCodes</button>
+        </div>
+        <div class="btn-item add-giw-back-btn">
+          <button type="button"
+                  class="btn btn-outline-secondary mr-2"
+                  (click)="onClickBack()">Back</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isMassAllocation">
+  <app-mass-allocation-transaction [fromLocationId]="selectedWarehouse.id"
+                                   [inventoryTransactionId]="inventoryTransactionId"
+                                   (isMassAllocation)="onMassAllocation($event)">
+
+  </app-mass-allocation-transaction>
+</div>

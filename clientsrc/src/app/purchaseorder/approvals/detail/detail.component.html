@@ -1,0 +1,111 @@
+<div [ngClass]="{'modal-content': isDetail}">
+    <div class="modal-header">
+        <h5 class="modal-title">Detail Purchase Order</h5>
+    </div>
+    <div class="modal-body purchase-order">
+        <form [formGroup]="detailValueForm">
+            <fieldset>
+                <div class="form-group">
+                    <div class="add-control">
+                        <label>Name</label>
+                        <input type="text" class="form-control" formControlName="name" readonly>
+
+                    </div>
+                    <div class="add-control">
+                        <label>Description</label>
+                        <input class="form-control" formControlName="description" readonly>
+                    </div>
+                    <div class="add-control">
+                        <label class="lable-control">Vendor</label>
+                        <ng-select #selection formControlName="vendor" [items]="vendors" bindValue="id" bindLabel="name"
+                            placeholder="Select Vendor" class="custom select-field" [clearable]=false [disabled]="true">
+                        </ng-select>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <div class="datatable">
+            <div class="row">
+                <div class="col-md-6">
+
+                </div>
+                <div class="col-md-6 currency-option">
+                    <ng-select class="custom-currency" [items]="currencies" bindLabel="name" bindValue="id" [(ngModel)]="currencySelected"
+                     [clearable]=false title="name" [disabled]="true">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="content">
+                <table class="fixed">
+                    <tr class="header">
+                        <th class="header column-name text-center">Products</th>
+                        <th class="header column-name text-center">Variants</th>
+                        <th class="header column-name text-center">Stock types</th>
+                        <th class="header column-name text-center">Quantity</th>
+                        <th class="header column-name text-center">Cost Value</th>
+                    </tr>
+                    <tr *ngFor="let item of purchaseOrderItemViewModel; let i = index">
+                        <th class="header column-name text-center">
+                            <div class="cell">
+                                <ng-select class="custom" [items]="products" bindLabel="name" bindValue="id"
+                                    placeholder="Select product" [(ngModel)]="item.productId" (change)="onSelectedProductChange(i)"
+                                    [clearable]=false title="{{item.product ? item.product.name : ''}}" [disabled]="true">
+                                </ng-select>
+                            </div>
+                        </th>
+                        <th class="header column-name text-center">
+                            <div class="text-box" >
+                                <div class="text-box__empty" *ngIf="!item.variant">
+                                    <span>select variant</span>
+                                </div>
+                                <div class="text-box__input" *ngIf="item.variant">
+                                    <div *ngFor="let field of item.variant.fieldValues" class="field__tag">
+                                        <div class="field__tag-title">{{field.name}}: <span class="font-weight-normal"
+                                                *ngFor="let value of field.value; let i = index">
+                                                <span *ngIf="i == 0">{{value}}</span><span *ngIf="i > 0">,
+                                                    {{value}}</span></span>
+                                        </div>
+
+                                        <div class="field__tag-tooltip-wrapper open">
+                                            <div class="field__tag-tooltip">{{field.name}}: <span class="font-weight-normal"
+                                                    *ngFor="let value of field.value; let i = index">
+                                                    <span *ngIf="i == 0">{{value}}</span><span *ngIf="i > 0">,
+                                                        {{value}}</span></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </th>
+                        <th class="header column-name text-center">
+                            <div class="cell">
+                                <ng-select class="custom" [items]="stockTypes" bindLabel="name" bindValue="id"
+                                    placeholder="Select stock type" [(ngModel)]="item.stockTypeId" [clearable]=false
+                                    (change)="onSelectedStockTypeChange(i)" title="{{item.stockType ? item.stockType.name : ''}}"
+                                    [disabled]="true">
+                                </ng-select>
+                            </div>
+
+                        </th>
+                        <th class="header column-name text-center">
+                            <div class="cell">
+                                <input class="number-updown" type="number" name="input" (change)="onQuantityChange(i)"
+                                    [(ngModel)]="item.quantity" oninput="validity.valid||(value='');" min="0" readonly>
+                            </div>
+                        </th>
+                        <th class="header column-name text-center">
+                            <div class="cell">
+                                <input class="number-updown" type="number" name="input" (change)="onCostChange(i)"
+                                    [(ngModel)]="item.costValue" [(ngModel)]="item.costValue" oninput="validity.valid||(value='');"
+                                    min="0" readonly>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">Cancel</button>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="pickup-orders-detail" [ngStyle]="{'width': pageWidth}">
+  <div class="pickup-orders-detail--call-back">
+    <app-page-callback [title]='title'>
+    </app-page-callback>
+  </div>
+
+  <div class="pickup-orders-detail__content">
+    <div class="customer-info" *ngIf="order">
+      Customer Name: <span>{{order.customerName}}</span>
+    </div>
+
+    <div class="total-price" *ngIf="order">
+      Total price: <span>{{totalPriceDecimal}} $</span>
+    </div>
+
+    <div class="total-price" *ngIf="order">
+      Deposit: <span>{{formatNumberDecimal(order.deposit)}} $</span>
+    </div>
+
+    <div class="product" *ngIf="order">
+      <ngx-datatable
+        #myTable
+        class="material striped list-product expandable"
+        [rows]="order.products"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="50">
+        <ngx-datatable-column name="name" [sortable]="false" [draggable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            Name
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{value}}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="quantity" [sortable]="false" [draggable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            Quantity
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{value}}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="price" [sortable]="false" [draggable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            Price ($)
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{formatNumberDecimal(value)}}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>

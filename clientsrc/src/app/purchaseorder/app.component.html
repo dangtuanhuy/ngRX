@@ -1,0 +1,5 @@
+<app-navbar [MenuItems]="MenuItems" [title]="title" [userName]="userName" [logo]="logo" (clickBtn)="switchFeature($event)"></app-navbar>
+<app-sidebar [ListItem]="ListItem" [userName]="userName" [ListItemMobile]="MenuItems" (clickBtn)="switchFeature($event)"></app-sidebar>
+<section class="main-container">
+    <router-outlet></router-outlet>
+</section>

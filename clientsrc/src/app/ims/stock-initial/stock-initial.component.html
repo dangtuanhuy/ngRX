@@ -1,0 +1,42 @@
+<div class="stock-initial-page">
+  <p class="col-sm-6 list-view-title h4">
+    Stock Initial
+  </p>
+
+  <div class="columns-dropdown">
+    <div class="dropdown">
+      <label class="dropdown-title">Location:</label>
+      <ng-select class="custom"
+                 [items]="locations"
+                 bindLabel="name"
+                 placeholder="Select location"
+                 [loading]="isLocationsLoading"
+                 [(ngModel)]="selectedLocation"
+                 [clearable]=false>
+      </ng-select>
+    </div>
+    <div class="dropdown">
+      <label class="dropdown-title">Categories:</label>
+      <ng-select class="custom"
+                 [items]="categories"
+                 bindLabel="name"
+                 placeholder="Select categories"
+                 [loading]="isCategoriesLoading"
+                 [(ngModel)]="selectedCategories"
+                 [multiple]="true"
+                 [clearable]=false>
+      </ng-select>
+      <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+    </div>
+    <div class="group-button">
+      <button type="button"
+              class="btn btn-outline-secondary ml-4"
+              (click)="onClickExportCSV()"
+              [disabled]="!selectedLocation">Export CSV</button>
+      <button type="button"
+              class="btn btn-outline-secondary ml-4"
+              (click)="onClickImportCSV()">Import CSV</button>
+    </div>
+  </div>
+
+</div>

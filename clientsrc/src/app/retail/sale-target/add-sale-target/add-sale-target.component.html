@@ -1,0 +1,52 @@
+<div class="modal-header">
+    <h5 class="modal-title">Add Target</h5>
+</div>
+<div class="modal-body">
+    <form [formGroup]="addValueForm">
+        <fieldset>
+            <div class="form-group">
+                <div class="add-control">
+                    <label class="lable-control">Store</label>
+                    <ng-select #selection formControlName="store" [(ngModel)]="selectedStore" [items]="stores"
+                        bindValue="id" bindLabel="name" placeholder="Select Store" class="custom select-field"
+                        [clearable]=false>
+                    </ng-select>
+                </div>
+
+                <label>From Date</label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="d1" formControlName="fromDate"
+                        ngbDatepicker #d1="ngbDatepicker">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button">
+                            <i class="fas fa-calendar-alt"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <label>To Date</label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="d2" formControlName="toDate"
+                        ngbDatepicker #d2="ngbDatepicker">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button">
+                            <i class="fas fa-calendar-alt"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="add-control">
+                    <label class="lable-control">Target</label>
+                    <input class="form-control" type="number" formControlName="target" placeholder="Target"
+                        oninput="validity.valid||(value='');" step="0.01" min="0">
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+</div>
+<div class="modal-footer">
+    <button [disabled]="addValueForm.invalid || isDeactive" class="btn btn-secondary" type="button"
+        (click)="onSave()">Save</button>
+    <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">Cancel</button>
+</div>

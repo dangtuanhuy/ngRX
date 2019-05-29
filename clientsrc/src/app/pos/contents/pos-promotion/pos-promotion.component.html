@@ -1,0 +1,21 @@
+<div class="pos-promotion" [ngStyle]="{'width': pageWidth}">
+  <div class="pos-promotion--call-back">
+    <app-page-callback
+      [title]='title'
+      [defaultPage]='defaultPage'>
+    </app-page-callback>
+  </div>
+
+  <div class="pos-promotion__content">
+    <app-manual-discount (addDiscount)="addManualDiscount($event)"></app-manual-discount>
+    
+    <app-variant-discount 
+      [products]="products"
+      (addDiscount)="addVariantDiscount($event)">
+    </app-variant-discount>
+
+    <div class="actions">
+      <button class="btn btn-success button-esc" (click)="onEsc($event)">Esc</button>
+    </div>
+  </div>
+</div>

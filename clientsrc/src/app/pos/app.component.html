@@ -1,0 +1,38 @@
+<div class="body">
+    <div *ngIf="isAuthenticated" class="toolbar">
+        <app-sales-toolbar></app-sales-toolbar>
+    </div>
+  <div class="content-wrapper">  
+    <div class="main-content" *ngIf="isAuthenticated">
+      <div class="sales-content">
+        <app-sales></app-sales>
+      </div>
+      <div class="app-information">
+        <div class="employee">
+          {{employeeName}}
+        </div>
+
+        <div class="version-information">
+            © All rights reserved {{version}}
+        </div>
+      </div>
+    </div>
+
+    <div class="router-outlet-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<app-keyboard 
+  class="app-keyboard"
+  [style.left.px]="keyboardPosition.left" 
+  [style.top.px]="keyboardPosition.top"  
+  *ngIf="showKeyboard">
+</app-keyboard>
+
+<!-- <app-pos-loading-spinner 
+  [hiddenLoadingIndicator]="hiddenLoadingIndicator"
+  [description]="loadingIndicatorDescription"
+>
+</app-pos-loading-spinner> -->

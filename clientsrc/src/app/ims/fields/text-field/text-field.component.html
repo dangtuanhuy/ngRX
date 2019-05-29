@@ -1,0 +1,11 @@
+<div *ngIf="!isInEditMode(); else editMode">
+    <span class="field__title">{{displayText}}</span>: <span [ngClass]="{'field__tag': value && value != ''}">{{value}} </span>
+
+    <span><i class="far fa-edit field__icon-edit" (click)="edit()"></i></span>
+</div>
+
+<ng-template #editMode>
+        <input class="form-control" [(ngModel)]="bindingValue" type="text" />
+        <button class="field__btn-save" (click)="save()">Save <i class="fas fa-save"></i></button>       
+        <button class="field__btn-cancel" (click)="cancel()">Cancel <i class="fas fa-ban"></i></button>
+  </ng-template>

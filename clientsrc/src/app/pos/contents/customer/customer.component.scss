@@ -1,0 +1,64 @@
+@import '@swimlane/ngx-datatable/release/index.css';
+@import '@swimlane/ngx-datatable/release/themes/material.css';
+@import '@swimlane/ngx-datatable/release/assets/icons.css';
+ 
+.customer-management {
+    width: 95%;
+    height: calc(100vh - 105px);
+
+    .ngx-datatable {
+        max-height: calc(100vh - 155px);
+        overflow-y: visible;
+    }
+
+    &--header {
+        height: 60px;
+        margin-top: 5px;
+        margin-left: 10px;
+        .call-back {
+            float: left;
+        }
+        .search {
+            width: 244px;
+            border: unset;
+            position: relative;
+            float: right;
+            margin-top: 5px;
+            &-icon {
+                position: absolute;
+                z-index: 1000;
+                right: 6px;
+                top: 7px;
+            }
+        }
+    }
+    
+
+    .ngx-datatable .datatable-body .datatable-scroll {
+        display: inline-block;
+        width: 100% !important;
+    }
+
+    .ngx-datatable.material .datatable-body .datatable-row-detail {
+        padding: 20px;
+        height: fit-content !important;
+    }
+
+    .ngx-datatable .datatable-footer {
+        .datatable-footer-inner {
+            .datatable-pager {
+                display: block !important;
+            }
+        }
+    }
+
+    .list-customer {
+        overflow-y: visible;
+        height: calc(100vh - 70px);
+    }
+
+    .customer-name {
+        color: #1b2a9c;
+        cursor: pointer;
+    }
+}

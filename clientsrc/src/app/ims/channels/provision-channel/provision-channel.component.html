@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h5 class="modal-title">Provision Channel</h5>
+</div>
+<div class="modal-body">
+    <p>Do you want to provision this channel?</p>
+    <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+</div>
+
+<div class="modal-footer">
+    <button [disabled]="isDeactive" class="btn btn-secondary" type="button" (click)="updateChannelProvision()">Save</button>
+    <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">Cancel</button>
+</div>

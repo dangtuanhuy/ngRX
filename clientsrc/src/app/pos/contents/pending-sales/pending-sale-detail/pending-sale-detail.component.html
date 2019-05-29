@@ -1,0 +1,60 @@
+<div class="pending-sales-detail" [ngStyle]="{'width': pageWidth}">
+  <div class="pending-sales-detail--call-back">
+    <app-page-callback
+      [title]='title'
+      [defaultPage]='defaultPage'>
+    </app-page-callback>
+  </div>
+
+  <div class="pending-sales-detail__content">
+    <div class="customer-info" *ngIf="sale">
+      Customer Name: <span>{{sale.customerName}}</span>
+    </div>
+
+    <!-- <div class="total-price" *ngIf="sale">
+      Total price: <span>{{formatNumberDecimal(sale.amount)}} $</span>
+    </div> -->
+
+    <div class="customer-info" *ngIf="sale">
+      Created date: <span>{{formarDate(sale.createdDate)}}</span>
+    </div>
+
+    <div class="product" *ngIf="sale">
+      <ngx-datatable
+        #myTable
+        class="material striped list-product expandable"
+        [rows]="sale.pendingSaleItems"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="50">
+        <ngx-datatable-column name="variant" [sortable]="false" [draggable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            Variant
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{value}}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="quantity" [sortable]="false" [draggable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            Quantity
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{value}}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <!-- <ngx-datatable-column name="amount" [sortable]="false" [draggable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            Amount ($)
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{formatNumberDecimal(value)}}</strong>
+          </ng-template>
+        </ngx-datatable-column> -->
+      </ngx-datatable>
+    </div>
+  </div>
+</div>

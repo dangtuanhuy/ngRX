@@ -1,0 +1,17 @@
+
+<app-list-view 
+  [title]="title"
+  [datasource]="datasource"
+  [pageNumber]="pageNumber"
+  [pageSize]="pageSize"
+  [totalItems]="totalItems"
+  [isMultiSelect]="isMultiSelect"
+  [isHiddenSearchBox]="isHiddenSearchBox"
+  [userDefinedColumnSetting]= "userDefinedColumnSetting"
+  [listButton]="listButton"
+  (sendSelectedPage)="eventSelectedPage($event)"
+  (searchQuery)="eventSearchQuery($event)"
+  (selectedRow) ="eventSelectedRow($event)"
+  (clickButton)="eventClickButton($event)">
+</app-list-view>
+<app-loading-indicator></app-loading-indicator>

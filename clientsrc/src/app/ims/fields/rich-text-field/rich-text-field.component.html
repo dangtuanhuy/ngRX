@@ -1,0 +1,11 @@
+<div *ngIf="!isInEditMode(); else editMode">
+    <span class="field__title">{{displayText}}</span> <i class="far fa-edit field__icon-edit" (click)="edit()"></i>
+    <p [innerHtml]="value"></p>  
+</div>
+
+<ng-template #editMode>
+    <app-ngx-editor [config]="editorConfig" [(ngModel)]="bindingValue"></app-ngx-editor>
+
+    <button class="field__btn-save" (click)="save()">Save <i class="fas fa-save"></i></button>
+    <button class="field__btn-cancel" (click)="cancel()">Cancel <i class="fas fa-ban"></i></button>
+</ng-template>

@@ -1,0 +1,30 @@
+@import '@swimlane/ngx-datatable/release/index.css';
+@import '@swimlane/ngx-datatable/release/themes/material.css';
+@import '@swimlane/ngx-datatable/release/assets/icons.css';
+
+.master-detail-list-view {
+    .ngx-datatable .datatable-body .datatable-scroll {
+        display: inline-block;
+        width: 100% !important;
+    }
+    .ngx-datatable.material .datatable-body .datatable-row-detail {
+        padding: 20px;
+        height: fit-content !important;
+    }
+    .master-detail-list {
+        overflow-y: visible;
+        height: calc(100vh - 70px);
+        
+        .datatable-body{
+            .detail-table {
+                background-color: rgb(223, 237, 253);
+                font-size:14px;
+                width: 100;
+            }
+            .toggle-icon{
+                color: #6c757d !important;
+                text-decoration : none;
+              }
+        }
+    }
+}

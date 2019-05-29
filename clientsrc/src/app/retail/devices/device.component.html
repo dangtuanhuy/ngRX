@@ -1,0 +1,13 @@
+<app-list-view-management
+  [title]="title"
+  [datasource]="datasource"
+  [pageSize]="pageSize"
+  [listButton]="listButton"
+  [actionType]="actionType"
+  [addSuccessMessage]='addSuccessMessage'
+  [updateSuccessMessage]='updateSuccessMessage'
+  [deleteSuccessMessage]='deleteSuccessMessage'
+  (changeSelectedPage)="changeSelectedPage($event)"
+  [userDefinedColumnSetting] = "userDefinedColumnSetting"
+  (searchQuery)="eventSearchQuery($event)">
+</app-list-view-management>

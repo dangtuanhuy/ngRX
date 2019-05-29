@@ -1,0 +1,37 @@
+<div class="modal-header">
+    <h5 class="modal-title">Add Channel</h5>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="addValueForm">
+      <fieldset>
+        <div class="form-group">
+          <label>Name</label>
+          <input id="name" class="form-control" formControlName="name" placeholder="Name" [ngClass]="{'is-invalid': (addValueForm.get('name')?.touched ||
+                                                    addValueForm.get('name')?.dirty) &&
+                                                    !addValueForm.get('name')?.valid}">
+          <span class="error invalid-feedback" *ngIf="addValueForm.get('name')?.dirty&&
+                                                    addValueForm.get('name')?.errors">
+            <span *ngIf="addValueForm.get('name')?.errors?.required">
+              Name is required!
+            </span>
+          </span>
+
+          <label>Description</label>
+          <input id="name" class="form-control" formControlName="description" placeholder="Description">
+  
+          <label>Server Information</label>
+          <input class="form-control" formControlName="server_information" placeholder="Server Information" [ngClass]="{'is-invalid': (addValueForm.get('server_information')?.touched ||
+        addValueForm.get('server_information')?.dirty) &&
+        !addValueForm.get('server_information')?.valid}">
+          <div class="form__validation-text" *ngIf="(addValueForm.get('server_information')?.touched || addValueForm.get('server_information')?.dirty) && !addValueForm.get('server_information')?.valid">
+            <p *ngIf="addValueForm.get('server_information')?.errors.required">(*) Server Information is required</p>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+    <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" type="button" [disabled]="addValueForm.invalid || isDeactive" (click)="onSave()">Save</button>
+    <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">Cancel</button>
+  </div>

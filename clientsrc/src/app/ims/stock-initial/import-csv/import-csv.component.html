@@ -1,0 +1,82 @@
+<div class="modal-header">
+  <h5 class="modal-title">Import CSV</h5>
+  <button type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="onDismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="dropdown">
+    <label class="dropdown-title">Location type:</label>
+    <ng-select class="custom"
+      [items]="locationTypes"
+      placeholder="Select location"
+      [(ngModel)]="selectedLocationType"
+      [clearable]=false
+      (change)="onChangeLocationType($event)">
+    </ng-select>
+  </div>
+
+  <div class="dropdown">
+    <label class="dropdown-title">Warehouse:</label>
+    <ng-select class="custom"
+      [items]="wareHouses"
+      bindLabel="name"
+      placeholder="Select location"
+      [(ngModel)]="selectedWareHouse"
+      [clearable]=false>
+    </ng-select>
+  </div>
+
+  <div class="dropdown" *ngIf="selectedLocationType === StoreLabel">
+    <label class="dropdown-title">Store:</label>
+    <ng-select class="custom"
+      [items]="stores"
+      bindLabel="name"
+      placeholder="Select location"
+      [(ngModel)]="selectedStore"
+      [clearable]=false>
+    </ng-select>
+  </div>
+
+  <div class="row header import-csv--select-file">
+    <div class="file-upload">
+      <input type="file"
+             #file
+             (change)="selectFile($event)" />
+      <div class="font-weight-light file-info"
+           *ngIf="currentFileUpload">{{currentFileUpload.name}} ({{currentFileUpload.size / 1024 | number:'0.0-2'}} KB
+        ) </div>
+    </div>
+  </div>
+  <div *ngIf="isUploading"
+       class="progress">
+    <div #progressbar
+         class="progress-bar progress-bar-striped progress-bar-animated"
+         role="progressbar"
+         [attr.aria-valuenow]="percentDone"
+         aria-valuemin="0"
+         aria-valuemax="100"
+         [style.width]="(percentDone/100)*100 + '%'"
+         style="min-width: 2em;"></div>
+    {{percentDone}}%
+  </div>
+  <div class="text-success"
+       *ngIf="message!= '' && !isUploading">{{message}}</div>
+  <div class="text-danger"
+       *ngIf="error!= '' && !isUploading">
+    <p [innerHTML]="error"></p>
+  </div>
+</div>
+<div class="modal-footer">
+  <button [disabled]="isUploading || !currentFileUpload
+                        || (selectedLocationType === WarehouseLabel && selectedWareHouse === null)
+                        || (selectedLocationType === StoreLabel 
+                                  && (selectedWareHouse === null || selectedStore === null))"
+          class="btn btn-primary"
+          type="button"
+          (click)="upload()">Upload</button>
+</div>

@@ -1,0 +1,71 @@
+<div class="pending-sales" [ngStyle]="{'width': pageWidth}">
+  <div class="pending-sales--call-back">
+    <app-page-callback
+      [title]='title'
+      [defaultPage]='defaultPage'>
+    </app-page-callback>
+  </div>
+
+  <div class="pending-sales__content">
+    <div class="pending-sales-search">
+      <app-input-with-keyboard
+        id="{{searchSaleId}}"
+        placeholder="Pending Sale"
+        className="form-control app-input"
+        [value]="saleSearch"
+        (valueChange)="onSearch($event)">
+      </app-input-with-keyboard>
+    </div>
+
+    <div class="sales">
+      <ngx-datatable
+        #myTable
+        class="material striped list-product expandable"
+        [rows]="pendingSales"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="50"
+        [externalPaging]="true"
+        [count]="totalItem"
+        [offset]="pageIndex"
+        [limit]="pageSize"
+        (page)='setPage($event)'>
+        <ngx-datatable-column name="customerName" [sortable]="false" [draggable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            Customer Name
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{value}}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <!-- <ngx-datatable-column name="amount" [sortable]="false" [width]="100" [draggable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            Amount ($)
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{formatNumberDecimal(value)}}</strong>
+          </ng-template>
+        </ngx-datatable-column> -->
+
+        <ngx-datatable-column name="createdDate" [sortable]="false" [width]="100" [draggable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            Created Date
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{formarDate(value)}}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Action" [sortable]="false" [draggable]="false" cellClass="column-action-release">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <button class="btn btn-success btn-outline-secondary reset column-action-release-button release" (click)="onClickRelease(row)">Release</button>
+            <button class="btn btn-outline-secondary reset column-action-release-button detail" (click)="onClickDetail(row)">Detail</button>
+            <button class="btn btn-outline-secondary reset column-action-release-button delete" (click)="onClickDelete(row)">Delete</button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>

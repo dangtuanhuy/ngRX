@@ -1,0 +1,17 @@
+#sales-customer-detail-data-item {
+    height: 50px;
+    position: relative;
+
+    .text {
+        font-size: 15px;
+        margin-left: 10px;
+    }
+
+    .value {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        font-size: 17px;
+        margin-left: 10px;
+    }
+}

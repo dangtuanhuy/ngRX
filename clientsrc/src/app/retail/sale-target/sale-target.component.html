@@ -1,0 +1,94 @@
+<div class="dashboard-page">
+    <p class="col-sm-6 title h4">
+        Sale Target
+    </p>
+
+    <div class="datatable">
+        <ngx-datatable #stocksTable class='material' [loadingIndicator]="isLoading" [rows]='datasource'
+            [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+            [offset]="currentPage"
+            [externalPaging]="true" 
+            [count]="totalItems" [offset]="pageNumber" [limit]="10" (page)='setPage($event)'>
+
+            <ngx-datatable-row-detail>
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                    <table class="fixed">
+                        <tr class="header">
+                            <th class="header column-name text-center">FromDate</th>
+                            <th class="header column-name text-center">ToDate</th>
+                            <th class="header column-name text-center">Target</th>
+                            <th class="header column-name text-center">Action</th>
+                        </tr>
+                        <tr *ngFor="let item of row.saleTargets" [ngClass]="item.isCurrent ? 'color-x' : 'color-y'">
+                            <ng-container *ngIf="!item.isEdit">
+                                <td>
+                                    {{item.fromDate}}
+                                </td>
+                                <td>
+                                    {{item.toDate}}
+                                </td>
+                                <td>
+                                    {{item.target}}
+                                </td>
+                                <td>
+                                    <div *ngIf="item.canEdit" class="table-icon">
+                                        <i class="far fa-edit table-icon-position" (click)="onClickEdit(item)"></i>
+                                        <i class="fas fa-trash-alt table-icon-position" (click)="onDelete(item)"></i>
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <ng-container *ngIf="item.isEdit">
+                                <td>
+                                    {{item.fromDate}}
+                                </td>
+                                <td>
+                                    {{item.toDate}}
+                                </td>
+                                <td>
+                                    <input class="form-control" type="number" [(ngModel)]="item.target"
+                                        placeholder="Target" oninput="validity.valid||(value='');" step="0.01" min="0">
+                                </td>
+                                <td>
+                                    <div class="table-icon">
+                                        <i class="fas fa-save table-icon-position" (click)="onSave(item)"></i>
+                                        <i class="fas fa-ban table-icon-position" (click)="onClickCancel(item)"></i>
+                                    </div>
+                                </td>
+                            </ng-container>
+                        </tr>
+                    </table>
+                </ng-template>
+            </ngx-datatable-row-detail>
+
+            <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false"
+                [canAutoResize]="false">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                    <a [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
+                        title="Expand/Collapse Row" class="arrow-detail" (click)="toggleExpandStocksRow(row)">
+                    </a>
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Store">
+                <ng-template let-column="column" ngx-datatable-header-template>
+                    Store
+                </ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.name}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Target">
+                <ng-template let-column="column" ngx-datatable-header-template>
+                    Target
+                </ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.currentTarget ? row.currentTarget : "---"}}
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+
+    <div class="group-button">
+        <button class="btn btn-secondary" type="button" (click)="onAddSaleTarget()">Add</button>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+<div class="filter-transfer-out-page">
+  <p class="list-view-title h4">
+      Transfer Out Management
+  </p>
+  <div class="row filter">
+      <div class="location-filter-form col-4">
+          <form [formGroup]="searchByLocationForm">
+              <fieldset>
+                  <div class="form-group">
+                      <label class="dropdown-title">From WareHouse</label>
+                      <ng-select formControlName="wareHouse" [items]="wareHouses" bindLabel="name" bindValue="id"
+                          placeholder="Select WareHouse" [loading]="isLocationsLoading" [(ngModel)]="selectedWareHouse"
+                          [clearable]=false>
+                      </ng-select>
+
+                      <label class="dropdown-title">To Outlet</label>
+                      <ng-select formControlName="outlet" [items]="outlets" bindLabel="name" bindValue="id"
+                          placeholder="Select Outlet" [loading]="isLocationsLoading" [(ngModel)]="selectedOutlet"
+                          [clearable]=false>
+                      </ng-select>
+                  </div>
+              </fieldset>
+          </form>
+      </div>
+      <div class="date-filter-form col-4">
+          <label>From Date</label>
+          <div class="input-group">
+              <input class="form-control" [disabled]="isAddTransferOut" placeholder="yyyy-mm-dd" name="d1" [(ngModel)]="filteredFromDate"
+                  ngbDatepicker #d1="ngbDatepicker">
+              <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button">
+                      <i class="fas fa-calendar-alt"></i>
+                  </button>
+              </div>
+          </div>
+
+          <label>To Date</label>
+          <div class="input-group">
+              <input class="form-control" [disabled]="isAddTransferOut" placeholder="yyyy-mm-dd" name="d2" [(ngModel)]="filteredToDate"
+                  ngbDatepicker #d2="ngbDatepicker">
+              <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button">
+                      <i class="fas fa-calendar-alt"></i>
+                  </button>
+              </div>
+          </div>
+      </div>
+      <div class="btn-filter col-4">
+          <button type="button" [disabled]="searchByLocationForm.invalid || isAddTransferOut" class="btn btn-outline-secondary reset"
+              (click)="onClickFilter()">Filter
+          </button>
+      </div>
+  </div>
+  <div class="row filter-transfer-out-datatable">
+      <div [style.display]="!isShowTransferOut ? 'block' : 'none'"  class="col-12">
+          <app-list-view-management [title]="title" 
+                                    [datasource]="datasource" 
+                                    [pageSize]="pageSize" 
+                                    [listButton]="listButton"
+                                    [actionType]="actionType" 
+                                    [isMultiSelect]="isMultiSelect" 
+                                    [isHiddenSearchBox]="isHiddenSearchBox"
+                                    [addSuccessMessage]='addSuccessMessage' 
+                                    [updateSuccessMessage]='updateSuccessMessage'
+                                    [deleteSuccessMessage]='deleteSuccessMessage' 
+                                    (changeSelectedPage)="changeSelectedPage($event)"
+                                    [userDefinedColumnSetting]="userDefinedColumnSetting">
+          </app-list-view-management>
+      </div>
+      <div class="group-btn col-12" *ngIf="!isShowTransferOut">
+          <div class="btn-item">
+              <button type="button" [disabled]="isDisableNextbutton" class="btn btn-outline-secondary reset" (click)="onClickNextButton()">Next</button>
+          </div> 
+          <div class="btn-item">
+              <button type="button" class="btn btn-outline-secondary back-btn" (click)="onClickBackToListingButton()">Back</button>
+          </div> 
+      </div>
+      <div *ngIf="isShowTransferOut" class="col-12">
+              <app-add-transfer-out (onclickSubtmitButton)="onclickSubtmitButton($event)"
+                                    (onclickBackButton)="onclickBackButton($event)"
+                                    [fromLocationId]="fromLocationId" 
+                                    [toLocationId]="toLocationId">
+              </app-add-transfer-out>
+      </div>
+  </div>
+</div>

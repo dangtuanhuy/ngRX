@@ -1,0 +1,84 @@
+@font-face {
+    font-family: "Arial Rounded MT Bold";
+    src: url("../../assets/fonts/ARLRDBD.ttf") format(truetype);
+}
+
+.body {
+    font-family: "Arial Rounded MT Bold", sans-serif;
+    font-size: 20px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+    height: 100vh;
+}
+
+.row.content { height: 100%; }
+
+.content-wrapper {
+    width: 100vw;
+    height: calc(100vh - 40px);
+    display: flex;
+}
+
+.toolbar {
+    position: relative;
+    height: 40px;
+    padding: 5px 1px 0 15px;
+}
+
+
+.main-content {
+    min-width: 450px;
+    width: 100%;
+    padding-left: 15px;
+
+    .app-information {
+        height: 30px;
+        background-color: #eee;
+        border-radius: 3px;
+        margin-top: 5px;
+        padding-left: 10px;
+        color: #0000ff;
+        font-weight: bold;
+        display: flex;
+        position: relative;
+
+        .employee {
+            
+        }
+
+        .version-information {
+            position: absolute;
+            right: 10px;
+        }
+    }
+}
+
+.router-outlet-content {
+    width: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+    
+.sidenav {
+    background-color: #f1f1f1;
+}
+
+footer {
+    background-color: #555;
+    color: white;
+    padding: 15px;
+}
+
+@media screen and (max-width: 767px) {
+    .sidenav {
+    height: auto;
+    padding: 15px;
+    }
+    .row.content {height: auto;} 
+}
+
+.app-keyboard {
+    position: absolute;
+    z-index: 9999;
+}

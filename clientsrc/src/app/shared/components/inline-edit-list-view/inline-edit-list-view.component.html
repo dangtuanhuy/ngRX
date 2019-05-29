@@ -1,0 +1,80 @@
+<div id="inline-edit-list-view">
+  <ngx-datatable
+    class='material'
+    [rows]='dataSource'
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [externalPaging]="true"
+    [count]="dataSource ? dataSource.length : 0" 
+    [offset]="pageNumber">
+
+    <ngx-datatable-column
+      *ngFor="let col of columns"
+      [name]="titleCaseWord(col.name)"
+      [width]="col.width"
+      [headerClass]="col.name"
+      [cellClass]="col.name"
+      [ngStyle]="{'text-align': (col.isNumber || col.isDecimalNumber ? 'right': '')}"
+      [resizeable]="false"
+      sortable="false">
+      <ng-container *ngIf="col.isEdit">
+        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <input *ngIf="isSaleSource && (row.type === 2 || row.type === 3)"
+            style="text-align: right; background: transparent; border: none;"
+            readonly="readonly"
+            value="1" />
+          <ng-container *ngIf="!(isSaleSource && row.type === 2 || row.type === 3)">
+            <ng-container *ngIf="showPlusMinusButton">
+              <button class="quantity-minus-button" (click)="onInPutNumberMinus(value, col.name, rowIndex)">-</button>
+            </ng-container>
+
+            <app-input-with-keyboard  
+              [id]="row.id"
+              [type]="col.isNumber ? 'number' : 'text'"
+              inputSelectText="true"
+              className="inline-edit"
+              [isNumpad]="col.isNumber"
+              [style]="{'text-align': (col.isNumber ? 'right': '')}"
+              [value]="value"
+              (valueChange)="updateValue($event, col.name, rowIndex)">
+            </app-input-with-keyboard>
+            
+            <ng-container *ngIf="showPlusMinusButton">
+              <button class="quantity-plus-button" (click)="onInPutNumberPlus(value, col.name, rowIndex)" *ngIf="col.isNumber">+</button>
+            </ng-container>
+          </ng-container>
+        </ng-template>
+      </ng-container>
+
+      <ng-container *ngIf="col.isIcon">
+        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <img [src]="value" style="cursor: pointer;" (click)="onClickIcon(col.name, row)"/>
+        </ng-template>
+      </ng-container>
+
+      <ng-container *ngIf="col.isDecimalNumber">
+        <ng-template 
+          ngx-datatable-cell-template 
+          let-rowIndex="rowIndex" 
+          let-value="value" 
+          let-row="row">
+          {{parseToDecimal(value)}}
+        </ng-template>
+      </ng-container>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column
+      name="Action"
+      headerClass="action"
+      cellClass="action"
+      [width]="100">
+      <ng-template ngx-datatable-cell-template let-row="row">
+        <p (click)="onDeleteItem(row)">
+          <i class="far fa-trash-alt delete-icon"></i>
+        </p>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>

@@ -1,0 +1,169 @@
+<div class="modal-header">
+  <h5 class="modal-title">Update Stock Request</h5>
+</div>
+<div class="modal-body">
+ 
+  <form [formGroup]="updateValueForm">
+    <fieldset>
+      <div class="form-group">
+        <div class="stock-request_header">
+          <label>Subject</label>
+          <input id="subject"
+                 class="form-control"
+                 formControlName="subject"
+                 placeholder="Subject"
+                 [ngClass]="{'is-invalid': (updateValueForm.get('subject')?.touched ||
+                 updateValueForm.get('subject')?.dirty) &&
+                                                      !updateValueForm.get('subject')?.valid}">
+          <span class="error invalid-feedback"
+                *ngIf="updateValueForm.get('subject')?.dirty&&
+                updateValueForm.get('subject')?.errors">
+            <span *ngIf="updateValueForm.get('subject')?.errors?.required">
+              Subject is required!
+            </span>
+          </span>
+
+          <label>Ware House</label>
+          <ng-select class="custom"
+                     formControlName="warehouse"
+                     [items]="fromLocations"
+                     bindLabel="name"
+                     bindValue="id"
+                     placeholder="Select ware house"
+                     [clearable]=false>
+          </ng-select>
+
+          <label>Store</label>
+          <ng-select class="custom"
+                     formControlName="store"
+                     [items]="locations"
+                     bindLabel="name"
+                     bindValue="id"
+                     placeholder="Select store"
+                     [loading]="isLocationsLoading"
+                     [clearable]=false>
+          </ng-select>
+
+          <label>Status</label>
+          <input id="description"
+                 class="form-control"
+                 formControlName="status"
+                 placeholder="Description"
+                 readonly>
+
+          <label>Description</label>
+          <input id="description"
+                 class="form-control"
+                 formControlName="description"
+                 placeholder="Description">
+
+          <label>Date Request</label>
+          <div class="input-group">
+            <input class="form-control"
+                   placeholder="yyyy-mm-dd"
+                   name="d1"
+                   formControlName="date"
+                   ngbDatepicker
+                   #d1="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar"
+                      (click)="d1.toggle()"
+                      type="button">
+                <i class="fas fa-calendar-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+  <div class="row">
+    <div class="col-md-2">
+      <button class="btn btn-secondary"
+              type="button"
+              (click)="onClickAddButton()">Add</button>
+    </div>
+  </div>
+  <div class="datatable">
+      <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+    <div class="stock-request_detail">
+      <table class="fixed">
+        <tr class="header">
+          <th class="header column-name text-center">Products</th>
+          <th class="header column-name text-center">Variants</th>
+          <th class="header column-name text-center">Quantity</th>
+          <th class="header column-name text-center">Action</th>
+        </tr>
+        <tr *ngFor="let item of stockRequestItems;let i = index">
+          <th class="header column-name text-center">
+            <div class="cell">
+              <ng-select class="custom"
+                         [items]="products"
+                         bindLabel="name"
+                         bindValue="id"
+                         placeholder="Search product"
+                         [(ngModel)]="item.product.id"
+                         (change)="onSelectedProductChange(i)"
+                         (search)="searchText.next($event)"
+                         [clearable]=false>
+              </ng-select>
+            </div>
+          </th>
+          <th class="header column-name text-center">
+            <div class="text-box"
+                 (click)="openVariantModal(i, item)">
+              <div class="text-box__empty"
+                   *ngIf="!item.variant">
+                <span>select variant</span>
+              </div>
+              <div class="text-box__input"
+                   *ngIf="item.variant">
+                <div *ngFor="let field of item.variant.fieldValues"
+                     class="field__tag">
+                  <div class="field__tag-title">{{field.name}}: <span class="font-weight-normal"
+                          *ngFor="let value of field.value; let i = index">
+                      <span *ngIf="i == 0">{{value}}</span><span *ngIf="i > 0">,
+                        {{value}}</span></span>
+                  </div>
+
+                  <div class="field__tag-tooltip-wrapper open">
+                    <div class="field__tag-tooltip">{{field.name}}: <span class="font-weight-normal"
+                            *ngFor="let value of field.value; let i = index">
+                        <span *ngIf="i == 0">{{value}}</span><span *ngIf="i > 0">,
+                          {{value}}</span></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </th>
+          <th class="header column-name text-center">
+            <div class="cell">
+              <input class="number-updown"
+                     type="number"
+                     name="input"
+                     (change)="onQuantityChange(i)"
+                     [(ngModel)]="item.quantity"
+                     oninput="validity.valid||(value='');"
+                     min="0">
+            </div>
+          </th>
+          <th class="header column-name text-center">
+            <div class="cell">
+              <i class="fas fa-trash-alt fa-lg icon"
+                 (click)="removeItem(i)"></i>
+            </div>
+          </th>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button [disabled]="updateValueForm.invalid|| isDeactive"
+          class="btn btn-secondary"
+          type="button"
+          (click)="onSave()">Save</button>
+  <button class="btn btn-secondary"
+          type="button"
+          (click)="onDismiss('Cross click')">Cancel</button>
+</div>

@@ -1,0 +1,50 @@
+.manual-discount {
+    .title {
+
+    }
+
+    .contents {
+        display: flex;
+        margin-top: 10px;
+
+        .select-reason {
+            margin-left: 10px;
+            width: 190px;
+        }
+
+        .select-promotion {
+            margin-left: 10px;
+            width: 120px;
+        }
+    
+        .value {
+            margin-left: 20px;
+
+            app-input-with-keyboard {
+                #promotion-manual-discount-value {
+                    width: 120px;
+                }
+            }
+        }
+
+        .action {
+            margin-left: 20px;
+            
+            button {
+                width: 150px;
+            }
+        }
+    }
+    
+    .actions {
+        margin-top: 10px;
+        margin-left: 30px;
+    
+        .button-add {
+            width: 120px;
+            height: 80px;
+            margin-right: 15px;
+        }
+    }
+    
+}

@@ -1,0 +1,11 @@
+<div class="modal-header">
+  <h5 class="modal-title">Update status</h5>
+</div>
+<div class="modal-body">
+  <p>Are you sure you want to update this item?</p>
+  <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+</div>
+<div class="modal-footer">
+  <button [disabled]="isDeactive" class="btn btn-secondary" type="button" (click)="onSave()">Yes</button>
+  <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">No</button>
+</div>

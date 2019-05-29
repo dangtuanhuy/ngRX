@@ -1,0 +1,9 @@
+.group-button {
+    display: flex;
+    padding: 10px 10px;
+    justify-content: flex-end;
+}
+
+.btn-item {
+    padding: 0 10px;
+}

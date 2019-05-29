@@ -1,0 +1,43 @@
+<div class="modal-body"
+     *ngIf="barCodeProductViewModel">
+  <div class="datatable">
+    <div *ngIf="!isShowBarcode()">No variants to show!</div>
+    <div *ngIf="isShowBarcode()"
+         class="product-view-barcode_detail">
+      <table class="fixed">
+        <tr class="header">
+          <th class="header column-name text-center">Variants</th>
+          <th class="header column-name text-center">Variants SKU</th>
+          <th class="header column-name text-center">BarCodes</th>
+        </tr>
+        <tr *ngFor="let item of barCodeProductViewModel.barCodesVariant;let i = index">
+          <th class="header column-name text-center">
+            <div class="text-box">
+              <div class="text-box__input">
+                <div *ngFor="let field of item.fields"
+                     class="field__tag">
+                  <div class="field__tag-title">{{field.name}}: <span class="font-weight-normal">
+                      <span>{{field.value}}</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </th>
+          <th class="header column-name text-center">
+            <div class="text-box">
+              {{item.variantSKU}}
+            </div>
+          </th>
+          <th class="header column-name text-center">
+            <div class="barcodes">
+              <div class="barcode"
+                   *ngFor="let barCode of item.barCodes">
+                {{barCode.code}}
+              </div>
+            </div>
+          </th>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

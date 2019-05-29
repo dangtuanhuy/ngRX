@@ -1,0 +1,25 @@
+.goods-return-page {
+    .filter-multi-select{
+        width: 100%;
+        padding-bottom: 30px;
+        &-field {
+            float: left;
+            padding-left: 4.5px;
+            &-view {
+                width: 370px;
+                display:inline-block;
+            }
+        }        
+    }
+    .group-button {
+        width: 80px;
+        float: right;
+        .btn-item {
+            float: right;
+        }
+        .add-goods-return-button {
+            padding-top: 10px;
+            width: 160px;
+        }
+    }
+}

@@ -1,0 +1,43 @@
+.discount-content {
+    display: flex;
+}
+
+.discount-type {
+    margin-top: 1px;
+    padding-right: 10px;
+}
+.lable-control {
+    margin-top: 10px;
+}
+
+.coupon-codes {
+    margin-bottom: 10px;
+}
+
+.condition-detail {
+    display: flex;
+    padding: 10px 0;
+}
+
+.value-of-condition {
+    margin-left: 10px;
+    min-width: 50%;
+    padding-right: 10px;
+}
+
+.operator {
+    margin-top: 1px;
+}
+
+.operator {
+    min-width: 50%;
+}
+
+.modal-body{
+    max-height: 80vh;
+    overflow: auto;
+}
+
+.card {
+    margin: 10px 0;
+}

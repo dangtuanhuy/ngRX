@@ -1,0 +1,52 @@
+.custom {
+    width: 200px;
+}
+
+.ng-dropdown-panel-items.scroll-host{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: fit-content;
+    min-width: 200px;
+}
+
+.number-updown {
+    height: 36px;
+    width: 100px;
+    padding-left: 10px;
+}
+
+
+.currency-option{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.item-select {
+    width: auto;
+    border-bottom: 1px solid #ccc;
+}
+
+.ng-dropdown-panel {
+    width: auto ; 
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tbody tr:hover{
+    cursor: pointer;
+    background-color: #f1f1f1;
+   }
+  
+  th {
+    background-color: #dddddd;
+  }

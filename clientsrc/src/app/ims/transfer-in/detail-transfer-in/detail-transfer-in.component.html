@@ -1,0 +1,63 @@
+<div class="modal-header">
+    <h5 class="modal-title">Transfer In Transaction Detail</h5>
+</div>
+  <div class="modal-body detail-transfer-in-transaction">
+      <form [formGroup]="detailValueForm">
+          <fieldset>
+            <div class="form-group">
+      
+              <label>From WareHouse</label>
+              <input class="form-control" formControlName="fromWareHouse">
+
+              <label>To Outlet</label>
+              <input class="form-control" formControlName="toOutlet">
+
+              <label>Transfer Number</label>
+              <input class="form-control" formControlName="transferNumber">
+
+              <label>Created Date</label>
+              <input class="form-control" formControlName="createdDate">
+            </div>
+          </fieldset>
+      </form>
+        
+      <div class="datatable">
+            <div class="content">
+                <table class="fixed">
+                    <tr class="header">
+                        <th class="header column-name text-center">Products</th>
+                        <th class="header column-name text-center">Variants</th>
+                        <th class="header column-name text-center">Quantity</th>
+                    </tr>
+                    <tr *ngFor="let item of inventoryTransactionTransferInProducts; let i = index">
+                        <th class="header column-name text-center">
+                            <div class="cell">
+                                <ng-select class="custom" [items]="products" bindLabel="name" bindValue="id" placeholder="Select product"
+                                    [(ngModel)]="item.productId" (change)="onSelectedProductChange(i)" [clearable]=false>
+                                </ng-select>
+                            </div>
+                        </th>
+                        <th class="header column-name text-center">
+                            <div class="cell">
+                                <ng-select class="custom" [items]="item.variants" bindLabel="name" bindValue="id" placeholder="Select variant"
+                                    [loading]="item.isVariantsLoading" [(ngModel)]="item.variantId" (ngModelChange)="onSelectedVariantChange(i, $event)"
+                                    [clearable]=false>
+                                </ng-select>
+                            </div>
+                        </th>
+                        <th class="header column-name text-center">
+                              <div class="cell">
+                                  <input class="number-updown" type="number" name="input" (change)="onQuantityChange(i)"
+                                      [(ngModel)]="item.quantity" oninput="validity.valid||(value='');" min="0">
+                              </div>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            <app-loading-indicator></app-loading-indicator>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" type="button" (click)="onPrintTransfer()">Print</button>
+    <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">Close</button>
+  </div>

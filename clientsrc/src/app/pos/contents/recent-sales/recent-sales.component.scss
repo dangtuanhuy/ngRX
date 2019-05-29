@@ -1,0 +1,26 @@
+@import '@swimlane/ngx-datatable/release/index.css';
+@import '@swimlane/ngx-datatable/release/themes/material.css';
+@import '@swimlane/ngx-datatable/release/assets/icons.css';
+
+.recent-sales {
+    &__content {
+        width: 95%;
+        height: calc(100vh - 105px);
+        margin-left: 10px;
+
+        .ngx-datatable {
+            max-height: calc(100vh - 115px);
+            overflow-y: visible;
+        }
+    }
+
+    &-search {
+        text-align: right;
+        margin-bottom: 10px;
+
+        .app-input {
+            width: 250px;
+            margin-left: auto;
+        }
+    }
+}

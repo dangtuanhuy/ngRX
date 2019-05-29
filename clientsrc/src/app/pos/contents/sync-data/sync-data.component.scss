@@ -1,0 +1,109 @@
+#sync-data{
+    width: calc(100vw - 30px);
+
+    .container {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    
+    .panel {
+        width: 600px;
+        border: solid 1px #ced4da;
+        border-radius: 5px;
+        padding: 20px;
+
+        &-body {
+            margin-bottom: 20px;
+        }
+
+        .messages {
+            .messages-flex-container {
+                list-style: none;
+                -ms-box-orient: horizontal;
+                display: -webkit-box;
+                display: -moz-box;
+                display: -ms-flexbox;
+                display: -moz-flex;
+                display: -webkit-flex;
+                display: flex;
+            
+                -webkit-flex-flow: row wrap;
+                flex-flow: row wrap;
+            }
+            
+            .space-between { 
+                -webkit-align-content: space-between; 
+                align-content: space-between; 
+            }  
+            
+            .messages-flex-item {
+                width: 33%;
+                text-align: center;
+            }
+        }
+    
+        .messages-display-table {
+            width: 100%;
+            height: auto;
+        
+            .messages-display-table-item {
+                width: 50%;
+                margin-bottom: 10px;
+                padding-right: 10px;
+
+                .synchronizing {
+                    color: #0000ff;
+                }
+
+                .synced {
+                    color: #00ff00;
+                }
+            }
+        }
+    }
+    
+    .invalid {
+        width: 100%;
+        margin-top: .25rem;
+        font-size: 80%;
+        color: #dc3545;
+    }
+    
+    .logo {
+        max-width: 25%;
+        max-height: 25%;
+        padding-bottom: 20px;
+    }
+    
+    .btn-signin {
+        background-color: #e42c00;
+        color: #fff;
+        width: 100px;
+        height: 40px;
+    }
+
+    .btn-reset-device-code {
+        background-color: #e42c00;
+        color: #fff;
+        height: 40px;
+        margin-left: 15px;
+    }
+    
+    @media screen and (max-width: 768px) {
+        .container {
+            justify-content: unset;
+        }
+    
+        .panel{
+            width: 100%;
+        }
+    
+        .logo{
+            max-width: 80%;
+            max-height: 80%;
+        }
+    }
+}

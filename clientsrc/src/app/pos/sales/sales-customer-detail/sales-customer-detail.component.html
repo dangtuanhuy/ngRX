@@ -1,0 +1,36 @@
+<div id="sales-customer-detail">
+  <div class="customer-plus">
+    <div class="customer-plus--icon">
+      <div class="icon" style="background-image: url('assets/pos/images/pos-user-image.png');">
+
+      </div>
+    </div>
+    <div class="customer-plus--info">
+      <span><b>{{customer.name}}</b></span>
+    </div>
+  </div>
+
+  <div class="customer-profile-data row">
+    <div class="col-4 data-item">
+      <app-sales-customer-detail-data-item title='STORE' value='{{customer.store}}'>
+      </app-sales-customer-detail-data-item>
+    </div>
+    <div class="col-4 data-item">
+      <app-sales-customer-detail-data-item title='REWARD' value='{{customer.reward}}'>
+      </app-sales-customer-detail-data-item>
+    </div>
+    <div class="col-4 data-item">
+      <app-sales-customer-detail-data-item title='VISIT' value='{{customer.visit}}'>
+      </app-sales-customer-detail-data-item>
+    </div>
+  </div>
+
+  <div class="customer-profile-information row">
+    <div class="col-6">
+      <button class="btn btn-warning customer-profile-information--profile-button" (click)="onClickProfile()">Profile</button>
+    </div>
+    <div class="col-6">
+      <button class="btn btn-info customer-profile-information--purchases-button">Purchases</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+.dashboard-page {
+    min-height: 80vh;
+    
+    button:disabled {
+        cursor: not-allowed;
+    }
+
+    .columns-dropdown {
+        display: flex;
+        padding: 20px 20px 10px 0;
+        justify-content: space-between;
+
+        .dropdown {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            &-title {
+                margin: 0px 20px;
+            }
+            
+            .custom {
+                min-width: 200px;
+            }
+        }
+    }
+
+    .datatable {  
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            border-spacing: 0;
+            background: #fff;
+        }
+        
+        table,
+        th,
+        td {
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+            padding: 5px 5px;
+        }
+        
+        table.fixed {
+            table-layout: fixed;
+        }
+        
+        .table-detail {
+            margin: 10px;
+        }
+        
+        .ngx-datatable .datatable-body .datatable-scroll {
+            display: inline-block;
+            width: 100% !important;
+        }
+
+        .ngx-datatable.material .datatable-body .datatable-row-detail {
+            padding: 20px;
+            height: fit-content !important;
+        }
+
+        .arrow-detail {
+            cursor: pointer;
+        }
+    }
+}

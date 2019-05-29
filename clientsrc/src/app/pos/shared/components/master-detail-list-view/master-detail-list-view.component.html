@@ -1,0 +1,47 @@
+<div class="master-detail-list-view">
+  <ngx-datatable
+        #myTable
+        class="material striped master-detail-list expandable"
+        [rows]="dataSource"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="50">
+
+        <ngx-datatable-row-detail [rowHeight]="50" #myDetailRow (toggle)="onDetailToggle($event)">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+              <div class="detail-table">
+                <ngx-datatable
+                    #myDetailTable
+                    class="material striped"
+                    [rows]="getDataSourceDetail(dataSource,row.id)"
+                    [columnMode]="'force'"
+                    [headerHeight]="50"
+                    [footerHeight]="50"
+                    [rowHeight]="'auto'">
+
+                    <ngx-datatable-column *ngFor="let detailcolumn of userSetDefaultDetailColumns" [name]="detailcolumn">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            <strong *ngIf="checkFieldValue(detailcolumn)">{{getField(row.variantFields)}}</strong>
+                            <strong *ngIf="checkPrice(detailcolumn)">{{getPrice(row.prices)}}</strong>
+                            <strong *ngIf="!checkFieldValue(detailcolumn) && !checkPrice(detailcolumn)">{{value}}</strong>
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+              </div>
+            </ng-template>
+        </ngx-datatable-row-detail>
+
+        <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+              <a href="javascript:void(0)" class="toggle-icon" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
+                title="Expand/Collapse Row" (click)="toggleExpandRow(row)">
+              </a>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column *ngFor="let col of userSetDefaultColumns" [name]="col">
+        </ngx-datatable-column>
+      
+    </ngx-datatable>
+</div>

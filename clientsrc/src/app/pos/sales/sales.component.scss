@@ -1,0 +1,162 @@
+.sales {
+    position: relative;
+    
+    &-wrapper {
+        position: relative;
+        height: 100%;
+
+        .data-search {
+            position: relative;
+            margin-top: 5px;
+            height: 60px;
+        }
+
+        .customer-detail {
+            position: relative;
+            height: 195px;
+            margin-top: 15px;
+        }
+
+        .product-list {
+            width: 100%;
+            margin-top: 10px;
+            position: relative;
+            height: calc(100vh - 475px);
+
+            .ngx-datatable {
+                width: 100%;
+
+                .datatable-header {
+                    width: 100%;
+
+                    &-inner {
+                        width: 100%;
+                    }
+
+                    .datatable-header-inner {
+                        .datatable-row-center {
+                            .datatable-header-cell {
+                                &.description {
+                                    width: 100% !important;
+                                }
+
+                                &.name {
+                                    width: calc(100% - 300px) !important;
+                                }
+
+                                &.quantity {
+                                    width: 220px !important;
+                                    float: right;
+                                    display: flex;
+                                    input {
+                                        width: 100px !important;
+                                    }
+                                }
+
+                                &.price {
+                                    width: 110px !important;
+                                    float: right;
+                                    display: flex;
+                                    input {
+                                        width: 100px !important;
+                                    }
+                                }
+
+                                &.action {
+                                    width: 130px !important;
+                                    float: right;
+                                    margin-right: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .datatable-body {
+                    width: 100%;
+                    max-height: calc(100vh - 525px);
+                    min-height: calc(100vh - 525px);
+        
+                    .datatable-row-wrapper {
+                        .datatable-body-row {
+                            width: auto !important;
+                            
+                            .datatable-body-cell {
+                                &.description {
+                                    width: 100% !important;
+                                }
+
+                                &.name {
+                                    width: calc(100% - 300px) !important;
+                                }
+
+                                &.quantity {
+                                    min-width: 175px !important;
+                                    max-width: 175px !important;
+                                    width: 175px !important;
+                                    float: right;
+                                    display: flex;
+                                    input {
+                                        width: 100px !important;
+                                    }
+                                }
+
+                                &.price {
+                                    width: 130px !important;
+                                    float: right;
+                                    display: flex;
+                                    input {
+                                        width: 100px !important;
+                                    }
+                                }
+
+                                &.action {
+                                    width: 130px !important;
+                                    float: right;
+                                    margin-right: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    
+        .summary {
+            bottom: 0;
+            height: 90px;
+            position: relative;
+            margin-top: 15px;
+            padding-bottom: 10px;
+    
+            .value {
+                text-align: right;
+                position: relative;
+
+                .amount {
+                    margin-right: 10px;
+                }
+
+                .unit {
+                    position: absolute;
+                    right: 3px;
+                }
+            }
+    
+            .total {
+                font-weight: 700;
+            }
+        }
+    }
+
+    .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0.3;
+        z-index: 999;
+        background: #353030;
+    }
+}

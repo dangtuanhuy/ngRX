@@ -1,0 +1,38 @@
+<div class="variant-discount">
+  <div class="title">
+    Variant discount:
+  </div>
+  
+  <div class="contents">
+    <div class="select-reason">
+      <ng-select #selection [(ngModel)]="selectedProductId"
+        [items]="products" 
+        bindValue="id" bindLabel="description"
+        placeholder="Select Variant" class="custom select-field"
+        [clearable]=false>
+      </ng-select>
+    </div>
+
+    <div class="select-promotion">
+      <ng-select #selection 
+        [(ngModel)]="selectedDiscountType" 
+        (ngModelChange)="onChangeDiscountType($event)"
+        [items]="discountTypes" 
+        bindValue="id" bindLabel="value" 
+        placeholder="Select Promotion" class="custom select-field"
+        [clearable]=false>
+      </ng-select>
+    </div>
+  
+    <div class="value">
+      <app-input-with-keyboard id="{{variantDiscountValueId}}" type="number" inputSelectText="true" isNumpad="true"
+        [value]="variantDiscountValue" (valueChange)="onChangeVariantDiscountValue($event)">
+      </app-input-with-keyboard>
+      {{discountUnit}}
+    </div>
+
+    <div class="action">
+      <button class="btn btn-success" (click)="onAddVariantDiscount($event)">Add</button>
+    </div>
+  </div>
+</div>

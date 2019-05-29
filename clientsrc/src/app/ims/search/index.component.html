@@ -1,0 +1,45 @@
+<p class="list-view-title h4">
+    {{title}}
+</p>
+
+<div class="row">
+    <div class="datatable">
+        <table class="fixed">
+            <tr class="header">
+                <th class="header column-name text-center">Index name</th>
+                <th class="header column-name text-center"></th>
+            </tr>
+            <tr>
+                <th class="header column-name text-center">
+                    <label>Product Index</label>
+                </th>
+                <th class="header column-name text-center">
+                    <button type="button"
+                            class="btn btn-outline-secondary reset"
+                            (click)="onRebuildIndex(0)">Rebuild Index</button>
+                </th>
+            </tr>
+            <tr>
+                <th class="header column-name text-center">
+                    <label>StockLevel Index</label>
+                </th>
+                <th class="header column-name text-center">
+                    <button type="button"
+                            class="btn btn-outline-secondary reset"
+                            (click)="onRebuildIndex(1)">Rebuild Index</button>
+                </th>
+            </tr>
+            <tr>
+                <th class="header column-name text-center">
+                    <label>Rebuild vendors</label>
+                </th>
+                <th class="header column-name text-center">
+                    <button type="button"
+                            class="btn btn-outline-secondary reset"
+                            (click)="onRebuildVendors()">Rebuild vendors</button>
+                </th>
+            </tr>
+        </table>
+    </div>
+    <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+</div>

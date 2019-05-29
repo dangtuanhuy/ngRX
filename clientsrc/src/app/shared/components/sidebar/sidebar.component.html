@@ -1,0 +1,66 @@
+<nav class="sidebar"
+     [ngClass]="{sidebarPushRight: isActive}">
+  <div class="blank"></div>
+  <div class="list-group">
+    <div class="subMenu-desktop"
+         *ngFor="let item of ListItem">
+      <a [routerLinkActive]="['active']"
+         [routerLink]="item.url"
+         class="list-group-item">
+        <i class="fas fa-tachometer-alt fa-fw icon"></i>&nbsp;{{item.label}}
+      </a>
+    </div>
+
+    <ul class="navbar-nav header-fields">
+      <li class="nav-item"
+          *ngFor="let item of ListItemMobile"
+          ngbDropdown>
+        <a class="list-group-item"
+           [routerLinkActive]="['active']"
+           id="dropdownConfig"
+           ngbDropdownToggle
+           (click)="onClick(item.label)">
+          <i class="fas fa-tachometer-alt fa-fw icon"></i> {{item.label}} <b class="caret"></b>
+        </a>
+        <div class="submenu bg-primary"
+             *ngFor="let subItem of item.subMenu"
+             aria-labelledby="dropdownConfig"
+             ngbDropdownMenu>
+          <a class="list-group-item"
+             [routerLinkActive]="['active']"
+             [routerLink]="subItem.url"
+             (click)="onClick(item.label)">
+            <i class="fas fa-fw fa-circle"></i> {{subItem.label}}
+          </a>
+        </div>
+      </li>
+    </ul>
+
+    <div class="header-fields">
+      <div class="nested-menu">
+        <a class="list-group-item"
+           (click)="addExpandClass('profile')"
+           placement="top"
+           ngbTooltip="{{userName}}">
+          <span>
+            <i class="fa fa-user fa-fw icon"></i>&nbsp; {{userName}}</span>
+        </a>
+        <li class="nested"
+            [class.expand]="showMenu === 'profile'">
+          <ul class="submenu">
+            <li>
+              <a [routerLink]="['/login']"
+                 (click)="logout($event)">
+                <span>
+                  <i class="fa fa-fw fa-power-off icon"></i> logout</span>
+              </a>
+
+            </li>
+          </ul>
+        </li>
+      </div>
+    </div>
+
+  </div>
+
+</nav>

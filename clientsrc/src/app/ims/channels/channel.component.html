@@ -1,0 +1,14 @@
+<app-list-view-management
+[title]="title"
+[datasource]="datasource"
+[pageSize]="pageSize"
+[listButton]="listButton"
+[actionType]="actionType"
+[isHiddenSearchBox]="isHiddenSearchBox"
+[addSuccessMessage]='addSuccessMessage'
+[updateSuccessMessage]='updateSuccessMessage'
+[deleteSuccessMessage]='deleteSuccessMessage'
+(changeSelectedPage)="changeSelectedPage($event)"
+[userDefinedColumnSetting] = "userDefinedColumnSetting"
+(selectedRow)="getChannel($event)">
+</app-list-view-management>

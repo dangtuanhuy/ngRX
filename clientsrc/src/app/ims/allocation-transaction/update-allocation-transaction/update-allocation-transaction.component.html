@@ -1,0 +1,134 @@
+<div class="modal-header">
+        <h5 [hidden]="!isEditMode" class="modal-title">Update Allocation Transaction</h5>
+        <h5 [hidden]="isEditMode" class="modal-title">Allocation Transaction Detail</h5>
+      </div>
+      <div class="modal-body allocation-transaction" [ngClass]="{'allocation-transaction-detail': !isEditMode}">
+      
+        <form [formGroup]="updateValueForm">
+          <fieldset>
+            <div class="form-group">
+      
+              <label class="dropdown-title">From WareHouse</label>
+              <ng-select
+                      formControlName="wareHouse"
+                      [items]="wareHouses"
+                      bindLabel="name"
+                      bindValue="id"
+                      placeholder="Select WareHouse"
+                      [loading]="isLocationsLoading"
+                      [clearable]=false>
+              </ng-select>
+      
+              <label class="dropdown-title">To Outlet</label>
+              <ng-select
+                      formControlName="outlet"
+                      [items]="outlets"
+                      bindLabel="name"
+                      bindValue="id"
+                      placeholder="Select Outlet"
+                      [loading]="isLocationsLoading"
+                      [clearable]=false>
+              </ng-select>
+      
+              <label>Name</label>
+              <input class="form-control" formControlName="name" 
+              placeholder="Name" 
+              [ngClass]="{'is-invalid': (updateValueForm.get('name')?.touched ||
+                                                        updateValueForm.get('name')?.dirty) &&
+                                                        !updateValueForm.get('name')?.valid}">
+              <div class="form__validation-text" 
+                       *ngIf="updateValueForm.get('name')?.dirty &&
+                             !updateValueForm.get('name')?.valid">
+                        <p *ngIf="updateValueForm.get('name')?.errors.required">(*) Name is required</p>
+              </div>
+              
+              <label>Description</label>
+              <input class="form-control" formControlName="description"  placeholder="Description">
+            </div>
+          </fieldset>
+        </form>
+      
+        <label>Delivery Date</label>
+        <div class="input-group">
+            <input class="form-control" 
+                   placeholder="yyyy-mm-dd"
+                   name="d2" #c2="ngModel" 
+                   [(ngModel)]="deliveryDate" 
+                   (ngModelChange)="onSelecteddeliveryDateChange($event)" 
+                   ngbDatepicker #d2="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button">
+                    <i class="fas fa-calendar-alt"></i>
+              </button>
+            </div>
+        </div>
+        
+        <div class="datatable">
+            <button class="btn btn-secondary" type="button" (click)="onClickAddButton()">Add</button>
+            <div class="content">
+                <table class="fixed">
+                    <tr class="header">
+                        <th class="header column-name text-center">Products</th>
+                        <th class="header column-name text-center">Variants</th>
+                        <th class="header column-name text-center">Quantity</th>
+                        <th class="header column-name text-center"></th>
+                    </tr>
+                    <tr *ngFor="let item of allocationTransactionItemViewModel; let i = index">
+                        <th class="header column-name text-center">
+                            <div class="cell">
+                                <ng-select class="custom" [items]="products" bindLabel="name" bindValue="id" placeholder="Search product"
+                                    [(ngModel)]="item.productId" (change)="onSelectedProductChange(i)"
+                                    (search)="searchText.next($event)"
+                                    [clearable]=false>
+                                </ng-select>
+                            </div>
+                        </th>
+                        <th class="header column-name text-center">
+                            <div class="text-box"
+                                 (click)="openVariantModal(i, item)">
+                              <div class="text-box__empty"
+                                   *ngIf="!item.variant">
+                                <span>select variant</span>
+                              </div>
+                              <div class="text-box__input"
+                                   *ngIf="item.variant">
+                                <div *ngFor="let field of item.variant.fieldValues"
+                                     class="field__tag">
+                                  <div class="field__tag-title">{{field.name}}: <span class="font-weight-normal"
+                                          *ngFor="let value of field.value; let i = index">
+                                      <span *ngIf="i == 0">{{value}}</span><span *ngIf="i > 0">,
+                                        {{value}}</span></span>
+                                  </div>
+                
+                                  <div class="field__tag-tooltip-wrapper open">
+                                    <div class="field__tag-tooltip">{{field.name}}: <span class="font-weight-normal"
+                                            *ngFor="let value of field.value; let i = index">
+                                        <span *ngIf="i == 0">{{value}}</span><span *ngIf="i > 0">,
+                                          {{value}}</span></span></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </th>
+                        <th class="header column-name text-center">
+                              <div class="cell">
+                                  <input class="number-updown" type="number" name="input" (change)="onQuantityChange(i)"
+                                      [(ngModel)]="item.quantity" oninput="validity.valid||(value='');" min="0">
+                              </div>
+                        </th>
+                        <th class="header column-name text-center">
+                                <div class="cell">
+                                    <i class="fas fa-trash-alt fa-lg icon" (click)="deleteAllocationTransactionItem(i)"></i>
+                                </div>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+        </div>
+      
+      </div>
+      <div class="modal-footer">
+        <button [disabled]="updateValueForm.invalid" [hidden]="!isEditMode" class="btn btn-secondary" type="button" (click)="onSave()">Save</button>
+        <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">Cancel</button>
+      </div>

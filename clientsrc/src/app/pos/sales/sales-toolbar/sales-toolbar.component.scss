@@ -1,0 +1,73 @@
+.sales-toolbar {
+    background-color: #eee;
+    border-radius: 3px;
+    padding: 5px;
+
+    &-information {
+      float: right;
+      display: flex;
+      height: 0;
+
+      .outlet-name {
+        margin-right: 25px;
+        font-weight: 700;
+        color: #f11504;
+      }
+
+      .logout-button {
+        cursor: pointer;
+        color: #0d4fe8;
+      }
+    }
+
+    .target {
+      display: inline;
+      margin-left: 20px;
+      color:#ff0000;
+    }
+
+    .achievied-target {
+      display: inline;
+      margin-left: 20px;
+      color:#0000ff;
+    }
+
+    .remaining-target {
+      display: inline;
+      margin-left: 20px;
+      color:#249624;
+    }
+}
+
+.online-mode {
+    color: rgb(65, 206, 107);
+    padding-left: 10px;
+}
+
+.offline-mode {
+    color: rgb(82, 78, 78);
+    padding-left: 10px;
+}
+
+.lds-dual-ring {
+    display: inline-block;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin: 1px;
+    border-radius: 50%;
+    border: 2px solid rgb(0, 0, 0);
+    border-color: rgb(0, 0, 0) transparent rgb(0, 0, 0) transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

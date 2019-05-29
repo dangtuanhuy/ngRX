@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <h5 class="modal-title">Export Store</h5>
+</div>
+<div class="modal-body">
+  <form [formGroup]="chooseDateForm">
+    <fieldset>
+      <div class="form-group">
+        <label>Choose date:</label>
+        <div class="input-group">
+          <input class="form-control"
+                 placeholder="yyyy-mm-dd"
+                 name="d1"
+                 [(ngModel)]="chooseDate"
+                 formControlName="chooseDate"
+                 [maxDate]="toDay"
+                 ngbDatepicker
+                 #d1="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar"
+                    (click)="d1.toggle()"
+                    type="button">
+              <i class="fas fa-calendar-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+  <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+</div>
+<div class="modal-footer">
+  <button [disabled]="chooseDateForm.invalid || isDeactive"
+          class="btn btn-secondary"
+          type="button"
+          (click)="onSave()">Export</button>
+  <button class="btn btn-secondary"
+          type="button"
+          (click)="onDismiss('Cross click')">Cancel</button>
+</div>

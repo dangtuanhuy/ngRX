@@ -1,0 +1,117 @@
+<div class="list-view-title h4">
+    <p>Mass Allocation Transaction</p>
+</div>
+
+<div class="row">
+    <div class="date-filter-form col-4">
+        <label>Delivery Date</label>
+        <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" name="d1" [(ngModel)]="deliveryDate" ngbDatepicker
+                #d1="ngbDatepicker">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button">
+                    <i class="fas fa-calendar-alt"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="date-filter-form col-4">
+        <label>From Date</label>
+        <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" name="d2" [(ngModel)]="filteredFromDate" ngbDatepicker
+                #d2="ngbDatepicker">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button">
+                    <i class="fas fa-calendar-alt"></i>
+                </button>
+            </div>
+        </div>
+
+        <label>To Date</label>
+        <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" name="d3" [(ngModel)]="filteredToDate" ngbDatepicker
+                #d3="ngbDatepicker">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d3.toggle()" type="button">
+                    <i class="fas fa-calendar-alt"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="btn-filter col-4">
+        <button type="button" class="btn btn-outline-secondary reset" (click)="onClickFilter()">Filter</button>
+        <br>
+        <div class="square-caption">
+            <span class="square-caption-hand"></span>_QtyOnHand
+            <br>
+            <span class="square-caption-sold"></span>_QtySold
+        </div>
+
+    </div>
+</div>
+<div class="allocation-page">
+    <div class="datatable">
+        <div class="content">
+            <table *ngIf="massAllocationTransactions.outletInfor.length > 0" class="auto">
+                <thead>
+                    <tr class="header">
+                        <th class="header column-name text-center" rowspan="2">SKU</th>
+                        <th class="header column-name text-center" rowspan="2">Name</th>
+                        <th class="header column-name text-center" rowspan="2">SOH</th>
+                        <th class="header column-name text-center" rowspan="2">GIW</th>
+                        <th class="header column-name text-center" rowspan="2">Remaining</th>
+                        <th class="header column-name text-center" [attr.colspan]="count">Outlet</th>
+                    </tr>
+
+                    <tr class="header">
+                        <th class="text-center" *ngFor="let outlet of massAllocationTransactions.outletInfor"
+                            colspan="3">
+                            {{outlet.name}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="w-100" *ngFor="let mass of massAllocationTransactions.massAllocations; let x = index">
+                        <td class="header column-name text-center">
+                            {{mass.sku}}
+                        </td>
+                        <td class="header column-name text-center">
+                            {{mass.productName}}
+                            <div *ngFor="let variant of mass.variantFields">
+                                {{variant.name}}: {{variant.value}}
+                            </div>
+                        </td>
+                        <td class="header column-name text-center">
+                            {{mass.balance}}
+                        </td>
+                        <td class="header column-name text-center">
+                            {{mass.giwQuantity}}
+                        </td>
+                        <td class="header column-name text-center" style="min-width: 97px;">
+                            {{mass.remaining}}
+                        </td>
+                        <ng-container class="w-100" *ngFor="let outlet of mass.outlets; let y = index">
+                            <td class="header column-name text-center background-quantity-hand">
+                                {{outlet.quantityOnHand}}
+                            </td>
+                            <td class="header column-name text-center background-quantity-sold">
+                                {{outlet.quantitySold}}
+                            </td>
+                            <td class="header column-name text-center">
+                                <div class="cell">
+                                    <input class="number-updown" type="number" #inputQty [ngModel]="outlet.quantity" 
+                                        (ngModelChange)="refreshMaxValueQuantity($event, x, y)"
+                                        name="input" [min]="0" [max]="outlet.maxQuantity">
+                                </div>
+                            </td>
+                        </ng-container>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<app-loading-indicator></app-loading-indicator>
+<div class="group-button">
+    <button class="btn btn-secondary btn-submit" type="button" (click)="onSave()">Submit</button>
+    <button class="btn btn-secondary" type="button" (click)="onCancel()">Cancel</button>
+</div>

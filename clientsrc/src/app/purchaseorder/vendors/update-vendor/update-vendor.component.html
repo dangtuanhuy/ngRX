@@ -1,0 +1,131 @@
+<div class="modal-header">
+  <h5 class="modal-title">Update Vendor</h5>
+</div>
+<div class="modal-body update-vendor">
+    <form [formGroup]="updateValueForm">
+        <fieldset>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-6">
+                  <label>Vendor Code</label>
+                  <input class="form-control" formControlName="vendorCode" 
+                  placeholder="Vendor Code" 
+                  [ngClass]="{'is-invalid': (updateValueForm.get('vendorCode')?.touched ||
+                                                            updateValueForm.get('vendorCode')?.dirty) &&
+                                                            !updateValueForm.get('vendorCode')?.valid}">
+                  <span class="error invalid-feedback" *ngIf="updateValueForm.get('vendorCode')?.dirty&&
+                                                              updateValueForm.get('vendorCode')?.errors">
+                      <span *ngIf="updateValueForm.get('vendorCode')?.errors?.required">
+                          VendorCode is required!
+                      </span>
+                  </span>
+    
+                <label>Name</label>
+                <input class="form-control" formControlName="name" 
+                placeholder="Name" 
+                [ngClass]="{'is-invalid': (updateValueForm.get('name')?.touched ||
+                                                          updateValueForm.get('name')?.dirty) &&
+                                                          !updateValueForm.get('name')?.valid}">
+                <span class="error invalid-feedback" *ngIf="updateValueForm.get('name')?.dirty&&
+                                                            updateValueForm.get('name')?.errors">
+                  <span *ngIf="updateValueForm.get('name')?.errors?.required">
+                    Name is required!
+                  </span>
+                </span>                                 
+                
+                <label>Address1</label>
+                <input class="form-control" formControlName="address1"  placeholder="Address1">
+    
+                <label>Address2</label>
+                <input class="form-control" formControlName="address2"  placeholder="Address2">
+
+                <label>Country</label>
+                <input class="form-control" formControlName="country"  placeholder="Country">
+    
+                <label>Email</label>
+                <input class="form-control" formControlName="email" type="email" placeholder="Email">
+    
+                <label>VendorUrl</label>
+                <input class="form-control" formControlName="vendorUrl"  placeholder="VendorUrl">
+    
+                <label>BarCode</label>
+                <input class="form-control" formControlName="barCode"  placeholder="BarCode">
+
+                <label>Description</label>
+                <textarea class="form-control" formControlName="description"  placeholder="Description"></textarea>
+    
+              </div>
+              <div class="col-6">
+                  <label>City Name</label>
+                  <input class="form-control" formControlName="cityName"  placeholder="City Name">
+                
+                  <label>City Code</label>
+                  <input class="form-control" formControlName="cityCode"  placeholder="City Code">
+                  
+                  <label>Phone</label>
+                  <input class="form-control" formControlName="phone"  placeholder="Phone">
+
+                  <label class="dropdown-title">Payment Term</label>
+                  <ng-select
+                          formControlName="paymentTerm"
+                          [items]="paymentTerms"
+                          bindLabel="name"
+                          bindValue="id"
+                          placeholder="Select payment term"
+                          [(ngModel)]="selectedPaymentTerm"
+                          [ngClass]="{'custom-payment': (updateValueForm.get('currency')?.touched ||
+                                                          updateValueForm.get('currency')?.dirty) &&
+                                                          !updateValueForm.get('currency')?.valid}"
+                          [clearable]=false>
+                  </ng-select>
+
+                  <label class="dropdown-title">Currency</label>
+                  <ng-select
+                          formControlName="currency"
+                          [items]="currencies"
+                          bindLabel="name"
+                          bindValue="id"
+                          placeholder="Select currency"
+                          [(ngModel)]="selectedCurrency"
+                          [ngClass]="{'custom-currency': (updateValueForm.get('currency')?.touched ||
+                                                          updateValueForm.get('currency')?.dirty) &&
+                                                          !updateValueForm.get('currency')?.valid}"
+                          [clearable]=false>
+                  </ng-select>
+
+                  <label class="dropdown-title">TaxType</label>
+                  <ng-select
+                          formControlName="taxType"
+                          [items]="taxTypes"
+                          bindLabel="name"
+                          bindValue="id"
+                          placeholder="Select Tax Type"
+                          [(ngModel)]="selectedTaxType"
+                          [ngClass]="{'custom-taxType': (updateValueForm.get('currency')?.touched ||
+                                                          updateValueForm.get('currency')?.dirty) &&
+                                                          !updateValueForm.get('currency')?.valid}"
+                          [clearable]=false>
+                  </ng-select>
+
+                  <label>ZipCode</label>
+                  <input class="form-control" formControlName="zipCode"  placeholder="Zip Code">
+
+                  <label>Fax</label>
+                  <input class="form-control" formControlName="fax"  placeholder="Fax">
+
+                  <label>Attention</label>
+                  <textarea class="form-control" formControlName="attention"  placeholder="Attention"></textarea>
+
+                  <label>Active</label>
+                  <input class="checkbox-type" type="checkbox" class="form-control" formControlName="active"/>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+      <app-loading-indicator></app-loading-indicator>
+</div>
+<div class="modal-footer">
+    <button [disabled]="updateValueForm.invalid" class="btn btn-secondary" type="button" (click)="onSave()">Save</button>
+    <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">Cancel</button>
+</div>

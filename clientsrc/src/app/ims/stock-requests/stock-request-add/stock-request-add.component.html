@@ -1,0 +1,158 @@
+<div class="modal-header">
+  <h5 class="modal-title">Add Stock Request</h5>
+</div>
+<div class="modal-body">
+  <form [formGroup]="addValueForm">
+    <fieldset>
+      <div class="form-group">
+        <div class="stock-request_header">
+          <div class="add-control">
+            <label>Subject</label>
+            <input id="subject"
+                   class="form-control"
+                   formControlName="subject"
+                   placeholder="Subject">
+          </div>
+          <div class="add-control">
+            <label>Ware House</label>
+            <ng-select class="custom"
+                       formControlName="warehouse"
+                       [items]="warehouses"
+                       binValue="id"
+                       bindLabel="name"
+                       placeholder="Select warehouse"
+                       [loading]="isWarehousesLoading"
+                       [clearable]=false>
+            </ng-select>
+          </div>
+          <div class="add-control">
+            <label>Store</label>
+            <ng-select class="custom"
+                       formControlName="store"
+                       [items]="stores"
+                       bindLabel="name"
+                       placeholder="Select store"
+                       [loading]="isStoresLoading"
+                       [clearable]=false>
+            </ng-select>
+          </div>
+          <div class="add-control">
+            <label>Description</label>
+            <input id="description"
+                   class="form-control"
+                   formControlName="description"
+                   placeholder="Description">
+          </div>
+          <div class="add-control">
+            <label>Date</label>
+            <div class="input-group">
+              <input class="form-control"
+                     placeholder="yyyy-mm-dd"
+                     name="d1"
+                     formControlName="date"
+                     ngbDatepicker
+                     #d1="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar"
+                        (click)="d1.toggle()"
+                        type="button">
+                  <i class="fas fa-calendar-alt"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+  <div class="row">
+    <div class="col-md-2">
+      <button class="btn btn-secondary"
+              type="button"
+              (click)="onClickAddButton()">Add</button>
+    </div>
+  </div>
+  <div class="datatable">
+    <div class="stock-request_detail">
+      <table class="fixed">
+        <tr class="header">
+          <th class="header column-name text-center">Products</th>
+          <th class="header column-name text-center">Variants</th>
+          <th class="header column-name text-center">Quantity</th>
+          <th class="header column-name text-center">Action</th>
+        </tr>
+        <tr *ngFor="let item of stockRequestItemsViewModel;let i = index">
+          <th class="header column-name text-center">
+            <div class="cell">
+              <ng-select class="custom"
+                         [items]="products"
+                         bindLabel="name"
+                         bindValue="id"
+                         placeholder="Search product"
+                         [(ngModel)]="item.product.id"
+                         (change)="onSelectedProductChange(i)"
+                         (search)="searchText.next($event)"
+                         [clearable]=false>
+              </ng-select>
+            </div>
+          </th>
+          <th class="header column-name text-center">
+            <div class="text-box"
+                 (click)="openVariantModal(i, item)">
+              <div class="text-box__empty"
+                   *ngIf="!item.variant">
+                <span>select variant</span>
+              </div>
+              <div class="text-box__input"
+                   *ngIf="item.variant">
+                <div *ngFor="let field of item.variant.fieldValues"
+                     class="field__tag">
+                  <div class="field__tag-title">{{field.name}}: <span class="font-weight-normal"
+                          *ngFor="let value of field.value; let i = index">
+                      <span *ngIf="i == 0">{{value}}</span><span *ngIf="i > 0">,
+                        {{value}}</span></span>
+                  </div>
+
+                  <div class="field__tag-tooltip-wrapper open">
+                    <div class="field__tag-tooltip">{{field.name}}: <span class="font-weight-normal"
+                            *ngFor="let value of field.value; let i = index">
+                        <span *ngIf="i == 0">{{value}}</span><span *ngIf="i > 0">,
+                          {{value}}</span></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </th>
+          <th class="header column-name text-center">
+            <div class="cell">
+              <input class="number-updown"
+                     type="number"
+                     name="input"
+                     (change)="onQuantityChange(i)"
+                     [(ngModel)]="item.quantity"
+                     oninput="validity.valid||(value='');"
+                     min="0">
+            </div>
+          </th>
+          <th class="header column-name text-center">
+            <div class="cell">
+              <i class="fas fa-trash-alt fa-lg icon"
+                 (click)="deleteStockRequestItem(i)"></i>
+            </div>
+          </th>
+        </tr>
+      </table>
+    </div>
+    <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+  </div>
+</div>
+<div class="modal-footer">
+  <button [disabled]="addValueForm.invalid"
+          class="btn btn-secondary"
+          type="button"
+          (click)="onSave()">Save</button>
+  <button class="btn btn-secondary"
+          type="button"
+          (click)="onDismiss('Cross click')">Cancel</button>
+</div>

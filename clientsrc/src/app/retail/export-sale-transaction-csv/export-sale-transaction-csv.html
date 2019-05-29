@@ -1,0 +1,62 @@
+<div class="row export-transaction">
+    <div class="location-filter-form col-4">
+        <div class="form-group">
+            <label class="dropdown-title">Location</label>
+            <ng-select [items]="locations"
+                       bindLabel="name"
+                       bindValue="id"
+                       placeholder="Select Location"
+                       [multiple]=true
+                       [(ngModel)]="selectLocation"
+                       [clearable]=false>
+            </ng-select>
+        </div>
+    </div>
+    <div class="date-filter-form col-4">
+        <label>From Date</label>
+        <div class="input-group">
+            <input class="form-control"
+                   placeholder="yyyy-mm-dd"
+                   name="d1"
+                   [(ngModel)]="fromDateFillter"
+                   ngbDatepicker
+                   #d1="ngbDatepicker">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar"
+                        (click)="d1.toggle()"
+                        type="button">
+                    <i class="fas fa-calendar-alt"></i>
+                </button>
+            </div>
+        </div>
+        <label>To Date</label>
+        <div class="input-group">
+            <input class="form-control"
+                   placeholder="yyyy-mm-dd"
+                   name="d2"
+                   [(ngModel)]="toDateFillter"
+                   ngbDatepicker
+                   #d2="ngbDatepicker">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar"
+                        (click)="d2.toggle()"
+                        type="button">
+                    <i class="fas fa-calendar-alt"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="btn-filter col-4 btn-export">
+        <button type="button"
+                *ngIf="!selectLocation"
+                class="btn btn-outline-secondary"
+                (click)="exportFile()"
+                disabled>Export
+        </button>
+        <button type="button"
+                *ngIf="selectLocation"
+                class="btn btn-outline-secondary"
+                (click)="exportFile()">Export
+        </button>
+    </div>
+</div>

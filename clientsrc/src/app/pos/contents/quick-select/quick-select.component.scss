@@ -1,0 +1,188 @@
+#quick-select {
+    margin-top: 5px;
+    position: relative;
+    
+    .contents {
+        .grid-with-arrow-1 {
+            app-buttons-grid {
+                .arrow-item-button {
+                    width: 80px !important;
+                    height: 80px !important;
+                }
+
+                .grid-container {
+                    grid-template-rows: 80px !important;
+                    grid-template-columns: 80px 80px 80px 80px 80px 80px 80px !important;
+                }
+
+                #big-button {
+                    .title {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+
+        .grid-with-arrow-2 {
+            app-buttons-grid {
+                .arrow-item-button {
+                    width: 80px !important;
+                    height: 160px !important;
+                }
+
+                .grid-container {
+                    grid-template-rows: 80px 80px !important;
+                    grid-template-columns: 80px 80px 80px 80px 80px 80px 80px !important;
+                }
+
+                #big-button {
+                    .title {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+
+        .grid-without-arrow-2 {
+            app-buttons-grid {
+                .grid-container {
+                    grid-template-rows: 80px 80px !important;
+                    grid-template-columns: 80px 80px 80px 80px 80px 80px 80px 80px 80px !important;
+                }
+
+                #big-button {
+                    .title {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+
+        #buttons-grid {
+            .caption {
+                font-weight: 800;
+            }
+        }
+
+        .categories {
+            height: 80px;
+
+            .buttons-grid-content {
+                .grid-item {
+                    #big-button {
+                        .title {
+                            font-weight: 700;
+                            font-size: 12px;
+                        }
+
+                        .caption {
+                            font-weight: 800;
+                        }
+                    }
+                }
+            }
+        }
+
+        .products {
+            height: 160px;
+
+            .buttons-grid-content {
+                .grid-item {
+                    #big-button {
+                        .title {
+                            font-weight: 700;
+                        }
+
+                        .caption {
+                            font-weight: 800;
+                        }
+                    }
+                }
+            }
+        }
+
+        .features {
+            height: 160px;
+            z-index: 1000;
+            position: relative;
+
+            .buttons-grid-content {
+                .grid-item {
+                    #big-button {
+                        .title {
+                            font-weight: 700;
+                            font-size: 15px;
+                                
+                        }
+                    }
+                }
+            }
+        }
+
+        .keys {
+            height: 160px;
+
+            .buttons-grid-content {
+                .grid-item {
+                    #big-button {
+                        .title {
+                            font-size: 13px;
+                            font-weight: 700;
+                        }
+                    }
+                }
+            }
+        }
+
+        .functions {
+            min-height: 90px;
+            height: calc(100vh - 620px);
+            margin-bottom: 5px;
+
+            &.grid {
+                app-buttons-grid {
+                    .grid-container {
+                        grid-template-columns: 160px 160px 160px 240px !important;
+                    }
+
+                    #big-button {
+                        .title {
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+
+            .buttons-grid-content {
+                .grid-item {
+                    #big-button {
+                        &.quick-select-funtion-return {
+                            .title {
+                                font-size: 30px;
+                                font-weight: 700;
+                            }
+                        }
+
+                        &.quick-select-funtion-payment {
+                            .title {
+                                font-size: 35px;
+                                font-weight: 700;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0.3;
+        z-index: 999;
+        background: #353030;
+    }
+}

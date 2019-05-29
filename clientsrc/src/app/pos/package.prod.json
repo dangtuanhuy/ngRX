@@ -1,0 +1,8 @@
+{
+    "name": "POSProd",
+    "productName": "POSProd",
+    "version": "1.0.9",
+    "description": "POSProd",
+    "main": "electron.js",
+    "license": "MIT"
+}

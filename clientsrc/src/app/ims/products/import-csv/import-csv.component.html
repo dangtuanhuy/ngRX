@@ -1,0 +1,26 @@
+<div class="modal-header">
+  <h5 class="modal-title">Import CSV</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onDismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row header">
+    <div class="file-upload">
+      <input type="file" #file (change)="selectFile($event)" />
+      <div  class="font-weight-light file-info" *ngIf="currentFileUpload">{{currentFileUpload.name}} ({{currentFileUpload.size / 1024 | number:'0.0-2'}} KB ) </div>
+    </div>
+  </div>
+  <div *ngIf="isUploading" class="progress">
+    <div #progressbar class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [attr.aria-valuenow]="percentDone" aria-valuemin="0"
+      aria-valuemax="100" [style.width]="(percentDone/100)*100 + '%'" style="min-width: 2em;"></div>
+      {{percentDone}}%
+  </div>
+  <div  class="text-success" *ngIf="message!= '' && !isUploading">{{message}}</div>
+  <div class="text-danger" *ngIf="error!= '' && !isUploading">
+      <p [innerHTML]="error"></p>
+  </div>
+</div>
+<div class="modal-footer">
+  <button [disabled]="isUploading || !currentFileUpload" class="btn btn-primary" type="button" (click)="upload()">Upload</button>
+</div>

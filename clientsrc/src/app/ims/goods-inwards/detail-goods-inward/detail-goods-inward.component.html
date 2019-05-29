@@ -1,0 +1,84 @@
+<div class="modal-header">
+    <h5 class="modal-title">Goods Inward Detail</h5>
+</div>
+<div class="modal-body detail-goods-inward">
+    <app-loading-indicator></app-loading-indicator>
+    <form [formGroup]="detailValueForm">
+        <fieldset>
+            <div class="form-group">
+
+                <label>From Vendor</label>
+                <input class="form-control"
+                       formControlName="fromVendor">
+
+                <label>To WareHouse</label>
+                <input class="form-control"
+                       formControlName="toWareHouse">
+
+                <label>Goods Inward Number</label>
+                <input class="form-control"
+                       formControlName="goodsInwardNumber">
+
+                <label>Created Date</label>
+                <input class="form-control"
+                       formControlName="createdDate">
+            </div>
+        </fieldset>
+    </form>
+
+    <div class="datatable">
+        <div class="content">
+            <table class="fixed">
+                <tr class="header">
+                    <th class="header column-name text-center">Products</th>
+                    <th class="header column-name text-center">Variants</th>
+                    <th class="header column-name text-center">Quantity</th>
+                </tr>
+                <tr *ngFor="let item of inventoryTransactionGoodsInwardProducts; let i = index">
+                    <th class="header column-name text-center">
+                        <div class="cell">
+                            <ng-select class="custom"
+                                       [items]="products"
+                                       bindLabel="name"
+                                       bindValue="id"
+                                       placeholder="Select product"
+                                       [(ngModel)]="item.productId"
+                                       [clearable]=false>
+                            </ng-select>
+                        </div>
+                    </th>
+                    <th class="header column-name text-center">
+                        <div class="cell">
+                            <ng-select class="custom"
+                                       [items]="item.variants"
+                                       bindLabel="name"
+                                       bindValue="id"
+                                       placeholder="Select variant"
+                                       [(ngModel)]="item.variantId"
+                                       [clearable]=false>
+                            </ng-select>
+                        </div>
+                    </th>
+                    <th class="header column-name text-center">
+                        <div class="cell">
+                            <input class="number-updown"
+                                   type="number"
+                                   name="input"
+                                   [(ngModel)]="item.quantity"
+                                   oninput="validity.valid||(value='');"
+                                   min="0">
+                        </div>
+                    </th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-secondary"
+            type="button"
+            (click)="onPrintTransfer()">Print</button>
+    <button class="btn btn-secondary"
+            type="button"
+            (click)="onDismiss('Cross click')">Close</button>
+</div>

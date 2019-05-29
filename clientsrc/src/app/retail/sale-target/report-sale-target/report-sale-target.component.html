@@ -1,0 +1,37 @@
+<p class="list-view-title h4">
+    {{title}}
+</p>
+<div class="row report">
+    <div class="location-filter-form col-4">
+        <div class="form-group">
+            <label class="dropdown-title">Channel</label>
+            <ng-select [items]="channels" bindLabel="name" bindValue="id" placeholder="Select Channel" [(ngModel)]="channelSelect" [clearable]=false>
+            </ng-select>
+        </div>
+    </div>
+    <div class="date-filter-form col-4">
+        <label>Date</label>
+        <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" name="d1" [(ngModel)]="dateFillter" ngbDatepicker
+                #d1="ngbDatepicker">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button">
+                    <i class="fas fa-calendar-alt"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="btn-filter col-4 btn-filter">
+        <button type="button" *ngIf="channelSelect == null" class="btn btn-outline-secondary"
+            (click)="getReportSaleTarget()" disabled>Filter
+        </button>
+        <button type="button" *ngIf="channelSelect != null" class="btn btn-outline-secondary"
+            (click)="getReportSaleTarget()">Filter
+        </button>
+    </div>
+</div>
+<div>
+    <app-list-view-management [datasource]="datasource" [pageSize]="pageSize"
+        [userDefinedColumnSetting]="userDefinedColumnSetting">
+    </app-list-view-management>
+</div>

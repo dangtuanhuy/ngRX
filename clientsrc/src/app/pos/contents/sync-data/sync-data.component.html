@@ -1,0 +1,43 @@
+<div id="sync-data">
+  <div class="container">
+    <img
+      src="assets/pos/images/pos-login-logo.png"
+      alt="Sync data"
+      class="logo"
+    />
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div>
+          <button
+            class="btn btn-signin text-center"
+            name="button"
+            value="save"
+            [disabled]="disableSyncButton"
+            (click)="onSyncData()"
+          >
+            Sync
+          </button>
+
+          <button
+            class="btn btn-reset-device-code text-center"
+            name="button"
+            value="save"
+            (click)="onResetDeviceCode()"
+          >
+            Reset device code
+          </button>
+        </div>
+      </div>
+
+      <div class="messages">
+        <div class="messages-display-table messages-flex-container space-between">
+          <div class="messages-display-table-item messages-flex-item" *ngFor="let syncDataMessage of syncDataMessages">
+            <p class="synchronizing" *ngIf="syncDataMessage.syncStatus === 1">{{syncDataMessage.message}}(synchronizing)</p>
+            <p class="synced" *ngIf="syncDataMessage.syncStatus === 2">{{syncDataMessage.message}}(success)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

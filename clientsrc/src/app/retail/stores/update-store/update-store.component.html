@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <h5 class="modal-title">Update Store</h5>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="updateValueForm">
+      <fieldset>
+        <div class="form-group">
+          <label>Mall</label>
+          <input class="form-control" formControlName="mall" placeholder="Mall">
+
+          <label>MachineId</label>
+          <input class="form-control" formControlName="machineId" placeholder="MachineId">
+
+          <label>ServerIp</label>
+          <input class="form-control" formControlName="serverIP" placeholder="ServerIP">
+
+          <label>AccountId</label>
+          <input class="form-control" formControlName="accountId" placeholder="AccountId">
+
+          <label>Password</label>
+          <input type="password" class="form-control" formControlName="password" placeholder="Password">
+
+          <label>Port</label>
+          <input type="number" class="form-control" formControlName="port" placeholder="Port">
+
+          <label>FolderPath</label>
+          <input class="form-control" formControlName="folderPath" placeholder="FolderPath">
+        </div>
+      </fieldset>
+    </form>
+    <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+  </div>
+  <div class="modal-footer">
+    <button [disabled]="updateValueForm.invalid || isDeactive" class="btn btn-secondary" type="button" (click)="onSave()">Save</button>
+    <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">Cancel</button>
+  </div>

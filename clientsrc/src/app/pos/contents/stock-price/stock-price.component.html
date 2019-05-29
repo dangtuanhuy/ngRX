@@ -1,0 +1,134 @@
+<div class="stock-price" [ngStyle]="{'width': pageWidth}">
+    <div class="stock-price--header">
+        <app-page-callback class="call-back" [title]='title' [defaultPage]='defaultPage'>
+        </app-page-callback>
+        <div class="search">
+            <app-input-with-keyboard id="{{searchProductInputId}}" placeholder="product name" (valueChange)="searchProduct($event)">
+            </app-input-with-keyboard>
+            <i class="fas fa-search search-icon"></i>
+        </div>
+    </div>
+
+    <ngx-datatable 
+        #productTable
+        class="material striped datatable-stock-price expandable"
+        [rows]="products"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [externalPaging]="true"
+        [count]="productTotalItem"
+        [offset]="productPageIndex"
+        [limit]="productPageSize" 
+        [rowHeight]="50"
+        (page)='setProductPage($event)'>
+
+        <ngx-datatable-row-detail [rowHeight]="50" #myDetailRow (toggle)="onDetailToggle($event)">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                <div class="detail-table">
+                <ngx-datatable
+                    #variantTable
+                    class="material striped"
+                    [rows]="getDetailVariants(row.id)"
+                    [columnMode]="'force'"
+                    [headerHeight]="50"
+                    [footerHeight]="50"
+                    [rowHeight]="'auto'"
+                    [externalPaging]="true"
+                    [count]="getDetailVariantPageTotalItem(row.id)"
+                    [offset]="getDetailVariantPageIndex(row.id)"
+                    [limit]="getDetailVariantPageSize(row.id)"
+                    (page)='setVariantPage($event)'>
+
+                    <ngx-datatable-column 
+                        name="Variant"
+                        [width]="80"
+                        [resizeable]="false"
+                        [sortable]="false"
+                        [draggable]="false"
+                        [canAutoResize]="true">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            <strong>{{row.description}}</strong>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column 
+                        name="List Price"
+                        [width]="80"
+                        [resizeable]="false"
+                        [sortable]="false"
+                        [draggable]="false"
+                        [canAutoResize]="true">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            <strong>{{formatNumberDecimal(row.listPrice)}}</strong>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column 
+                        name="Member Price"
+                        [width]="80"
+                        [resizeable]="false"
+                        [sortable]="false"
+                        [draggable]="false"
+                        [canAutoResize]="true">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            <strong>{{formatNumberDecimal(row.memberPrice)}}</strong>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column 
+                        name="Staff Price"
+                        [width]="80"
+                        [resizeable]="false"
+                        [sortable]="false"
+                        [draggable]="false"
+                        [canAutoResize]="true">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            <strong>{{formatNumberDecimal(row.staffPrice)}}</strong>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column 
+                        name="Quantity"
+                        [width]="80"
+                        [resizeable]="false"
+                        [sortable]="false"
+                        [draggable]="false"
+                        [canAutoResize]="true">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            <strong>{{row.quantity}}</strong>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column 
+                        name="Location"
+                        [width]="80"
+                        [resizeable]="false"
+                        [sortable]="false"
+                        [draggable]="false"
+                        [canAutoResize]="true">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            <strong>{{row.locationName}}</strong>
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+                </div>
+            </ng-template>
+        </ngx-datatable-row-detail>
+
+        <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <a href="javascript:void(0)" class="toggle-icon" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
+                title="Expand/Collapse Row" (click)="toggleExpandRow(row)">
+                </a>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Name" [width]="80" [resizeable]="false" [sortable]="false" [draggable]="false"
+            [canAutoResize]="true">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <strong>{{row.name}}</strong>
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+</div>

@@ -1,0 +1,27 @@
+
+<p class="list-view-title h4">
+    {{title}}
+</p>
+  
+<div class="dropdown-list">
+    <ng-select 
+        placeholder="Select User"
+        bindValue="id"
+        bindLabel="fullName"
+        [items]="users"
+        (change)="onSelectUser($event)">
+    </ng-select>
+</div>
+
+<app-list-view-management
+isHiddenSearchBox="true"
+[datasource]="datasource"
+[pageSize]="pageSize"
+[listButton]="listButton"
+[actionType]="actionType"
+[addSuccessMessage]='addSuccessMessage'
+[updateSuccessMessage]='updateSuccessMessage'
+[deleteSuccessMessage]='deleteSuccessMessage'
+(changeSelectedPage)="changeSelectedPage($event)"
+[userDefinedColumnSetting] = "userDefinedColumnSetting">
+</app-list-view-management>

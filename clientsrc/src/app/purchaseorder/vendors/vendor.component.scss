@@ -1,0 +1,14 @@
+.vendors-page {
+    .filter-multi-select{
+        width: 100%;
+        padding-bottom: 30px;
+        &-field {
+            float: left;
+            padding-left: 4.5px;
+            &-view {
+                width: 270px;
+                display:inline-block;
+            }
+        }        
+    }
+}

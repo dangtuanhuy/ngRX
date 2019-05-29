@@ -1,0 +1,52 @@
+<div class="transfer-out-page">
+    <div *ngIf="!checkShowTransfer()">
+        <p class="list-view-title h4">
+            Transfer Out Management
+        </p>
+        <div class="filter-multi-select col-12">
+                <div class="filter-multi-select-field col-4">
+                    <div class="filter-multi-select-field-title">
+                        <p class="h6">FromLocation</p>     
+                    </div>
+                    <app-filter-multi-select [dropdownList]="fromLocationDropdownList" [customPlaceholder]="fromLocationPlaceholder" (dropDownListItem)='displaydropDownListFromLocation($event)'class="filter-multi-select-field-view"></app-filter-multi-select>
+                </div>  
+                <div class="filter-multi-select-field col-4">
+                    <div class="filter-multi-select-field-title">
+                        <p class="h6">ToLocation</p>     
+                    </div>
+                    <app-filter-multi-select [dropdownList]="toLocationDropdownList" [customPlaceholder]="toLocationPlaceholder" (dropDownListItem)='displaydropDownListToLocation($event)'class="filter-multi-select-field-view"></app-filter-multi-select>
+                </div>    
+              </div>
+        <app-list-view-management
+                                      [title]="title" 
+                                      [datasource]="datasource" 
+                                      [pageSize]="pageSize" 
+                                      [listButton]="listButton"
+                                      [actionType]="actionType" 
+                                      [isMultiSelect]="isMultiSelect" 
+                                      [isHiddenSearchBox]="isHiddenSearchBox"
+                                      [addSuccessMessage]='addSuccessMessage' 
+                                      [updateSuccessMessage]='updateSuccessMessage'
+                                      [deleteSuccessMessage]='deleteSuccessMessage' 
+                                      (changeSelectedPage)="changeSelectedPage($event)"
+                                      [userDefinedColumnSetting]="userInventoryTransactionDefinedColumnSetting"
+                                      (searchQuery)="eventSearchQuery($event)"
+                                      (clickButton)="handleOnClick($event)">
+        </app-list-view-management>      
+    </div>
+
+    <div class="row transfer-out-datatable">
+        <div *ngIf="isShowTransferOut" class="col-12">
+                <app-filter-transfer-out (onclickBackToListingButton)="onclickBackToListingButton($event)">
+                </app-filter-transfer-out>
+        </div>
+    </div>
+
+    <div class="row transfer-out-datatable">
+        <div *ngIf="isShowManualTransferOut" class="col-12">
+                <app-manual-add-transfer-out    (onclickSubtmitButton)="onclickSubtmitButton($event)"
+                                                (onclickBackButton)="onclickBackButton($event)">
+                </app-manual-add-transfer-out>
+        </div>
+    </div>
+</div>

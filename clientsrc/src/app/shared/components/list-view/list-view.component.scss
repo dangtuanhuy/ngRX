@@ -1,0 +1,35 @@
+.ng-select.custom {
+    width: 300px;
+}
+
+.columns-dropdown {
+    display: flex;
+    padding: 20px 20px 10px 0;
+    justify-content: flex-end;
+}
+
+.datatable{
+    width: 100%;
+    padding: 10px 20px;
+}
+
+.search{
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 35px;
+}
+
+.group-button {
+    display: flex;
+    padding: 10px 10px;
+    justify-content: flex-end;
+}
+
+.btn-item {
+    padding: 0 10px;
+}
+
+.on-top {
+  float: none !important;
+  width: 100% !important;
+}

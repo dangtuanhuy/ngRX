@@ -1,0 +1,136 @@
+<div class="pos-app-setting" [ngStyle]="{'width': pageWidth}">
+  <div class="pos-app-setting--call-back">
+    <app-page-callback
+      [title]='title'
+      [defaultPage]='defaultPage'>
+    </app-page-callback>
+  </div>
+
+  <div class="item">
+    <p class="item-title">Synchronize interval time(minutes)</p>
+
+    <app-input-with-keyboard
+      id="{{syncIntervalTimeId}}"
+      type="number"
+      inputSelectText="true"
+      isNumpad="true"
+      [value]="syncIntervalTime"
+      (valueChange)="onChangeSyncIntervalTime($event)">
+    </app-input-with-keyboard>
+
+    <button class="btn btn-success sync-time-button" (click)="onApplySyncIntervalTime()">Apply</button>
+  </div>
+
+  <div class="item display-flex">
+    <div>
+      <p class="item-title">GST(%)</p>
+
+      <app-input-with-keyboard
+        id="{{GSTId}}"
+        type="number"
+        inputSelectText="true"
+        isNumpad="true"
+        [value]="GST"
+        (valueChange)="onChangeGST($event)">
+      </app-input-with-keyboard>
+
+      <button class="btn btn-success sync-time-button" (click)="onApplyGST()">Apply</button>
+
+      <div class="item virtual-keyboard">
+        <p class="virtual-keyboard-title">GST Inclusive </p>
+        <label class="switch">
+          <input type="checkbox" [checked]="GSTInclusive" (change)="changeGSTInclusive($event)">
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="bill-no-setting">
+      <div class="billno-prefix">
+        <p class="item-title">BillNo prefix</p>
+
+        <app-input-with-keyboard
+          id="{{billNoPrefixId}}"
+          inputSelectText="true"
+          [value]="billNoPrefix"
+          (valueChange)="onChangeBillNoPrefix($event)">
+        </app-input-with-keyboard>
+
+        <button class="btn btn-success billno-prefix-button" (click)="onApplyBillNoPrefix()">Apply</button>
+      </div>
+
+      <div class="device-no">
+          <p class="item-title">Device No</p>
+  
+          <app-input-with-keyboard
+            id="{{billNoDeviceNoId}}"
+            inputSelectText="true"
+            isNumpad="true"
+            [value]="billNoDeviceNo"
+            (valueChange)="onChangeBillNoDeviceNo($event)">
+          </app-input-with-keyboard>
+
+          <button class="btn btn-success device-no-button" (click)="onApplyBillNoDeviceNo()">Apply</button>
+        </div>
+    </div>
+  </div>
+
+  <div class="item">
+    <p class="item-title">Printer's name</p>
+
+    <app-input-with-keyboard
+      id="{{deviceHubNameId}}"
+      inputSelectText="true"
+      [value]="deviceHubName"
+      (valueChange)="onChangeDeviceHubName($event)">
+    </app-input-with-keyboard>
+
+    <button class="btn btn-success sync-time-button" (click)="onApplyDeviceHubName()">Apply</button>
+  </div>
+
+  <div class="item printer-share-name">
+    <p class="item-title">Printer share name</p>
+
+    <app-input-with-keyboard
+      id="{{printerShareNameId}}"
+      className="printer-share-name-input"
+      [value]="printerShareName"
+      (valueChange)="onChangePrinterShareName($event)">
+    </app-input-with-keyboard>
+
+    <button class="btn btn-success sync-time-button" (click)="onApplyPrinterShareName()">Apply</button>
+  </div>
+
+  <div class="item virtual-keyboard">
+    <button
+      class="btn btn-sync text-center"
+      name="button"
+      value="save"
+      (click)="onSyncData()"
+    >
+      Sync data
+    </button>
+    <span [hidden]="latsSyncTime == ''" class="last-sync-time">last sync: {{latsSyncTime}}</span>
+  </div>
+
+  <div class="item">
+    <app-shortcut-page
+      title="Quick select screen"
+      [shortcuts]='quickSelectShortcuts'>
+    </app-shortcut-page>
+  </div>
+
+  <div class="item virtual-keyboard">
+    <p class="virtual-keyboard-title">Virtual keyboard </p>
+    <label class="switch">
+      <input type="checkbox" [checked]="keyboardStatus" (change)="changeKeyboardStatus($event)">
+      <span class="slider round"></span>
+    </label>
+  </div>
+
+  <div class="device-code" [hidden]="deviceCode == null || deviceCode == ''">
+    <span class="device-code-title">Device Code:</span> <input class="device-code-content" readonly value="{{deviceCode}}">
+  </div>
+
+  <!-- <button class="btn btn-success save-button" (click)="onClickSave()">Save</button> -->
+</div>

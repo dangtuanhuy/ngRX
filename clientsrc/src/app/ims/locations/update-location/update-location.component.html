@@ -1,0 +1,70 @@
+<div class="modal-header">
+  <h5 class="modal-title">Update Location</h5>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="updateValueForm">
+    <fieldset>
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" 
+        formControlName="name" 
+        placeholder="Name" 
+        [ngClass]="{'is-invalid': (updateValueForm.get('name')?.touched ||
+        updateValueForm.get('name')?.dirty) &&
+        !updateValueForm.get('name')?.valid}">
+        <span class="error invalid-feedback" *ngIf="updateValueForm.get('name')?.dirty&&
+                                                        updateValueForm.get('name')?.errors">
+              <span *ngIf="updateValueForm.get('name')?.errors?.required">
+                Name is required!
+              </span>
+        </span>
+
+        <label>Location Code</label>
+        <input class="form-control" 
+        formControlName="locationCode" 
+        placeholder="locationCode" 
+        [ngClass]="{'is-invalid': (updateValueForm.get('locationCode')?.touched ||
+        updateValueForm.get('locationCode')?.dirty) &&
+        !updateValueForm.get('locationCode')?.valid}">
+        <span class="error invalid-feedback" *ngIf="updateValueForm.get('locationCode')?.dirty&&
+                                                        updateValueForm.get('locationCode')?.errors">
+              <span *ngIf="updateValueForm.get('locationCode')?.errors?.required">
+                Location Code is required!
+              </span>
+        </span>
+
+        <label>Address</label>
+        <input class="form-control" formControlName="address" placeholder="Address" [ngClass]="{'is-invalid': (updateValueForm.get('address')?.touched ||
+        updateValueForm.get('address')?.dirty) &&
+        !updateValueForm.get('address')?.valid}">
+        <span class="error invalid-feedback" *ngIf="updateValueForm.get('address')?.dirty &&
+                                                    updateValueForm.get('address')?.errors">
+              <span *ngIf="updateValueForm.get('address')?.errors?.required">
+                  Address is required!
+              </span>
+        </span>
+
+        <label>Type</label>
+        <select class="form-control" formControlName="type">
+          <option value="1">WareHouse</option>
+          <option value="2">Store</option>
+        </select>
+
+        <label>Contact Person</label>
+        <input class="form-control" formControlName="contactPerson" placeholder="Contact Name">
+
+        <label>Phone1</label>
+        <input class="form-control" formControlName="phone1" placeholder="Phone1">
+
+        <label>Phone2</label>
+        <input class="form-control" formControlName="phone2" placeholder="Phone2">
+      </div>
+    </fieldset>
+  </form>
+  <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+</div>
+<div class="modal-footer">
+  <button [disabled]="updateValueForm.invalid || isDeactive" class="btn btn-secondary" type="button" (click)="onSave()">Save</button>
+  <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">Cancel</button>
+</div>

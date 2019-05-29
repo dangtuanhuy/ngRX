@@ -1,0 +1,12 @@
+<div class="close-day-report">
+  <table>
+    <tr *ngFor="let item of dataSource" class="report-payment-item">
+      <td class="name">{{item.name}}:</td>
+      <td class="amount">{{item.amountDecimal}}</td>
+    </tr>
+  </table>
+
+  <div class="close-day-report-close-button">
+    <button class="btn btn-success" (click)="onClickClose()">Close</button>
+  </div>
+</div>

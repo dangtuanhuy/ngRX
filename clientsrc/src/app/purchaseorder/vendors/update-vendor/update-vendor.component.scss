@@ -1,0 +1,23 @@
+.update-vendor {
+    input[type=checkbox] {
+        height: 25px;
+        width: 25px;
+    }
+}
+.ng-select.custom-payment {
+    .ng-select-container {
+        border-color: #dc3545;
+    }
+}
+
+.ng-select.custom-currency {
+    .ng-select-container {
+        border-color: #dc3545;
+    }
+}
+
+.ng-select.custom-taxType {
+    .ng-select-container {
+        border-color: #dc3545;
+    }
+}

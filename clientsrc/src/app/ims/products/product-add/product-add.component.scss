@@ -1,0 +1,33 @@
+.field-input{
+    border: 1px #695656 solid;
+    margin: 10px 5px;
+    padding: 10px;
+    border-style: dashed;
+}
+
+.fields-selection {
+    margin: 20px 0;
+
+    a.nav-link {
+        color: #6c757d;
+    }
+
+    a.nav-link.active {
+        color: #007bff;
+    }
+}
+
+.information-content {
+    padding: 20px 10px;
+}
+
+.variants-content {
+    padding: 20px 10px;
+}
+
+.modal-body{
+    overflow: auto;
+    max-height: 80vh;
+}
+
+

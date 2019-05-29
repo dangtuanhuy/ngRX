@@ -1,0 +1,13 @@
+<div class="tender-report">
+  <table>
+    <tr *ngFor="let item of dataSource" class="tender-report-payment-item">
+      <td class="name">{{item.name}}:</td>
+      <td class="amount">{{item.amountDecimal}}</td>
+    </tr>
+  </table>
+
+  <div class="tender-report-action">
+    <button class="btn btn-success" (click)="onClickOk()">Ok</button>
+    <button class="btn btn-warning close-button" (click)="onClickClose()">Close</button>
+  </div>
+</div>

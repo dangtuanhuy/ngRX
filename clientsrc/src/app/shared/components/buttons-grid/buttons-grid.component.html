@@ -1,0 +1,41 @@
+<div id="buttons-grid">
+    <div class="arrow-item" *ngIf="showArrow">
+        <div class="arrow-item-button" [ngStyle]="{'width': angleButtonWidth, 'height': angleButtonHeight}">
+            <button (click)="onClickPreviousItems()">
+                <i class="fas fa-angle-left"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="buttons-grid-content">
+        <div class="grid-container" 
+            [ngStyle]="gridStyle">
+            <ng-container *ngFor="let rows of buttonsGrid">
+                <ng-container *ngFor="let button of rows">
+                    <div class="grid-item">
+                        <app-big-button
+                            [id]='button.id'
+                            [title]='button.title'
+                            [caption]='button.caption'
+                            [backgroundColor]='button.backgroundColor'
+                            [textColor]='button.textColor'
+                            [fontSize]='button.fontSize'
+                            [width]='button.width'
+                            [height]='button.height'
+                            [shortKey]='button.shortKey'
+                            (onClick)='onClickButton($event)'>
+                        </app-big-button>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="arrow-item" *ngIf="showArrow">
+        <div class="arrow-item-button" [ngStyle]="{'width': angleButtonWidth, 'height': angleButtonHeight}">
+            <button (click)="onClickNextItems()">
+                <i class="fas fa-angle-right"></i>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+<div class="modal-header">
+    <h5 class="modal-title">Add Product</h5>
+</div>
+<div class="modal-body">
+    <form [formGroup]="addValueForm">
+        <fieldset>
+            <div class="form-group">
+                <div class="add-control">
+                    <ng-select #selection formControlName="fieldTemplate" [(ngModel)]="selectedFieldTemplate" [items]="fieldTemplates"
+                        bindValue="id" bindLabel="name" placeholder="Select Field Template" class="custom select-field"
+                        [clearable]=false (change)="onSelectFieldTemplate($event)">
+                    </ng-select>
+                </div>
+                <div class="add-control">
+                    <label class="lable-control">Category</label>
+                    <ng-select #selection formControlName="category" [(ngModel)]="selectedCategory" [items]="categories"
+                        bindValue="id" bindLabel="name" placeholder="Select Category" class="custom select-field"
+                        [clearable]=false>
+                    </ng-select>
+                </div>
+                <div class="add-control">
+                    <label class="lable-control">Name</label>
+                    <input class="form-control" formControlName="name" placeholder="Name" [ngClass]="{'is-invalid': (addValueForm.get('name')?.dirty) &&
+                                                                !addValueForm.get('name')?.valid}">
+                    <span class="error invalid-feedback" *ngIf="addValueForm.get('name')?.dirty&&
+                      addValueForm.get('name')?.errors">
+                        <span *ngIf="addValueForm.get('name')?.errors?.required || addValueForm.get('name')?.errors?.nospace">
+                            Name is required!
+                        </span>
+                    </span>
+                </div>
+                <div class="add-control">
+                    <label class="lable-control">Description</label>
+                    <input class="form-control" formControlName="description" placeholder="Description">
+                </div>
+                <div [hidden]="!selectedFieldTemplate" class="fields-selection">
+                    <ngb-tabset (tabChange)="onTabChange($event)">
+                        <ngb-tab id="1">
+                            <ng-template ngbTabTitle placement="bottom">
+                                <span class="tab-title"><i class="fas fa-gift"></i> Information</span></ng-template>
+                            <ng-template ngbTabContent>
+                                <div [hidden]="product && product.sections.length != 0">No fields
+                                    without variant</div>
+                                <div class="information-content" *ngFor="let item of product.sections">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <label>{{item.name}}</label>
+                                        </div>
+                                        <div class="card-body">
+                                            <div *ngFor="let field of item.fieldValues; let index = index" class="field-input">
+                                                <app-text-field *ngIf="field.type==1" [id]="field.id" [fieldId]="field.fieldId"
+                                                    [displayText]="field.name" [value]="field.value" [type]="field.type"
+                                                    (onSave)="onSaveField($event)">
+                                                </app-text-field>
+
+                                                <app-check-box-field *ngIf="field.type==7" [id]="field.id" [fieldId]="field.fieldId"
+                                                    [displayText]="field.name" [value]="field.value" [type]="field.type"
+                                                    (onSave)="onSaveField($event)">
+                                                </app-check-box-field>
+
+                                                <app-numeric-field *ngIf="field.type==2" [id]="field.id" [fieldId]="field.fieldId"
+                                                    [displayText]="field.name" [value]="field.value" [type]="field.type"
+                                                    (onSave)="onSaveField($event)">
+                                                </app-numeric-field>
+
+                                                <app-tag-field *ngIf="field.type== 4" [id]="field.id" [fieldId]="field.fieldId"
+                                                    [displayText]="field.name" [value]="buildValue(field)" [type]="field.type"
+                                                    (onSave)="onSaveField($event)">
+                                                </app-tag-field>
+
+                                                <app-dropdown-list-field *ngIf="field.type== 5" [id]="field.id"
+                                                    [fieldId]="field.fieldId" [displayText]="field.name" [value]="field.value"
+                                                    [type]="field.type" [data]="field.data" (onSave)="onSaveField($event)"
+                                                    [singleSelection]="false">
+                                                </app-dropdown-list-field>
+
+                                                <app-rich-text-field *ngIf="field.type== 3" [id]="field.id" [fieldId]="field.fieldId"
+                                                    [displayText]="field.name" [value]="field.value" [type]="field.type"
+                                                    (onSave)="onSaveField($event)">
+                                                </app-rich-text-field>
+
+                                                <app-entity-reference-field *ngIf="field.type== 6" [id]="field.id"
+                                                    [fieldId]="field.fieldId" [displayText]="field.name" [value]="buildValue(field)"
+                                                    [type]="field.type" [data]="field.data" (onSave)="onSaveField($event)"
+                                                    [singleSelection]="false">
+                                                </app-entity-reference-field>
+
+                                                <app-date-time-field *ngIf="field.type==8" [id]="field.id" [fieldId]="field.fieldId"
+                                                    [displayText]="field.name" [value]="field.value" [type]="field.type"
+                                                    (onSave)="onSaveField($event)">
+                                                </app-date-time-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ngb-tab>
+                        <ngb-tab id="2">
+                            <ng-template ngbTabTitle placement="bottom">
+                                <span class="tab-title"><i class="fas fa-gift"></i> Variants</span></ng-template>
+                            <ng-template ngbTabContent>
+                                <div class="variants-content">
+                                    <app-variants-collection [fieldValues]="fieldValues" [columnCount]="columnCount" [isEditForm]="isEditForm">
+                                    </app-variants-collection>
+                                </div>
+                            </ng-template>
+                        </ngb-tab>
+                    </ngb-tabset>
+
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+</div>
+<div class="modal-footer">
+    <button [disabled]="isDeactive" class="btn btn-secondary" type="button" (click)="onSave()">Save</button>
+    <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">Cancel</button>
+</div>

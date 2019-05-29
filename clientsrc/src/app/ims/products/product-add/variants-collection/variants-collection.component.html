@@ -1,0 +1,87 @@
+<button [hidden]="fieldValues && fieldValues.length == 0"
+        class="btn btn-secondary"
+        type="button"
+        (click)="AddVariant($event)">Add</button>
+<div class="datatable">
+
+  <div class="content">
+    <table class="fixed">
+      <tr class="header"
+          [hidden]="fieldValues && fieldValues.length == 0">
+        <th class="header text-center delete-column">#</th>
+        <th *ngFor="let item of fieldValues"
+            class="header column-name text-center">{{item.name}}</th>
+        <th class="header column-name delete-column text-center"></th>
+      </tr>
+      <ng-container *ngFor="let variant of datasource; let i = index">
+        <tr>
+          <td class="text-center"
+              rowspan="2">{{i+1}}</td>
+          <td *ngFor="let item of variant.fieldValues; let j = index">
+            <app-dropdown-list-field [isModeEdit]="checkEmptyVariantId(variant.id)"
+                                     [id]="item.id"
+                                     [fieldId]="item.fieldId"
+                                     [displayText]="item.name"
+                                     [value]="item.value"
+                                     [type]="item.type"
+                                     [singleSelection]="true"
+                                     [data]="item.data"
+                                     (onSave)="onSaveField($event, variant.fieldValues, j, i)">
+            </app-dropdown-list-field>
+          </td>
+          <td rowspan="2"
+              class="text-center"><i [ngClass]="{disabled: checkEmptyVariantId(variant.id)}"
+               class="fas fa-trash-alt text-center delete-icon"
+               (click)="onClickDelete($event, i, variant.id)"></i></td>
+        </tr>
+        <tr>
+          <td [attr.colspan]="columnCount - 2">
+            <div class="price-content">
+              <span class="price-lable font-weight-bold">Price: </span>
+              <input (change)="onChangePrice($event, priceEnums.listPrice, i)"
+                     [(ngModel)]="variant.price.listPrice"
+                     type="number"
+                     min="0"
+                     oninput="validity.valid||(value='');"
+                     step="0.01"
+                     class="form-control price-item"
+                     placeholder="List Price"
+                     ngbTooltip="List Price">
+              <input (change)="onChangePrice($event, priceEnums.staffPrice, i)"
+                     [(ngModel)]="variant.price.staffPrice"
+                     type="number"
+                     min="0"
+                     oninput="validity.valid||(value='');"
+                     step="0.01"
+                     class="form-control price-item"
+                     placeholder="Staff Price"
+                     ngbTooltip="Staff Price">
+              <input (change)="onChangePrice($event, priceEnums.memberPrice, i)"
+                     [(ngModel)]="variant.price.memberPrice"
+                     type="number"
+                     min="0"
+                     oninput="validity.valid||(value='');"
+                     step="0.01"
+                     class="form-control price-item"
+                     placeholder="Member Price"
+                     ngbTooltip="Member Price">
+              <input (change)="onChangePrice($event, priceEnums.preorderPrice, i)"
+                     [(ngModel)]="variant.price.preOrderPrice"
+                     type="number"
+                     min="0"
+                     oninput="validity.valid||(value='');"
+                     step="0.01"
+                     class="form-control price-item"
+                     placeholder="PreOrder Price"
+                     ngbTooltip="PreOrder Price">
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+      <tr [hidden]="(datasource && datasource.length != 0) || (fieldValues && fieldValues.length == 0)">
+        <td [attr.colspan]="columnCount">No variants to show!</td>
+      </tr>
+    </table>
+    <div [hidden]="fieldValues && fieldValues.length != 0">No variant fields!</div>
+  </div>
+</div>

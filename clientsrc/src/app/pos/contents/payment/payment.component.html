@@ -1,0 +1,78 @@
+<div class="payment" [ngStyle]="{'width': pageWidth}">
+    <div class="payment--call-back">
+        <app-page-callback
+            [title]='title'
+            [defaultPage]='defaultPage'>
+        </app-page-callback>
+    </div>
+
+    <div class="payment-wrapper">
+        <div class="payment-mode">
+            <div class="payment-data-search">
+                <div class="data-search">
+                    <div>
+                        <app-search-with-keyboard
+                            [id]='paymentModeSearchId'
+                            placeHolder='Payment Mode'
+                            putItemLeft=true
+                            [dataSet]='filteredPaymenModes'
+                            (changeValue)="onSearchPaymentMode($event)"
+                            (selectItem)="onSelectPaymentMode($event)">
+                        </app-search-with-keyboard>
+                    </div>
+                </div>
+            </div>
+            <div class="payment-mode-list">
+                <app-inline-edit-list-view 
+                    [dataSource]='paymentModes'
+                    [columns]='paymentModeViewColumns'
+                    (changeAmount)="changePaymentAmount($event)"
+                    (deleteItem)="onDeletePaymentMode($event)"
+                    (clickIcon)="onClickIcon($event)">
+                </app-inline-edit-list-view>
+            </div>
+        </div>
+
+        <div class="payment-result">
+            <div class="summary container">
+                <div class="row price">
+                    <div class='col-6 title'>
+                        <span>NET</span>
+                    </div>
+                    <div class='col-6 value'>
+                        <span>{{decimalTotalNetPrice}}</span>
+                    </div>
+                </div>
+                <div class="row total">
+                    <div class='col-6 title'>
+                        <span>PAID</span>
+                    </div>
+                    <div class='col-6 value'>
+                        <span>{{decimalTotalPaid}}</span>
+                    </div>
+                </div>
+                <div class="row tax">
+                    <div class='col-6 title'>
+                        <span>BALANCE</span>
+                    </div>
+                    <div class='col-6 value'>
+                        <span>{{decimalBalance}}</span>
+                    </div>
+                </div>
+                <div class="row net">
+                    <div class='col-6 title'>
+                        <span>DEPOSIT</span>
+                    </div>
+                    <div class='col-6 value'>
+                        <span>{{decimalDeposit}}</span>
+                    </div>
+                </div>
+                <div class="payment-action">
+                    <button class="btn btn-info payment-action--save-button" (click)="onSave()">Save</button>
+                    <button class="btn btn-info payment-action--cancel-button" (click)="onEsc()">(Esc)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <a routerLink="/quick-select" routerLinkActive="active">Quick select</a> -->
+</div>

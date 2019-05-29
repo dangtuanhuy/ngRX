@@ -1,0 +1,40 @@
+<div class="modal-header">
+  <h5 class="modal-title">Add Brand</h5>
+</div>
+<div class="modal-body">
+  <form [formGroup]="addValueForm">
+    <fieldset>
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" formControlName="name" 
+        placeholder="Name" 
+        [ngClass]="{'is-invalid': (addValueForm.get('name')?.touched ||
+                                                  addValueForm.get('name')?.dirty) &&
+                                                  !addValueForm.get('name')?.valid}">
+        <div class="form__validation-text" 
+                 *ngIf="addValueForm.get('name')?.dirty &&
+                       !addValueForm.get('name')?.valid">
+                  <p *ngIf="addValueForm.get('name')?.errors.required">(*) Name is required</p>
+        </div>
+        <label>Description</label>
+        <input class="form-control" formControlName="description"  placeholder="Description">
+
+        <label>Code</label>
+        <input class="form-control" formControlName="code"  placeholder="Code"
+        [ngClass]="{'is-invalid': (addValueForm.get('code')?.touched ||
+                                                  addValueForm.get('code')?.dirty) &&
+                                                  !addValueForm.get('code')?.valid}">
+        <div class="form__validation-text" 
+                  *ngIf="addValueForm.get('code')?.dirty &&
+                          !addValueForm.get('code')?.valid">
+                    <p *ngIf="addValueForm.get('code')?.errors.required">(*) Code is required</p>
+         </div>                    
+      </div>
+    </fieldset>
+  </form>
+  <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+</div>
+<div class="modal-footer">
+  <button [disabled]="addValueForm.invalid || isDeactive" class="btn btn-secondary" type="button" (click)="onSave()">Save</button>
+  <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">Cancel</button>
+</div>

@@ -1,0 +1,137 @@
+@import '@swimlane/ngx-datatable/release/index.css';
+@import '@swimlane/ngx-datatable/release/themes/material.css';
+@import '@swimlane/ngx-datatable/release/assets/icons.css';
+
+#inline-edit-list-view {
+    width: 100%;
+    padding: 0;
+    
+    .ngx-datatable {
+        box-shadow: none;
+        
+        .datatable-header {
+            background-color: #eee;
+    
+            .datatable-header-inner {
+                padding-top: 7px;
+                width: 100%;
+    
+                .datatable-row-center {
+                    width: 100%;
+                    
+                    .datatable-header-cell {
+                        padding: 0px 10px;
+                        font-size: 20px;
+                        font-weight: 700;
+
+                        &-wrapper {
+                            color: #333;
+                        }
+                    }
+                }
+            }
+        }
+
+        .datatable-body {
+            width: 100%;
+            overflow-y: auto;
+            background-color: #e8e8e8;
+            .datatable-scroll {
+                width: 100% !important;
+            }
+
+            .datatable-row-wrapper {
+                width: 100%;
+                margin-bottom: 2px;
+
+                &:first-child {
+                    padding-top: 5px;
+                }
+
+                .datatable-body-row {
+                    .datatable-body-cell {
+                        padding: 0 10px;
+                        display: flex;
+    
+                        input {
+                            width: 100%;
+                        }
+    
+                        &-label {
+                            margin-top: auto;
+                            margin-bottom: auto;
+                            font-size: 20px;
+
+                            span {
+                                font-size: 18px;
+                                color: #464040;
+                            }
+
+                            .delete-icon {
+                                color: rgb(51, 122, 183);
+                                cursor: pointer;
+                            }
+
+                            .inline-edit {
+                                width: 100%;
+                                padding-right: 2px;
+                            }
+
+                            .inline-edit[type=number]::-webkit-outer-spin-button,
+                            .inline-edit[type=number]::-webkit-inner-spin-button {
+                                display: none;
+                                -webkit-appearance: none;
+                                margin: 0;
+                            }
+
+                            img {
+                                width: 80px;
+                                height: 50px;
+                                background-repeat: no-repeat;
+                                background-size: 80px;
+                                border-radius: 10px;
+                            }
+
+                            p {
+                                margin-top: auto;
+                                margin-bottom: auto;
+                            }
+                        }
+
+                        &.action {
+                            .datatable-body-cell-label {
+                                margin: auto !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .datatable-footer {
+            display: none;
+        }
+    }
+
+    .quantity-plus-button {
+        color: #556bde;
+        background: transparent;
+        border: none;
+        font-size: 25px;
+
+        &:focus {
+            border: none;
+        }
+    }
+
+    .quantity-minus-button {
+        color: #d62316;
+        background: transparent;
+        border: none;
+        font-size: 30px;
+
+        &:focus {
+            border: none;
+        }
+    }
+}

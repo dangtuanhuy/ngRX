@@ -1,0 +1,62 @@
+<div class="add-transfer-in">
+  <div class="datatable">
+      <div class="content">
+          <table class="fixed">
+              <tr class="header">
+                  <th class="header column-name text-center">Transfer Number</th>
+                  <th class="header column-name text-center">Products</th>
+                  <th class="header column-name text-center">Variants</th>
+                  <th class="header column-name text-center">Quantity</th>
+              </tr>
+              <tr *ngFor="let item of inventoryTransactionTransferInItemViewModel; let i = index">
+                <th class="header column-name text-center">
+                      <div class="cell">
+                          {{item.inventoryTransactionTransferNumber}}
+                      </div>
+                </th>
+                <th class="header column-name text-center">
+                      <div class="cell">
+                          <ng-select class="custom" [disabled]="true" [hideSelected]="true" [items]="products" bindLabel="name" bindValue="id" placeholder="Select product"
+                              [(ngModel)]="item.productId" [clearable]=false>
+                          </ng-select>
+                      </div>
+                  </th>
+                  <th class="header column-name text-center">
+                      <div class="cell">
+                          <ng-select class="custom" [disabled]="true" [hideSelected]="true" [items]="item.variants" bindLabel="name" bindValue="id" placeholder="Select variant"
+                              [loading]="item.isVariantsLoading" [(ngModel)]="item.variantId"
+                              [clearable]=false>
+                          </ng-select>
+                      </div>
+                  </th>
+                  <th class="header column-name text-center">
+                        <div class="cell">
+                            <input class="number-updown" 
+                                   type="number" 
+                                   name="input"
+                                   [disabled]="true"
+                                   (change)="onQuantityChange(i)"
+                                   [(ngModel)]="item.quantity"
+                                   oninput="validity.valid||(value='');" 
+                                   [min]="0" 
+                                   [max]="item.maxQuantity">
+                        </div>
+                  </th>
+              </tr>
+          </table>
+      </div>
+      <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+  </div>
+  <div class="group-button">
+      <div class="btn-item">
+        <button type="button"
+                class="btn btn-outline-secondary back-btn"
+                (click)="onClickBackButton()">Back</button>
+      </div>
+      <div class="btn-item">
+        <button type="button"
+                class="btn btn-outline-secondary reset"
+                (click)="onClickSubmitButton()">Receive</button>
+      </div>
+    </div>
+</div>

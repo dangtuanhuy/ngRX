@@ -1,0 +1,27 @@
+<div id="sales-data-search">
+    <div class="data-search">
+        <div>
+            <app-search-with-keyboard
+                [id]='customerSearchId'
+                placeHolder='Customer'
+                putItemRight=true
+                [dataSet]='filteredCustomers'
+                [searchText]='searchCustomerText'
+                (changeValue)="onSearchCustomer($event)"
+                (selectItem)="onSelectCustomer($event)">
+            </app-search-with-keyboard>
+        </div>
+
+        <div>
+            <app-search-with-keyboard
+                [id]='productSearchId'
+                placeHolder='Product'
+                putItemRight=true
+                [dataSet]='filteredProducts'
+                [searchText]='searchProductText'
+                (changeValue)="onSearchProduct($event)"
+                (selectItem)="onSelectProduct($event)">
+            </app-search-with-keyboard>
+        </div>
+    </div>
+</div>

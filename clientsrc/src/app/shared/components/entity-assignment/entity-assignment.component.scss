@@ -1,0 +1,76 @@
+
+.panel-default{
+    height: 150px;
+    border: 1px solid #e0e0e0;
+    border-top: none;
+}
+
+.drag-column-header {
+    width: 100%;
+    padding: 10px;
+    background-color: #6c757d
+}
+
+.drag-title {
+    font-size: 18px;
+    margin: 0;
+    text-transform: uppercase;
+    color: #ffffff;
+    font-weight: 600;
+    display: inline;
+}
+
+.drop-column-header {
+    width: 100%;
+    padding: 10px;
+    background-color: #00B961
+}
+
+.drop-icon {
+    float: right;
+    cursor: pointer;
+    padding: 4px 0px 5px 5px;
+}
+
+.drag {
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+.drag-tag-category {
+    margin-right: 5px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    padding: 2px 5px 5px 5px;
+    background: #eeeeee;
+    border: 1px #ddd solid;
+    display: inline-block
+}
+
+.drag-tag-product {
+    margin-right: 5px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    padding: 2px 5px 5px 5px;
+    background: #cff1e7;
+    border: 1px #ddd solid;
+    display: inline-block
+}
+
+
+.search-container {
+    float: right;
+    font-size: 16px;
+}
+
+.search-container button {
+    padding: 3px 10px;
+    background: #ddd;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background: #ccc;
+}

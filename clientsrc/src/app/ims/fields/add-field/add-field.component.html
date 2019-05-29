@@ -1,0 +1,82 @@
+<div class="modal-header">
+  <h5 class="modal-title">Add Field</h5>
+</div>
+<div class="modal-body">
+  <form [formGroup]="addValueForm">
+    <fieldset>
+      <div class="form-group">
+        <div class="add-control">
+          <label class="lable-control">Name</label>
+          <input class="form-control" formControlName="name" placeholder="Name" [ngClass]="{
+              'is-invalid':
+                addValueForm.get('name')?.dirty &&
+                !addValueForm.get('name')?.valid
+            }" />
+          <span class="error invalid-feedback" *ngIf="
+              addValueForm.get('name')?.dirty &&
+              addValueForm.get('name')?.errors
+            ">
+            <span *ngIf="
+                addValueForm.get('name')?.errors?.required ||
+                addValueForm.get('name')?.errors?.nospace
+              ">
+              Name is required!
+            </span>
+          </span>
+        </div>
+
+        <div class="add-control">
+          <label class="lable-control">Description</label>
+          <input class="form-control" formControlName="description" placeholder="Description" />
+        </div>
+        <div class="add-control">
+          <label class="lable-control">IdentifiedId</label>
+          <input class="form-control" formControlName="identifiedId" placeholder="IdentifiedId" />
+          <span class="error invalid-feedback" *ngIf="
+              addValueForm.get('identifiedId')?.dirty &&
+              addValueForm.get('identifiedId')?.errors
+            ">
+            <span *ngIf="
+                addValueForm.get('identifiedId')?.errors?.required ||
+                addValueForm.get('identifiedId')?.errors?.nospace
+              ">
+              IdentifiedId is required!
+            </span>
+          </span>
+        </div>
+
+        <div class="add-control">
+          <label class="lable-control">Type</label>
+          <div class="columns-dropdown">
+            <ng-select class="form-control" formControlName="type" bindValue="value" bindLabel="key" #selection [items]="fieldTypes"
+              placeholder="Select Type" [(ngModel)]="selectedType" class="custom" [clearable]="false" (ngModelChange)="onChangeFieldType($event)"
+              [ngClass]="{
+                'is-invalid':
+                  addValueForm.get('type')?.dirty &&
+                  !addValueForm.get('type')?.valid
+              }">
+            </ng-select>
+          </div>
+        </div>
+
+        <div class="add-control" [hidden]="!isShowEntityRefList && !isShowPredefinedList">
+          <label class="lable-control">DefaultValue</label>
+          <ng-select [hidden]="!isShowEntityRefList" class="form-control" formControlName="entityList" #selection
+            [items]="entityRefList" bindValue="id" bindLabel="name" placeholder="Select Type" [(ngModel)]="selectedEntityRef"
+            class="custom" [clearable]="false">
+          </ng-select>
+          <tag-input [hidden]="!isShowPredefinedList" formControlName="predefinedList" [(ngModel)]="predefinedList"></tag-input>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+  <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+</div>
+<div class="modal-footer">
+  <button [disabled]="!addValueForm.valid || isDeactive" class="btn btn-secondary" type="button" (click)="onSave()">
+    Save
+  </button>
+  <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">
+    Cancel
+  </button>
+</div>

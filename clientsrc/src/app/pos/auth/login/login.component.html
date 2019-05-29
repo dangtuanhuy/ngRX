@@ -1,0 +1,67 @@
+<div id="login">
+  <div class="container">
+    <img
+      src="assets/pos/images/pos-login-logo.png"
+      alt="Login Logo"
+      class="logo"
+    />
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h2 class="text-center">Login</h2>
+        <hr />
+        <div class="form-group">
+          <label>Email</label>
+          <div class="email-section">
+            <div class="email-content">
+              <app-input-with-keyboard
+                id="{{emailId}}"
+                placeholder="Email"
+                className="form-control"
+                appBindingInputValue
+                [value]="email"
+                (valueChange)="changeEmail($event)">
+              </app-input-with-keyboard>
+            </div>
+            
+            <div class="email-save-button">
+              <button
+                class="btn btn-signin text-center"
+                name="button"
+                value="login"
+                (click)="onSaveEmailLogin()">
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group form-group-login">
+          <label>Pin</label>
+          <div class="pin-content">
+            <app-input-with-keyboard
+              id="{{passwordId}}"
+              placeholder="Password"
+              type="password"
+              className="form-control"
+              appBindingInputValue
+              [value]="password"
+              (valueChange)="changePassword($event)">
+            </app-input-with-keyboard>
+          </div>
+        </div>
+
+        <div>
+          <button
+            class="btn btn-signin text-center"
+            name="button"
+            value="login"
+            (click)="login()"
+          >
+            Login
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

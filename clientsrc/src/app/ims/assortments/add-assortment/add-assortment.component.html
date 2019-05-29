@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h5 class="modal-title">Add Assortment</h5>
+</div>
+<div class="modal-body">
+  <form [formGroup]="addValueForm">
+    <fieldset>
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" formControlName="name" 
+        placeholder="Name" 
+        [ngClass]="{'is-invalid': (addValueForm.get('name')?.touched ||
+                                                  addValueForm.get('name')?.dirty) &&
+                                                  !addValueForm.get('name')?.valid}">
+        <span class="error invalid-feedback" *ngIf="addValueForm.get('name')?.dirty&&
+                                                    addValueForm.get('name')?.errors">
+            <span *ngIf="addValueForm.get('name')?.errors?.required">
+              Name is required!
+            </span>
+        </span>
+        <label>Description</label>
+        <input class="form-control" formControlName="description"  placeholder="Description">
+      </div>
+    </fieldset>
+  </form>
+  <app-loading-spinner [hiddenLoadingIndicator]="hiddenLoadingIndicator"></app-loading-spinner>
+</div>
+<div class="modal-footer">
+  <button [disabled]="addValueForm.invalid || isDeactive" class="btn btn-secondary" type="button" (click)="onSave()">Save</button>
+  <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">Cancel</button>
+</div>

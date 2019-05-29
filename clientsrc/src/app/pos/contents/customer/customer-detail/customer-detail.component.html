@@ -1,0 +1,12 @@
+<div class="customer-detail" [ngStyle]="{'width': pageWidth}">
+  <div class="customer-detail--call-back">
+    <app-page-callback 
+      [title]='title' 
+      [defaultPage]='defaultPage'>
+    </app-page-callback>
+  </div>
+  <p>Name: {{customer.name}}</p>
+  <p>Reward: {{customer.reward}} </p>
+  <p>Store: {{customer.store}} </p>
+  <p>Visit: {{customer.visit}} </p>
+</div>

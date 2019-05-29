@@ -1,0 +1,52 @@
+<div class="customer-management" [ngStyle]="{'width': pageWidth}">
+  <div class="customer-management--header">
+    <app-page-callback
+      class="call-back"
+      [title]='title'
+      [defaultPage]='defaultPage'
+      (back)="onBack()">
+    </app-page-callback>
+    <div class="search">
+        <app-input-with-keyboard
+            id="{{searchCustomerInputId}}"
+            placeholder="customer name"
+            [value]="searchCustomerText"
+            (valueChange)="searchCustomer($event)">
+        </app-input-with-keyboard>
+        <i class="fas fa-search search-icon"></i>
+    </div>
+  </div>
+  
+  <ngx-datatable
+        #myTable
+        class="material striped list-customer expandable"
+        [rows]="customers"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [externalPaging]="true"
+        [count]="totalItem"
+        [offset]="pageIndex"
+        [limit]="pageSize"
+        [rowHeight]="50"
+        (page)='setPage($event)'>
+
+      <ngx-datatable-column name="Name" [minWidth]="300" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <p class="customer-name" (click)="onClickCustomer(row.id)">{{row.name}}</p>
+          </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Store" [width]="80" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="true">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{value}}</strong>
+          </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Reward" [width]="80" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="true">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <strong>{{value}}</strong>
+        </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>

@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <h5 class="modal-title">Select Variant</h5>
+</div>
+<div class="modal-body">
+    <table *ngIf="variant">
+        <thead>
+            <tr>
+                <th *ngFor="let field of variant.fieldValues">{{field.name}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let variantTemp of variants" (click)="onSelect(variantTemp)">
+                <td *ngFor="let fieldValue of variantTemp.fieldValues">
+                    {{fieldValue.value}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-secondary" type="button" (click)="onDismiss('Cross click')">Cancel</button>
+</div>

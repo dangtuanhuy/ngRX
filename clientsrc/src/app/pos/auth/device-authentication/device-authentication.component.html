@@ -1,0 +1,36 @@
+<div id="device-authentication">
+  <div class="container">
+    <img
+      src="assets/pos/images/pos-login-logo.png"
+      alt="Device code Logo"
+      class="logo"
+    />
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="form-group">
+          <label>Device code</label>
+          <app-input-with-keyboard
+            id="{{deviceCodeId}}"
+            placeholder="Device code"
+            className="form-control"
+            appBindingInputValue
+            [value]="deviceCode"
+            (valueChange)="changeDeviceCode($event)">
+          </app-input-with-keyboard>
+        </div>
+
+        <div>
+          <button
+            class="btn btn-signin text-center"
+            name="button"
+            value="save"
+            (click)="onSave()"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

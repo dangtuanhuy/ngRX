@@ -1,0 +1,58 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    border-spacing: 0;
+}
+
+table,
+th,
+td {
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    padding: 5px 5px;
+}
+
+table.fixed {
+    table-layout: fixed;
+}
+
+.header {
+    background-color: rgba(0, 0, 0, .03);
+}
+
+.datatable {
+    padding: 20px 0;
+}
+
+.price-content {
+    display: flex;
+}
+
+.price-item {
+    margin: 5px;
+}
+
+.delete-column {
+    width: 50px;
+}
+
+.code-column {
+    width: 30%;
+}
+
+.delete-icon {
+    cursor: pointer;
+    color: red;
+}
+
+.price-lable {
+    padding: 5px;
+    margin: 5px;
+}
+
+.disabled {
+    cursor: not-allowed;
+    color: #6c757d;
+}
